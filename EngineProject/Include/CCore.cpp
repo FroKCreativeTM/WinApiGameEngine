@@ -1,5 +1,6 @@
 #include "CCore.h"
 #include "Scene/CSceneManager.h"
+#include "Core/CTimer.h"
 
 // nullptr 선언은 여기서 가능하다.
 // 왜냐면 얘는 프로그램 시작과 생기는 인스턴스고
@@ -33,6 +34,12 @@ bool CCore::Init(HINSTANCE hInstance)
 
     Create();
 
+    // 타이머 초기화
+    if (!GET_SINGLE(CTimer)->Init())
+    {
+        return false;
+    }
+
     /* 서브 관리 클래스 초기화 */
     if (!GET_SINGLE(CSceneManager)->Init())
     {
@@ -59,7 +66,8 @@ int CCore::Run()
         // 윈도우 데드타임
         else
         {
-
+            // 게임의 로직이 실행된다.
+            Logic();
         }
     }
 
@@ -137,6 +145,15 @@ BOOL CCore::Create()
     return TRUE;
 }
 
+void CCore::Logic()
+{
+    // 타이머 갱신
+    GET_SINGLE(CTimer)->Update();
+
+    // 우리가 함수를 만들고 그 델타타임에 이것을 전달하면 된다.
+    float fDeltaTime = GET_SINGLE(CTimer)->GetDeltaTime();
+}
+
 CCore::CCore() 
 {
 }
@@ -145,4 +162,5 @@ CCore::~CCore()
 {
     // 서브 관리 클래스들을 전부 해제한다.
     DESTROY_SINGLE(CSceneManager);
+    DESTROY_SINGLE(CTimer);
 }

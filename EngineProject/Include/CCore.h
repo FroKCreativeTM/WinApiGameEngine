@@ -33,6 +33,7 @@ private :
 private : 
 	ATOM MyRegisterClass();
 	BOOL Create();
+	void Logic();
 
 // 외부에서 메모리 건들지 못하게.
 private : 

@@ -149,13 +149,20 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="Core\CTimer.cpp" />
+    <ClCompile Include="Scene\CInGameScene.cpp" />
+    <ClCompile Include="Scene\CScene.cpp" />
     <ClCompile Include="Scene\CSceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="Core\CTimer.h" />
+    <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene\CInGameScene.h" />
+    <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="Scene\CSceneManager.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>

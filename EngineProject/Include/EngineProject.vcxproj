@@ -149,12 +149,14 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="Scene\CSceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene\CSceneManager.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>

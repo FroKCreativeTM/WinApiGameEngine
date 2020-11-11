@@ -16,6 +16,9 @@
     <Filter Include="01.Core">
       <UniqueIdentifier>{c0e24d7a-7a54-4006-b437-5a567b61d37d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene">
+      <UniqueIdentifier>{e9d556d0-1cbf-4084-8422-3616baae27dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -23,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="CCore.cpp">
       <Filter>01.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CSceneManager.cpp">
+      <Filter>02.Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CSceneManager.h">
+      <Filter>02.Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

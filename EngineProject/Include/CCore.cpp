@@ -1,5 +1,5 @@
 #include "CCore.h"
-#include "resource.h"
+#include "Scene/CSceneManager.h"
 
 // nullptr 선언은 여기서 가능하다.
 // 왜냐면 얘는 프로그램 시작과 생기는 인스턴스고
@@ -32,6 +32,12 @@ bool CCore::Init(HINSTANCE hInstance)
     m_tRS.nHeight = 720;
 
     Create();
+
+    /* 서브 관리 클래스 초기화 */
+    if (!GET_SINGLE(CSceneManager)->Init())
+    {
+        return false;
+    }
 
 	return true;
 }
@@ -137,4 +143,6 @@ CCore::CCore()
 
 CCore::~CCore()
 {
+    // 서브 관리 클래스들을 전부 해제한다.
+    DESTROY_SINGLE(CSceneManager);
 }

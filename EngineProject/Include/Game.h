@@ -9,3 +9,4 @@
 using namespace std;
 
 #include "Macro.h"
+#include "Types.h"

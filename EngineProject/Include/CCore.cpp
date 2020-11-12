@@ -26,15 +26,17 @@ bool CCore::Init(HINSTANCE hInstance)
 {
 	m_hInst = hInstance;
 
-	// 윈도우창 생성
+    // 윈도우 클래스 등록
     MyRegisterClass();
+
     // 해상도 설정
     m_tRS.nWidth = 1280;
     m_tRS.nHeight = 720;
 
+    // 윈도우창 생성
     Create();
 
-    // 타이머 초기화
+    // 타이머(FPS, 델타타임) 초기화
     if (!GET_SINGLE(CTimer)->Init())
     {
         return false;
@@ -102,17 +104,17 @@ ATOM CCore::MyRegisterClass()
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
-    wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = CCore::WndProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = m_hInst;
-    wcex.hIcon = LoadIcon(m_hInst, MAKEINTRESOURCE(IDI_ICON1));
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = L"FroK's Engine";
-    wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_ICON1));
+    wcex.style          = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc    = CCore::WndProc;
+    wcex.cbClsExtra     = 0;
+    wcex.cbWndExtra     = 0;
+    wcex.hInstance      = m_hInst;
+    wcex.hIcon          = LoadIcon(m_hInst, MAKEINTRESOURCE(IDI_ICON1));
+    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW + 1);
+    wcex.lpszMenuName   = NULL;
+    wcex.lpszClassName  = L"FroK's Engine";
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_ICON1));
 
     return RegisterClassExW(&wcex);
 }

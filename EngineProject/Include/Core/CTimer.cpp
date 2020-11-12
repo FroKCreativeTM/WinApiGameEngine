@@ -6,7 +6,7 @@ CTimer::CTimer()
 {
 }
 
-CTimer::~CTimer()
+CTimer::~CTimer() 
 {
 }
 
@@ -20,7 +20,6 @@ bool CTimer::Init()
 	m_fFPSTime = 0.0f;
 	m_nFrameMax = 60;	// 60프레임 기준
 	m_nFrame = 0;
-
 
 	return true;
 }

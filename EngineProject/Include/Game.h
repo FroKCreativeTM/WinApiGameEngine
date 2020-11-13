@@ -28,3 +28,20 @@ void Safe_Delete_VecList(T& ref)
 
 	ref.clear();
 }
+
+// 레이어 소멸자에서
+// 모든 오브젝트를 지운다.
+template <typename T>
+void Safe_Release_VecList(T& ref)
+{
+	typename T::iterator iter;
+	typename T::iterator iterEnd = ref.end();
+
+	for (iter = ref.begin(); iter != iterEnd; ++iter)
+	{
+		SAFE_RELEASE((*iter));
+	}
+
+	ref.clear();
+}
+

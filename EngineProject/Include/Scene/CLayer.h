@@ -39,6 +39,18 @@ public :
 		return this->m_pScene;
 	}
 
+public : 
+	/* 코어부터 지금 돌아가는 씬의 레이어들까지 내려왔다. */
+	/* 게임 요소를 위한 메소드 */
+	void Input(float fDeltaTime);
+	int Update(float fDeltaTime);
+	int LateUpdate(float fDeltaTime);
+	void Collision(float fDeltaTime);
+	void Render(HDC hDC, float fDeltaTime);
+
+public : 
+	void AddObj(class CObj* pObj);
+
 private : 
 	friend class CScene;
 
@@ -59,5 +71,10 @@ private :
 							// 이것을 결정하는 것이 바로 이 ZOrder이다.
 							// 장면이 레이어들을 들고 있을텐데
 							// 이것을 정렬하게 할 것이다.
+
+	// 오브젝트는 삭제가 많이 생기는 그런 물건이다.
+	// 그렇기 때문에 중간 삽입,삭제가 굉장히 많이 발생할 것이다.
+	// 그런 부분은 vector보다는 list가 빠르다.
+	list<class CObj*> m_ObjList;
 };
 

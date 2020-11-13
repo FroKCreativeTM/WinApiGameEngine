@@ -7,14 +7,24 @@
 class CScene
 {
 public:
+	/* 레이어와 관련된 메소드 */
 	class CLayer* CreateLayer(const string& strTag,
 		int nZOrder = 0);
+	class CLayer* FindLayer(const string& strTag);
 
+public : 
 	// 전역 함수이다!!!!(list의 sort caller가 callee로 전역함수를 원한다.)
 	static bool LayerSort(class CLayer* pL1, class CLayer* pL2);
 
 public:
+	/* 게임 요소를 위한 메소드 */
 	virtual bool Init();
+	// 각 씬마다의 고유한 기능을 넣기 위한 메소드다.
+	virtual void Input(float fDeltaTime);
+	virtual int Update(float fDeltaTime);
+	virtual int LateUpdate(float fDeltaTime);
+	virtual void Collision(float fDeltaTime);
+	virtual void Render(HDC hDC, float fDeltaTime);
 
 protected:
 	friend class CSceneManager;	// 씬 매니저만 이 클래스에 접근 가능하다.

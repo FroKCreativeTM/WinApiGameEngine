@@ -14,6 +14,7 @@ CScene::~CScene()
     Safe_Delete_VecList(m_LayerList);
 }
 
+// 새로운 레이어 생성
 CLayer* CScene::CreateLayer(const string& strTag, int nZOrder)
 {
     CLayer* pLayer = new CLayer();
@@ -38,6 +39,24 @@ CLayer* CScene::CreateLayer(const string& strTag, int nZOrder)
     return nullptr;
 }
 
+// 레이어 찾기
+// @parameter
+// strTag : 찾으려는 레이어의 태그
+CLayer* CScene::FindLayer(const string& strTag)
+{
+    list<CLayer*>::iterator iter;
+    list<CLayer*>::iterator iterEnd = m_LayerList.end();
+
+    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+    {
+        if ((*iter)->GetTag() == strTag)
+        {
+            return *iter;
+        }
+    }
+    return nullptr;
+}
+
 bool CScene::LayerSort(CLayer* pL1, CLayer* pL2)
 {
     // zOrder에 따른 오름차순 정렬을 할 것이다.
@@ -48,4 +67,68 @@ bool CScene::LayerSort(CLayer* pL1, CLayer* pL2)
 bool CScene::Init()
 {
     return true;
+}
+
+void CScene::Input(float fDeltaTime)
+{
+    // 레이어 리스트를 반복해서 돌려야 처리가 가능하다.
+    list<CLayer*>::iterator iter;
+    list<CLayer*>::iterator iterEnd = m_LayerList.end();
+
+    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+    {
+        (*iter)->Input(fDeltaTime);
+    }
+}
+
+int CScene::Update(float fDeltaTime)
+{
+    // 레이어 리스트를 반복해서 돌려야 처리가 가능하다.
+    list<CLayer*>::iterator iter;
+    list<CLayer*>::iterator iterEnd = m_LayerList.end();
+
+    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+    {
+        (*iter)->Update(fDeltaTime);
+    }
+
+    return 0;
+}
+
+int CScene::LateUpdate(float fDeltaTime)
+{
+    // 레이어 리스트를 반복해서 돌려야 처리가 가능하다.
+    list<CLayer*>::iterator iter;
+    list<CLayer*>::iterator iterEnd = m_LayerList.end();
+
+    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+    {
+        (*iter)->LateUpdate(fDeltaTime);
+    }
+
+    return 0;
+}
+
+void CScene::Collision(float fDeltaTime)
+{
+    // 레이어 리스트를 반복해서 돌려야 처리가 가능하다.
+    list<CLayer*>::iterator iter;
+    list<CLayer*>::iterator iterEnd = m_LayerList.end();
+
+    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+    {
+        (*iter)->Collision(fDeltaTime);
+    }
+}
+
+void CScene::Render(HDC hDC, float fDeltaTime)
+{
+    // 레이어 리스트를 반복해서 돌려야 처리가 가능하다.
+    list<CLayer*>::iterator iter;
+    list<CLayer*>::iterator iterEnd = m_LayerList.end();
+
+    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+    {
+        (*iter)->Render(hDC, fDeltaTime);
+    }
 }

@@ -36,6 +36,9 @@ bool CCore::Init(HINSTANCE hInstance)
     // 윈도우창 생성
     Create();
 
+    // 렌더 타깃인 화면 DC를 만들어준다.
+    m_hDC = GetDC(m_hWnd);
+
     // 타이머(FPS, 델타타임) 초기화
     if (!GET_SINGLE(CTimer)->Init())
     {
@@ -121,14 +124,14 @@ ATOM CCore::MyRegisterClass()
 
 BOOL CCore::Create()
 {
-    m_Hwnd = CreateWindowW(
+    m_hWnd = CreateWindowW(
         L"FroK's Engine",
         L"FroK's Engine",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, 
         nullptr, nullptr,m_hInst, nullptr);
 
-    if (!m_Hwnd)
+    if (!m_hWnd)
     {
         return FALSE;
     }
@@ -138,11 +141,11 @@ BOOL CCore::Create()
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
     // 위에서 구해준 크기로 윈도우 클라이언트 크기를 원하는 크기로 맞춰줘야 한다.
-    SetWindowPos(m_Hwnd, HWND_TOPMOST, 100, 100, rc.right-rc.left,
+    SetWindowPos(m_hWnd, HWND_TOPMOST, 100, 100, rc.right-rc.left,
         rc.bottom - rc.top, SWP_NOMOVE | SWP_NOZORDER);
 
-    ShowWindow(m_Hwnd, SW_SHOW);
-    UpdateWindow(m_Hwnd);
+    ShowWindow(m_hWnd, SW_SHOW);
+    UpdateWindow(m_hWnd);
 
     return TRUE;
 }
@@ -154,6 +157,42 @@ void CCore::Logic()
 
     // 우리가 함수를 만들고 그 델타타임에 이것을 전달하면 된다.
     float fDeltaTime = GET_SINGLE(CTimer)->GetDeltaTime();
+
+    // 입력을 받는다.
+    Input(fDeltaTime);
+    Update(fDeltaTime);
+    LateUpdate(fDeltaTime);
+    Collision(fDeltaTime);
+    Render(fDeltaTime);
+}
+
+void CCore::Input(float fDeltaTime)
+{
+    GET_SINGLE(CSceneManager)->Input(fDeltaTime);
+}
+
+int CCore::Update(float fDeltaTime)
+{
+    GET_SINGLE(CSceneManager)->Update(fDeltaTime);
+    return 0;
+}
+
+int CCore::LateUpdate(float fDeltaTime)
+{
+    GET_SINGLE(CSceneManager)->LateUpdate(fDeltaTime);
+    return 0;
+}
+
+void CCore::Collision(float fDeltaTime)
+{
+    GET_SINGLE(CSceneManager)->Collision(fDeltaTime);
+}
+
+void CCore::Render(float fDeltaTime)
+{
+    // 씬 매니저부터는 DC가 필요하다!
+    // 렌더 타깃
+    GET_SINGLE(CSceneManager)->Render(m_hDC, fDeltaTime);
 }
 
 CCore::CCore() 

@@ -149,8 +149,12 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="Core\CRef.cpp" />
     <ClCompile Include="Core\CTimer.cpp" />
+    <ClCompile Include="Object\CMoveObj.cpp" />
     <ClCompile Include="Object\CObj.cpp" />
+    <ClCompile Include="Object\CPlayer.cpp" />
+    <ClCompile Include="Object\CStaticObj.cpp" />
     <ClCompile Include="Scene\CInGameScene.cpp" />
     <ClCompile Include="Scene\CLayer.cpp" />
     <ClCompile Include="Scene\CScene.cpp" />
@@ -158,11 +162,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="Core\CRef.h" />
     <ClInclude Include="Core\CTimer.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Macro.h" />
+    <ClInclude Include="Object\CMoveObj.h" />
     <ClInclude Include="Object\CObj.h" />
+    <ClInclude Include="Object\CPlayer.h" />
+    <ClInclude Include="Object\CStaticObj.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene\CInGameScene.h" />
     <ClInclude Include="Scene\CLayer.h" />

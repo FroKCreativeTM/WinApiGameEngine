@@ -1,4 +1,6 @@
 #include "CInGameScene.h"
+#include "../Object/CPlayer.h"
+#include "CLayer.h"
 
 CInGameScene::CInGameScene()
 {

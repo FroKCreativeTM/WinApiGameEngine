@@ -28,6 +28,12 @@
     <Filter Include="03. Object">
       <UniqueIdentifier>{ceea278f-4fa0-487b-abfa-35eefbb02685}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\01. MoveObj">
+      <UniqueIdentifier>{b50b53c3-20b4-4239-9ea5-ea636cb6b37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\02.StaticObj">
+      <UniqueIdentifier>{b053c24a-9aca-4e0f-90b0-9d40df7e2055}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -53,6 +59,18 @@
     </ClCompile>
     <ClCompile Include="Object\CObj.cpp">
       <Filter>03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CRef.cpp">
+      <Filter>01.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CMoveObj.cpp">
+      <Filter>03. Object\01. MoveObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CStaticObj.cpp">
+      <Filter>03. Object\02.StaticObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CPlayer.cpp">
+      <Filter>03. Object\01. MoveObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +109,18 @@
     </ClInclude>
     <ClInclude Include="Object\CObj.h">
       <Filter>03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CRef.h">
+      <Filter>01.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CMoveObj.h">
+      <Filter>03. Object\01. MoveObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CStaticObj.h">
+      <Filter>03. Object\02.StaticObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CPlayer.h">
+      <Filter>03. Object\01. MoveObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
-#include "CObj.h"
-#include "../Scene/CScene.h"
 #include "../Scene/CLayer.h"
+#include "../Scene/CScene.h"
+#include "CObj.h"
 
 void CObj::Input(float fDeltaTime)
 {
@@ -26,7 +26,7 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 
 // m_nRef가 0이면 지워진다.
 // 즉 이것을 만드는 시점에서 누군가는 이 오브젝트를 참조한다.
-CObj::CObj()  
+CObj::CObj()
 {
 }
 

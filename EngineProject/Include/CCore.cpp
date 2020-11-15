@@ -197,6 +197,12 @@ void CCore::Render(float fDeltaTime)
 
 CCore::CCore() 
 {
+    // 메모리 누수를 체크하기 위한 설정
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    // 메모리 릭이 있을 때만 쓴다.
+    // 매개변수로 그 메모리의 블록 번호를 넣어주면,
+    // 메모리 릭 부분을 바로 이동한다. (호출 스택을 잘 볼 수 있어야..)
+    // _CrtSetBreakAlloc();
 }
 
 CCore::~CCore()

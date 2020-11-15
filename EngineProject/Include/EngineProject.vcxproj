@@ -152,6 +152,7 @@
     <ClCompile Include="Core\CRef.cpp" />
     <ClCompile Include="Core\CTimer.cpp" />
     <ClCompile Include="Object\CMoveObj.cpp" />
+    <ClCompile Include="Object\CMushroom.cpp" />
     <ClCompile Include="Object\CObj.cpp" />
     <ClCompile Include="Object\CPlayer.cpp" />
     <ClCompile Include="Object\CStaticObj.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Object\CMoveObj.h" />
+    <ClInclude Include="Object\CMushroom.h" />
     <ClInclude Include="Object\CObj.h" />
     <ClInclude Include="Object\CPlayer.h" />
     <ClInclude Include="Object\CStaticObj.h" />
@@ -179,6 +181,7 @@
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Object\CObj.inl" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

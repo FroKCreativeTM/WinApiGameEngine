@@ -2,6 +2,9 @@
 
 #include "../Core/CRef.h"
 
+class CScene;
+class CLayer;
+
 // 게임 내 보이는 모든 오브젝트들이 상속받을 클래스입니다.
 // 움직임이 있는가 없는가를 나눈다.
 // 위치와 크기가 필요하다.
@@ -63,31 +66,6 @@ public :
 	virtual void Render(HDC hDC, float fDeltaTime);
 
 public : 
-	// 굉장히 다양한 타입의 오브젝트를 만들기 위한 
-	// 템플릿 타입의 메소드이다.
-	template <typename T>
-	static T* CreateObj(const string& strTag,
-		class CLayer* pLayer = nullptr)
-	{
-		T* pObj = new T;
-
-		if (!pObj->Init())
-		{
-			SAFE_RELEASE(pObj);
-			return nullptr;
-		}
-
-		if (pLayer)
-		{
-			pObj->AddRef();
-			pLayer->AddObject(pObj);
-		}
-
-		pObj->AddRef();
-		return pObj;
-	}
-
-public : 
 	void SetScene(class CScene* pScene)
 	{
 		this->m_pScene = pScene;
@@ -125,5 +103,13 @@ protected :
 	// 자기가 속한 장면과 레이어를 알게 한다.
 	class CScene* m_pScene;
 	class CLayer* m_pLayer;
+
+public : 
+	// 굉장히 다양한 타입의 오브젝트를 만들기 위한 
+	// 템플릿 타입의 메소드이다.
+	template <typename T>
+	static T* CreateObj(const string& strTag,
+		class CLayer* pLayer = nullptr);
 };
 
+#include "CObj.inl"

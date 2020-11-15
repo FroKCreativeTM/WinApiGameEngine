@@ -33,4 +33,6 @@ void CTimer::Update()
 	// 델타타임(시간의 변화량) 공식
 	m_fDeltaTime = (tTime.QuadPart - m_tTime.QuadPart)
 		/ (float)m_tSecond.QuadPart;
+
+	m_tTime = tTime;
 }

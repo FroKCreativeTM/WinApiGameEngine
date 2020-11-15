@@ -34,6 +34,12 @@
     <Filter Include="03. Object\02.StaticObj">
       <UniqueIdentifier>{b053c24a-9aca-4e0f-90b0-9d40df7e2055}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\01. MoveObj\02.Monster">
+      <UniqueIdentifier>{9373335d-0e9c-4fa3-b9fc-b20119a2c337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\01. MoveObj\01. Player">
+      <UniqueIdentifier>{e9e366b5-e4b4-49bc-811d-f7a593f3a7e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -70,7 +76,10 @@
       <Filter>03. Object\02.StaticObj</Filter>
     </ClCompile>
     <ClCompile Include="Object\CPlayer.cpp">
-      <Filter>03. Object\01. MoveObj</Filter>
+      <Filter>03. Object\01. MoveObj\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CMushroom.cpp">
+      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,11 +129,17 @@
       <Filter>03. Object\02.StaticObj</Filter>
     </ClInclude>
     <ClInclude Include="Object\CPlayer.h">
-      <Filter>03. Object\01. MoveObj</Filter>
+      <Filter>03. Object\01. MoveObj\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CMushroom.h">
+      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <None Include="Object\CObj.inl">
+      <Filter>03. Object</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EngineProject.rc">

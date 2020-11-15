@@ -14,6 +14,13 @@ public :
 	int Run();
 
 public : 
+	// «ÿªÛµµ π›»Ø
+	RESOLUTION GetResolution() const
+	{
+		return m_tRS;
+	}
+
+public : 
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 // ΩÃ±€≈Ê! 

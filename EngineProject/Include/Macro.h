@@ -30,3 +30,6 @@ private : \
 #define DEFINITION_SINGLE(Type) Type* Type::m_pInst = NULL; 
 #define GET_SINGLE(Type) Type::GetInst()
 #define DESTROY_SINGLE(Type) Type::DestroyInst()
+
+// 해상도를 얻어오는 매크로
+#define GET_RESOLUTION  CCore::GetInst()->GetResolution()

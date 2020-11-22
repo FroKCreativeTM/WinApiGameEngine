@@ -2,6 +2,7 @@
 -- EngineProject
 19화 오브젝트 리스트 설계 및 프로토타입 설계<br>
 20화 총알 복사생성
+21화 경로관리자와 리소스 관리자
 공부 완료 <br>
 <hr>
 --ShootingGame

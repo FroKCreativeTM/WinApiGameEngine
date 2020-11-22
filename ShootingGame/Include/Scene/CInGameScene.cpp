@@ -1,6 +1,7 @@
 #include "CInGameScene.h"
 #include "../Object/CPlayer.h"
 #include "../Object/CMushroom.h"
+#include "../Object/CZako.h"
 #include "CLayer.h"
 
 CInGameScene::CInGameScene()
@@ -35,6 +36,13 @@ bool CInGameScene::Init()
 	CMushroom* pMushroom = CObj::CreateObj<CMushroom>
 		("Mushroom", pLayer);
 	SAFE_RELEASE(pMushroom);
+
+	CZako* pZako = CObj::CreateObj<CZako>
+		("Zako", pLayer);
+	SAFE_RELEASE(pZako);
+
+	/* ÃÑ¾Ë »ý¼º */
+
 
 	return true;
 }

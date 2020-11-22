@@ -74,3 +74,8 @@ void CPlayer::Render(HDC hDC, float fDeltaTime)
     Rectangle(hDC, m_tPos.x, m_tPos.y,
         m_tPos.x + m_tSize.x, m_tPos.y + m_tSize.y);
 }
+
+CPlayer* CPlayer::Clone()
+{
+    return new CPlayer(*this);
+}

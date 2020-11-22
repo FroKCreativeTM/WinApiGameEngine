@@ -75,9 +75,27 @@ void CScene::Input(float fDeltaTime)
     list<CLayer*>::iterator iter;
     list<CLayer*>::iterator iterEnd = m_LayerList.end();
 
-    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
-    {
+    for (iter = m_LayerList.begin(); iter != iterEnd;)
+    {// 비활성화시
+        if (!(*iter)->GetEnable())
+        {
+            ++iter;
+            continue;
+        }
+
         (*iter)->Input(fDeltaTime);
+
+        // 만약 이 레이어가 죽었다면
+        if (!(*iter)->GetLife())
+        {
+            SAFE_DELETE((*iter));
+            iter = m_LayerList.erase(iter);
+            iterEnd = m_LayerList.end();
+        }
+        else
+        {
+            ++iter;
+        }
     }
 }
 
@@ -87,9 +105,28 @@ int CScene::Update(float fDeltaTime)
     list<CLayer*>::iterator iter;
     list<CLayer*>::iterator iterEnd = m_LayerList.end();
 
-    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+    for (iter = m_LayerList.begin(); iter != iterEnd;)
     {
+        // 비활성화시
+        if (!(*iter)->GetEnable())
+        {
+            ++iter;
+            continue;
+        }
+
         (*iter)->Update(fDeltaTime);
+
+        // 만약 이 레이어가 죽었다면
+        if (!(*iter)->GetLife())
+        {
+            SAFE_DELETE((*iter));
+            iter = m_LayerList.erase(iter);
+            iterEnd = m_LayerList.end();
+        }
+        else
+        {
+            ++iter;
+        }
     }
 
     return 0;
@@ -101,9 +138,27 @@ int CScene::LateUpdate(float fDeltaTime)
     list<CLayer*>::iterator iter;
     list<CLayer*>::iterator iterEnd = m_LayerList.end();
 
-    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
-    {
+    for (iter = m_LayerList.begin(); iter != iterEnd;)
+    {// 비활성화시
+        if (!(*iter)->GetEnable())
+        {
+            ++iter;
+            continue;
+        }
+
         (*iter)->LateUpdate(fDeltaTime);
+
+        // 만약 이 레이어가 죽었다면
+        if (!(*iter)->GetLife())
+        {
+            SAFE_DELETE((*iter));
+            iter = m_LayerList.erase(iter);
+            iterEnd = m_LayerList.end();
+        }
+        else
+        {
+            ++iter;
+        }
     }
 
     return 0;
@@ -115,9 +170,27 @@ void CScene::Collision(float fDeltaTime)
     list<CLayer*>::iterator iter;
     list<CLayer*>::iterator iterEnd = m_LayerList.end();
 
-    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
-    {
+    for (iter = m_LayerList.begin(); iter != iterEnd;)
+    {// 비활성화시
+        if (!(*iter)->GetEnable())
+        {
+            ++iter;
+            continue;
+        }
+
         (*iter)->Collision(fDeltaTime);
+
+        // 만약 이 레이어가 죽었다면
+        if (!(*iter)->GetLife())
+        {
+            SAFE_DELETE((*iter));
+            iter = m_LayerList.erase(iter);
+            iterEnd = m_LayerList.end();
+        }
+        else
+        {
+            ++iter;
+        }
     }
 }
 
@@ -127,8 +200,26 @@ void CScene::Render(HDC hDC, float fDeltaTime)
     list<CLayer*>::iterator iter;
     list<CLayer*>::iterator iterEnd = m_LayerList.end();
 
-    for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
-    {
+    for (iter = m_LayerList.begin(); iter != iterEnd;)
+    {// 비활성화시
+        if (!(*iter)->GetEnable())
+        {
+            ++iter;
+            continue;
+        }
+
         (*iter)->Render(hDC, fDeltaTime);
+
+        // 만약 이 레이어가 죽었다면
+        if (!(*iter)->GetLife())
+        {
+            SAFE_DELETE((*iter));
+            iter = m_LayerList.erase(iter);
+            iterEnd = m_LayerList.end();
+        }
+        else
+        {
+            ++iter;
+        }
     }
 }

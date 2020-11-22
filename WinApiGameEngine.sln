@@ -7,6 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineProject", "EngineProj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShootingGame", "ShootingGame\Include\ShootingGame.vcxproj", "{2EE51C99-7B56-442F-9D2C-F697AD5ABA7F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{602507FE-BAEB-41DA-99F9-D53A75E1DB33}"
+	ProjectSection(SolutionItems) = preProject
+		Engine.md = Engine.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

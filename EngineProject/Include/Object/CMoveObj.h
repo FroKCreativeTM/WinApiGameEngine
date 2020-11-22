@@ -37,6 +37,7 @@ public:
 	virtual int LateUpdate(float fDeltaTime);
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
+	virtual CMoveObj* Clone() = 0;
 
 private : 
 	// 자식도 못 건들이는 앵글!

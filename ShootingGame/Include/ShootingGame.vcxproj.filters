@@ -31,17 +31,17 @@
     <Filter Include="03. Object\01. MoveObj">
       <UniqueIdentifier>{b50b53c3-20b4-4239-9ea5-ea636cb6b37e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Object\01. MoveObj\02.Monster">
-      <UniqueIdentifier>{9373335d-0e9c-4fa3-b9fc-b20119a2c337}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Object\01. MoveObj\01. Player">
       <UniqueIdentifier>{e9e366b5-e4b4-49bc-811d-f7a593f3a7e5}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Object\02. StaticObj">
       <UniqueIdentifier>{b053c24a-9aca-4e0f-90b0-9d40df7e2055}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Object\01. MoveObj\03. Bullet">
-      <UniqueIdentifier>{f4165dfa-447a-489d-ba4d-c906a4db650f}</UniqueIdentifier>
+    <Filter Include="03. Object\01. MoveObj\02. Monster">
+      <UniqueIdentifier>{9373335d-0e9c-4fa3-b9fc-b20119a2c337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\01. MoveObj\03.Bullet">
+      <UniqueIdentifier>{7158192e-8411-4e5f-823b-ef6015b5654b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -82,13 +82,13 @@
       <Filter>03. Object\01. MoveObj\01. Player</Filter>
     </ClCompile>
     <ClCompile Include="Object\CMushroom.cpp">
-      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
+      <Filter>03. Object\01. MoveObj\02. Monster</Filter>
     </ClCompile>
     <ClCompile Include="Object\CZako.cpp">
-      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
+      <Filter>03. Object\01. MoveObj\02. Monster</Filter>
     </ClCompile>
     <ClCompile Include="Object\CBullet.cpp">
-      <Filter>03. Object\01. MoveObj\03. Bullet</Filter>
+      <Filter>03. Object\01. MoveObj\03.Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,13 +141,13 @@
       <Filter>03. Object\01. MoveObj\01. Player</Filter>
     </ClInclude>
     <ClInclude Include="Object\CMushroom.h">
-      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
+      <Filter>03. Object\01. MoveObj\02. Monster</Filter>
     </ClInclude>
     <ClInclude Include="Object\CZako.h">
-      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
+      <Filter>03. Object\01. MoveObj\02. Monster</Filter>
     </ClInclude>
     <ClInclude Include="Object\CBullet.h">
-      <Filter>03. Object\01. MoveObj\03. Bullet</Filter>
+      <Filter>03. Object\01. MoveObj\03.Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

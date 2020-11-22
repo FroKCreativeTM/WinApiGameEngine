@@ -20,3 +20,4 @@ public:
 	virtual void Render(HDC hDC, float fDeltaTime);
 };
 
+

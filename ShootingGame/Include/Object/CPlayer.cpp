@@ -1,7 +1,11 @@
 #include "CPlayer.h"
+#include "CBullet.h"
+#include "../CCore.h"
 
-CPlayer::CPlayer()
+CPlayer::CPlayer() : 
+    m_nSkillCoolTime(0)
 {
+
 }
 
 CPlayer::CPlayer(const CPlayer& ref) : 
@@ -11,6 +15,37 @@ CPlayer::CPlayer(const CPlayer& ref) :
 
 CPlayer::~CPlayer()
 {
+}
+
+void CPlayer::Shot()
+{
+    /*
+    RECTANGLE bullet;
+
+    bullet.left = (this->GetPos().x + this->GetSize().x);
+    bullet.right = bullet.left + 50.f;
+    bullet.top = this->GetPos().y + (this->GetSize().y / 4.f);
+    bullet.bottom = bullet.top + 50.f;
+
+    m_BulletList.push_back(bullet);
+    */
+
+
+}
+
+void CPlayer::Skill()
+{
+    /* 다량의 총알을 발사한다. */
+
+    if (m_nSkillCoolTime == 0)
+    {   // 만약 스킬을 쓸 수 있는 경우 경우
+
+    }
+    else if((m_nSkillCoolTime & 0b00000001))
+    {
+        // 이미 사용했다면.
+        return;
+    }
 }
 
 bool CPlayer::Init()
@@ -44,6 +79,16 @@ void CPlayer::Input(float fDeltaTime)
     {
         MoveXFromSpeed(fDeltaTime, MD_FRONT);
     }
+    if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+    {
+        // 총을 쏜다.
+        Shot();
+    }
+    if (GetAsyncKeyState('R') & 0x8000)
+    {
+        // 총을 쏜다.
+        Skill();
+    }
 }
 
 int CPlayer::Update(float fDeltaTime)
@@ -71,6 +116,44 @@ void CPlayer::Render(HDC hDC, float fDeltaTime)
 {
     // 부모의 함수를 호출해준다.
     CMoveObj::Render(hDC, fDeltaTime);
+
+    /*
+    // 만약 탄약이 들었다면?
+    if (m_BulletList.size() != 0)
+    {
+        list<RECTANGLE>::iterator iter;
+        list<RECTANGLE>::iterator iterEnd = m_BulletList.end();
+
+        for (iter = m_BulletList.begin(); iter != iterEnd;)
+        {
+            (*iter).left += fDeltaTime * 600.f;
+            (*iter).right += fDeltaTime * 600.f;
+
+            if ((*iter).left > GET_RESOLUTION.nWidth)
+            {
+                iter = m_BulletList.erase(iter);
+                iterEnd = m_BulletList.end();
+            }
+            else
+                ++iter;
+        }
+    }
+    */
+
     Rectangle(hDC, m_tPos.x, m_tPos.y,
-        m_tPos.x + m_tSize.x, m_tPos.y + m_tSize.y);
+        m_tPos.x + m_tSize.x, m_tPos.y + m_tSize.y);   
+
+    /*
+    if (m_BulletList.size() != 0)
+    {
+        list<RECTANGLE>::iterator iter;
+        list<RECTANGLE>::iterator iterEnd = m_BulletList.end();
+
+        for (iter = m_BulletList.begin(); iter != iterEnd; ++iter)
+        {
+            Ellipse(hDC, (*iter).left, (*iter).top, 
+                (*iter).right, (*iter).bottom);
+        }
+    }
+    */
 }

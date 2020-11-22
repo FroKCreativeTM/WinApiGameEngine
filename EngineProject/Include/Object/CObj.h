@@ -64,6 +64,8 @@ public :
 	virtual int LateUpdate(float fDeltaTime);
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
+	// 
+	virtual CObj* Clone() = 0;	
 
 public : 
 	void SetScene(class CScene* pScene)
@@ -86,6 +88,15 @@ public :
 		return m_pLayer;
 	}
 
+public :
+	static void AddObj(CObj* pObj);
+	static CObj* FindObj(const string& strTag);
+	static void EraseObj();	// 전체
+	static void EraseObj(CObj* pObj);
+	static void EraseObj(const string& strTag);
+	static void ErasePrototype();	// 전체
+	static void ErasePrototype(const string& strTag);
+
 protected :
 	CObj();
 	CObj(const CObj& ref);
@@ -104,12 +115,39 @@ protected :
 	class CScene* m_pScene;
 	class CLayer* m_pLayer;
 
+private : 
+	// 생성되는 모든 오브젝트들은 여기서 저장된다.
+	// 즉 레이어에 배치되면서 동시에 여기에 들어온다는 뜻이다.
+	// (실제 배치됨)
+	static list<CObj*> m_ObjList;
+	// 원본 객체(프로토타입)을 관리
+	// 복사할 용도, 
+	// 예로들어 오크를 만든다 치면
+	// HP 등등의 정보가 있을 것이다.
+	// 근데 문제는 모든 몬스터는 정보가 다를 것이다.
+	// 그러면 파일에 있는 것을 로딩할텐데 문제는 느려!
+	// 그렇기 때문에 여기다가 미리 만들어놓고, 리스폰될 객체들을
+	// 만들면 될 것이다.
+	static unordered_map<string, CObj*> m_mapPrototype;
+
 public : 
 	// 굉장히 다양한 타입의 오브젝트를 만들기 위한 
 	// 템플릿 타입의 메소드이다.
 	template <typename T>
 	static T* CreateObj(const string& strTag,
 		class CLayer* pLayer = nullptr);
+	// 프로토타입 제작 메소드
+	template <typename T>
+	static T* CreatePrototype(const string& strTag);
+	// 생성된 프로토타입의 복사를 생성한다.
+	// 템플릿으로 만들 이유도 없다.
+	static CObj* CreateCloneObj(const string& strProtoKey,
+		const string& strTag,
+		class CLayer* pLayer = nullptr);
+
+private : 
+	// 생성할 때만 필요하다.
+	static CObj* FindPrototype(const string& strTag);
 };
 
 #include "CObj.inl"

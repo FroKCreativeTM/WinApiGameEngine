@@ -46,3 +46,32 @@ void Safe_Release_VecList(T& ref)
 	ref.clear();
 }
 
+template <typename T>
+void Safe_Delete_Map(T& ref)
+{
+	typename T::iterator iter;
+	typename T::iterator iterEnd = ref.end();
+
+	for (iter = ref.begin(); iter != iterEnd; ++iter)
+	{
+		SAFE_DELETE(iter->second);
+	}
+
+	ref.clear();
+}
+
+template <typename T>
+void Safe_Release_Map(T& ref)
+{
+	typename T::iterator iter;
+	typename T::iterator iterEnd = ref.end();
+
+	for (iter = ref.begin(); iter != iterEnd; ++iter)
+	{
+		SAFE_RELEASE(iter->second);
+	}
+
+	ref.clear();
+}
+
+

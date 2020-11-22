@@ -19,6 +19,27 @@ public :
 		return m_nRef;
 	}
 
+public : 
+	void SetEnable(bool bEnable)
+	{
+		this->m_bEnable = bEnable;
+	}
+
+	void SetLife(bool bLife)
+	{
+		this->m_bLife = bLife;
+	}
+
+	bool GetLife() const
+	{
+		return m_bLife;
+	}
+
+	bool GetEnable() const
+	{
+		return m_bEnable;
+	}
+
 protected : 
 	CRef();
 	virtual ~CRef();
@@ -26,5 +47,7 @@ protected :
 protected :
 	// 이 오브젝트를 얼마나 참조하냐를 나타내는 지표
 	int			m_nRef;
+	bool		m_bEnable;	// 객체 활성화(객체는 있지만, 보이냐 안 보이는가)
+	bool		m_bLife;	// 살리는가 죽이는가.
 };
 

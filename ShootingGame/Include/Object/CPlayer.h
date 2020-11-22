@@ -8,10 +8,18 @@ class CPlayer :
 private : 
 	friend class CObj;
 
+private : 
+	list<class CBullet*> m_BulletList;
+	int m_nSkillCoolTime;				// 스킬 쿨타임
+
 private :
 	CPlayer();
 	CPlayer(const CPlayer& ref);
     ~CPlayer();
+
+private : 
+	void Shot();
+	void Skill();
 
 public:
 	virtual bool Init();		

@@ -8,7 +8,7 @@ private:
 
 private:
 	CZako();
-	CZako(const CZako& mushroom);
+	CZako(const CZako& zako);
 	~CZako();
 
 private:

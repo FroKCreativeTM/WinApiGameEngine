@@ -33,6 +33,7 @@ protected :
 	CScene();
 	virtual ~CScene() = 0;	// 순수 가상함수로!
 
+
 // 오브젝트 자체를 레이어에 배치할 것이다.
 // 레이어는 리스트로 보관하자.
 protected : 

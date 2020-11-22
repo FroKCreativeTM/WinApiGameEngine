@@ -51,6 +51,27 @@ public :
 public : 
 	void AddObj(class CObj* pObj);
 
+public:
+	void SetEnable(bool bEnable)
+	{
+		this->m_bEnable = bEnable;
+	}
+
+	void SetLife(bool bLife)
+	{
+		this->m_bLife = bLife;
+	}
+
+	bool GetLife() const
+	{
+		return m_bLife;
+	}
+
+	bool GetEnable() const
+	{
+		return m_bEnable;
+	}
+
 private : 
 	friend class CScene;
 
@@ -76,5 +97,7 @@ private :
 	// 그렇기 때문에 중간 삽입,삭제가 굉장히 많이 발생할 것이다.
 	// 그런 부분은 vector보다는 list가 빠르다.
 	list<class CObj*> m_ObjList;
+	bool		m_bEnable;	// 레이어 활성화
+	bool		m_bLife;	// 살리는가 죽이는가.
 };
 

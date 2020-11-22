@@ -34,3 +34,8 @@ void CZako::Collision(float fDeltaTime)
 void CZako::Render(HDC hDC, float fDeltaTime)
 {
 }
+
+CZako* CZako::Clone()
+{
+	return new CZako(*this);
+}

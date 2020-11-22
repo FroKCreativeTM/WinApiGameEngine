@@ -52,7 +52,6 @@ private :
 	void Collision(float fDeltaTime);
 	void Render(float fDeltaTime);
 
-
 // 외부에서 메모리 건들지 못하게.
 private : 
 	CCore();

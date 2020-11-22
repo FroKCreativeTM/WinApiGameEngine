@@ -43,6 +43,12 @@
     <Filter Include="03. Object\01. MoveObj\03. Bullet">
       <UniqueIdentifier>{f4165dfa-447a-489d-ba4d-c906a4db650f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Core\02. Path">
+      <UniqueIdentifier>{a0b6ac2d-70d7-425c-9f93-45547410877c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Resources">
+      <UniqueIdentifier>{f94b70d6-9210-4757-ad3c-9052c8174566}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -89,6 +95,15 @@
     </ClCompile>
     <ClCompile Include="Object\CBullet.cpp">
       <Filter>03. Object\01. MoveObj\03. Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CPathManager.cpp">
+      <Filter>01.Core\02. Path</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\CResourceManager.cpp">
+      <Filter>04. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\CTexture.cpp">
+      <Filter>04. Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +163,15 @@
     </ClInclude>
     <ClInclude Include="Object\CBullet.h">
       <Filter>03. Object\01. MoveObj\03. Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CPathManager.h">
+      <Filter>01.Core\02. Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\CResourceManager.h">
+      <Filter>04. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\CTexture.h">
+      <Filter>04. Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

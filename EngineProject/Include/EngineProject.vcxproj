@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="Core\CPathManager.cpp" />
     <ClCompile Include="Core\CRef.cpp" />
     <ClCompile Include="Core\CTimer.cpp" />
     <ClCompile Include="Object\CBullet.cpp" />
@@ -158,6 +159,8 @@
     <ClCompile Include="Object\CPlayer.cpp" />
     <ClCompile Include="Object\CStaticObj.cpp" />
     <ClCompile Include="Object\CZako.cpp" />
+    <ClCompile Include="Resources\CResourceManager.cpp" />
+    <ClCompile Include="Resources\CTexture.cpp" />
     <ClCompile Include="Scene\CInGameScene.cpp" />
     <ClCompile Include="Scene\CLayer.cpp" />
     <ClCompile Include="Scene\CScene.cpp" />
@@ -165,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="Core\CPathManager.h" />
     <ClInclude Include="Core\CRef.h" />
     <ClInclude Include="Core\CTimer.h" />
     <ClInclude Include="Flag.h" />
@@ -178,6 +182,8 @@
     <ClInclude Include="Object\CStaticObj.h" />
     <ClInclude Include="Object\CZako.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Resources\CResourceManager.h" />
+    <ClInclude Include="Resources\CTexture.h" />
     <ClInclude Include="Scene\CInGameScene.h" />
     <ClInclude Include="Scene\CLayer.h" />
     <ClInclude Include="Scene\CScene.h" />

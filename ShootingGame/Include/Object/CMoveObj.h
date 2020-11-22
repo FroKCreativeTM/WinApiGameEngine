@@ -27,8 +27,8 @@ public :
 	void MoveY(float y, float fDeltaTime);
 
 	// 특정 각도를 이용해서 방향으로 이동할 때
-	void MoveAngle(float fSpeed);
-	void MoveAngle(float fSpeed, float fDeltaTime);
+	void MoveAngle();
+	void MoveAngle(float fDeltaTime);
 
 public:
 	virtual bool Init() = 0;// 하위에 있어야되니 순수 가상함수;
@@ -38,8 +38,7 @@ public:
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
 
-private : 
-	// 자식도 못 건들이는 앵글!
+protected : 
 	float			m_fAngle;
 	float			m_fSpeed;
 

@@ -25,9 +25,9 @@ public :
 		this->m_bEnable = bEnable;
 	}
 
-	void SetLife(bool bLife)
+	void Die()
 	{
-		this->m_bLife = bLife;
+		this->m_bLife = false;
 	}
 
 	bool GetLife() const

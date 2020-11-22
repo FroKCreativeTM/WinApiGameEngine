@@ -1,6 +1,8 @@
 #pragma once
 #include "CMoveObj.h"
 
+// 총알 클래스
+// 각도를 이용해서 움직인다.
 class CBullet :
     public CMoveObj
 {

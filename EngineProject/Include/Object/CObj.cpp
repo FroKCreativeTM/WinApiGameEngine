@@ -1,10 +1,10 @@
 #include "../Scene/CLayer.h"
+#include "../Scene/CSceneManager.h"
 #include "../Scene/CScene.h"
 #include "CObj.h"
 
 // static
 list<CObj*> CObj::m_ObjList;
-unordered_map<string, CObj*> CObj::m_mapPrototype;
 
 void CObj::Input(float fDeltaTime)
 {
@@ -88,25 +88,7 @@ void CObj::EraseObj(const string& strTag)
 	}
 }
 
-void CObj::ErasePrototype()
-{
-	// 전체 프로토타입을 통으로 날린다.
-	Safe_Release_Map(m_mapPrototype);
-}
 
-void CObj::ErasePrototype(const string& strTag)
-{
-	unordered_map<string, CObj*>::iterator iter 
-		= m_mapPrototype.find(strTag);
-
-	if (!iter->second)
-	{
-		return;
-	}
-
-	SAFE_RELEASE(iter->second);
-	m_mapPrototype.erase(iter);
-}
 
 // m_nRef가 0이면 지워진다.
 // 즉 이것을 만드는 시점에서 누군가는 이 오브젝트를 참조한다.
@@ -126,10 +108,11 @@ CObj::~CObj()
 
 CObj* CObj::CreateCloneObj(const string& strProtoKey,
 	const string& strTag,
-	CLayer* pLayer = nullptr)
+	CLayer* pLayer)
 {
 	// 어떤 타입인지 알아서 찾아서 복사하도록
-	CObj* pPrototype = FindPrototype(strProtoKey);
+	// 짜피 static이라 CScene::
+	CObj* pPrototype = CScene::FindPrototype(strProtoKey);
 
 	if (!pPrototype)
 	{
@@ -149,14 +132,3 @@ CObj* CObj::CreateCloneObj(const string& strProtoKey,
 	return pObj;
 }
 
-CObj* CObj::FindPrototype(const string& strTag)
-{
-	unordered_map<string, CObj*>::iterator iter = m_mapPrototype.find(strTag);
-
-	if (iter == m_mapPrototype.end())
-	{
-		return nullptr;
-	}
-
-	return iter->second;
-}

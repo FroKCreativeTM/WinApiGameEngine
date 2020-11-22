@@ -3,12 +3,19 @@
 class CBullet :
     public CMoveObj
 {
+public : 
+	void SetBulletDist(float fDist)
+	{
+		this->m_fLimitDist = fDist;
+	}
+
 private:
 	friend class CObj;
+	friend class CScene;
 
 private:
 	CBullet();
-	CBullet(const CBullet& mushroom);
+	CBullet(const CBullet& bullet);
 	~CBullet();
 
 public:
@@ -18,6 +25,11 @@ public:
 	virtual int LateUpdate(float fDeltaTime);
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
+	virtual CBullet* Clone();
+
+private:
+	float m_fDist;		// 거리
+	float m_fLimitDist;	// 사정거리
 };
 
 

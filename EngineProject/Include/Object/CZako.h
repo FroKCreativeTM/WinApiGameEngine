@@ -5,6 +5,7 @@ class CZako :
 {
 private:
 	friend class CObj;
+	friend class CScene;
 
 private:
 	CZako();

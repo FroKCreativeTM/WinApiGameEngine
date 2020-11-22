@@ -26,6 +26,31 @@ public:
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
 
+public : 
+	// 프로토타입 관련 메소드
+	static void ErasePrototype();	// 전체
+	static void ErasePrototype(const string& strTag);
+
+	// 프로토타입 제작 메소드
+	template<typename T>
+	T* CreatePrototype(const string& strTag)
+	{
+		T* pObj = new T;
+
+		pObj->SetTag(strTag);
+
+		if (!pObj->Init())
+		{
+			SAFE_RELEASE(pObj);
+			return nullptr;
+		}
+
+		pObj->AddRef();
+		m_mapPrototype.insert(make_pair(strTag, pObj));
+
+		return pObj;
+	}
+
 protected:
 	friend class CSceneManager;	// 씬 매니저만 이 클래스에 접근 가능하다.
 
@@ -40,5 +65,12 @@ protected :
 	// 이 방식을 이용하면 장면이 날아가면 그 장면에 종속된 모든
 	// 레이어들도 함께 날아간다.
 	list<class CLayer*> m_LayerList;	
+
+public:
+	// 생성할 때만 필요하다.
+	static class CObj* FindPrototype(const string& strTag);
+
+private:
+	static unordered_map<string, class CObj*> m_mapPrototype;
 };
 

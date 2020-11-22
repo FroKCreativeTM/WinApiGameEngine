@@ -1,5 +1,8 @@
 #include "CScene.h"
 #include "CLayer.h"
+#include "../Object/CObj.h"
+
+unordered_map<string, CObj*> CScene::m_mapPrototype;
 
 CScene::CScene()
 {
@@ -222,4 +225,36 @@ void CScene::Render(HDC hDC, float fDeltaTime)
             ++iter;
         }
     }
+}
+
+void CScene::ErasePrototype()
+{
+    // 전체 프로토타입을 통으로 날린다.
+    Safe_Release_Map(m_mapPrototype);
+}
+
+void CScene::ErasePrototype(const string& strTag)
+{
+    unordered_map<string, CObj*>::iterator iter
+        = m_mapPrototype.find(strTag);
+
+    if (!iter->second)
+    {
+        return;
+    }
+
+    SAFE_RELEASE(iter->second);
+    m_mapPrototype.erase(iter);
+}
+
+CObj* CScene::FindPrototype(const string& strTag)
+{
+    unordered_map<string, CObj*>::iterator iter = m_mapPrototype.find(strTag);
+
+    if (iter == m_mapPrototype.end())
+    {
+        return nullptr;
+    }
+
+    return iter->second;
 }

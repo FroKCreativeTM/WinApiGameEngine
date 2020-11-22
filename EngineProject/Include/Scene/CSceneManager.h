@@ -6,10 +6,6 @@
 // 싱글톤으로 생성할 것.
 class CSceneManager
 {
-private : 
-	class CScene* m_pScene;
-	class CScene* m_pNextScene;	// 장면 전환용 장면
-
 public : 
 	bool Init();	
 	/* 코어에도 있던 부분이다. */
@@ -46,6 +42,16 @@ public :
 
 		return pScene;
 	}
+
+public : 
+	class CScene* GetScene() const
+	{
+		return m_pScene;
+	}
+
+private:
+	class CScene* m_pScene;
+	class CScene* m_pNextScene;	// 장면 전환용 장면
 
 	DECLARE_SINGLE(CSceneManager)
 };

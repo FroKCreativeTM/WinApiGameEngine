@@ -7,6 +7,7 @@ class CPlayer :
 {
 private : 
 	friend class CObj;
+	friend class CScene;
 
 private :
 	CPlayer();
@@ -21,5 +22,8 @@ public:
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CPlayer* Clone();
+
+private : 
+	void Fire();
 };
 

@@ -1,14 +1,19 @@
 #include "CMushroom.h"
 #include "../CCore.h"
 
-CMushroom::CMushroom()
+// 2초에 한 번씩 발사한다.
+CMushroom::CMushroom() : 
+	m_fFireTime(0.f),
+	m_fFireLimitTime(1.13f)
 {
 }
 
 CMushroom::CMushroom(const CMushroom& mushroom) : 
-	CMoveObj(mushroom),
-	m_eDir(mushroom.m_eDir)
+	CMoveObj(mushroom)
 {
+	this->m_eDir = mushroom.m_eDir;
+	this->m_fFireTime = mushroom.m_fFireTime;
+	this->m_fFireLimitTime = mushroom.m_fFireLimitTime;
 }
 
 CMushroom::~CMushroom()
@@ -46,6 +51,15 @@ int CMushroom::Update(float fDeltaTime)
 		m_eDir = MD_FRONT;
 	}
 
+	m_fFireTime += fDeltaTime;
+
+	// 2초가 지났다면 
+	if (m_fFireTime >= m_fFireLimitTime)
+	{
+		m_fFireTime -= m_fFireLimitTime;
+		Fire();
+	}
+
 	return 0;
 }
 
@@ -70,4 +84,17 @@ void CMushroom::Render(HDC hDC, float fDeltaTime)
 CMushroom* CMushroom::Clone()
 {
 	return new CMushroom(*this);
+}
+
+void CMushroom::Fire()
+{
+	CObj* pBullet =
+		CObj::CreateCloneObj("Bullet", "EnemyBullet", m_pLayer);
+
+	((CMoveObj*)pBullet)->SetAngle(PI);
+
+	pBullet->SetPos(m_tPos.x - pBullet->GetSize().x,
+		(m_tPos.y + m_tPos.y + m_tSize.y) / 2.f - pBullet->GetSize().y / 2.f);
+
+	SAFE_RELEASE(pBullet);
 }

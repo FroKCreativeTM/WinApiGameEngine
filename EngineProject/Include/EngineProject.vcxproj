@@ -157,6 +157,7 @@
     <ClCompile Include="Object\CMushroom.cpp" />
     <ClCompile Include="Object\CObj.cpp" />
     <ClCompile Include="Object\CPlayer.cpp" />
+    <ClCompile Include="Object\CStage.cpp" />
     <ClCompile Include="Object\CStaticObj.cpp" />
     <ClCompile Include="Object\CZako.cpp" />
     <ClCompile Include="Resources\CResourceManager.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Object\CMushroom.h" />
     <ClInclude Include="Object\CObj.h" />
     <ClInclude Include="Object\CPlayer.h" />
+    <ClInclude Include="Object\CStage.h" />
     <ClInclude Include="Object\CStaticObj.h" />
     <ClInclude Include="Object\CZako.h" />
     <ClInclude Include="resource.h" />

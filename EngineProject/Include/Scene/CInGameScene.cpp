@@ -2,6 +2,7 @@
 #include "../Object/CPlayer.h"
 #include "../Object/CMushroom.h"
 #include "../Object/CBullet.h"
+#include "../Object/CStage.h"
 #include "CLayer.h"
 
 CInGameScene::CInGameScene()
@@ -42,6 +43,13 @@ bool CInGameScene::Init()
 		("Bullet");
 	pBullet->SetSize(50.f, 50.f);
 	SAFE_RELEASE(pBullet);
+
+	/* 스테이지(백그라운드) 생성 */
+	// 레이어를 약간 다른 것을 쓸 것이다.
+	CLayer* pStageLayer = FindLayer("Stage");
+	CStage* pStage = CObj::CreateObj<CStage>
+		("Stage", pStageLayer);
+	SAFE_RELEASE(pStage);
 
 	return true;
 }

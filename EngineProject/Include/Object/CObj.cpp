@@ -31,6 +31,8 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 	// 텍스처가 있는 경우
 	if (m_pTexture)
 	{
+		POSITION tPos = m_tPos - m_tSize * m_tPivot;
+
 		// 화면에 DC에 들어가있는 도구를 출력해주는 함수이다.
 		// 1. DC
 		// 2~3. 어디에 출력할것인가
@@ -38,7 +40,7 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 		// 6. source의 DC
 		// 7~8. 이미지의 어디부터 출력?
 		// 9. 6번 인자에 복사
-		BitBlt(hDC, m_tPos.x, m_tPos.y, 
+		BitBlt(hDC, tPos.x, tPos.y,
 			m_tSize.x, m_tSize.y,
 			m_pTexture->GetDC(), 
 			0, 0,

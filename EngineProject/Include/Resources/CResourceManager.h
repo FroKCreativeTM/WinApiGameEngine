@@ -11,10 +11,14 @@ public :
 		const string& strPathKey = TEXTURE_PATH);
 	class CTexture* FindTexture(const string& strKey);
 
+public : 
+	class CTexture* GetBackBuffer() const;	
+
 private : 
 	HINSTANCE		m_hInst;
 	HDC				m_hDC;
 	unordered_map<string, class CTexture*> m_mapTexture;
+	class CTexture* m_pBackBuffer;
 
 	DECLARE_SINGLE(CResourceManager)
 };

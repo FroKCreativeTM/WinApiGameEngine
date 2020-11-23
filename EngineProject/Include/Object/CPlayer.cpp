@@ -15,10 +15,10 @@ CPlayer::~CPlayer()
 
 bool CPlayer::Init()
 {
-    SetPos(100.f, 100.f);
+    SetPos(0.f, 0.f);
     SetSize(256.f, 235.f);
-
     SetSpeed(400.f);
+    SetPivot(0.5f, 0.5f);
 
     SetTexture("Player", L"todd.bmp");
 

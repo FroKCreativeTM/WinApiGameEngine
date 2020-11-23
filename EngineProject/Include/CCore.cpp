@@ -3,6 +3,7 @@
 #include "Core/CTimer.h"
 #include "Core/CPathManager.h"
 #include "Resources/CResourceManager.h"
+#include "Resources/CTexture.h"
 
 // nullptr 선언은 여기서 가능하다.
 // 왜냐면 얘는 프로그램 시작과 생기는 인스턴스고
@@ -204,9 +205,28 @@ void CCore::Collision(float fDeltaTime)
 
 void CCore::Render(float fDeltaTime)
 {
+    // 백버퍼를 생성한다.
+    CTexture* pBackBuffer =
+        GET_SINGLE(CResourceManager)->GetBackBuffer();
+
+    // 백버퍼를 비운다.
+    Rectangle(pBackBuffer->GetDC(), 0, 0, 1280, 720);
+
     // 씬 매니저부터는 DC가 필요하다!
     // 렌더 타깃
-    GET_SINGLE(CSceneManager)->Render(m_hDC, fDeltaTime);
+    // 백버퍼 DC에 그린다. (문제는 이렇게 하면 백버퍼에만 그린다.)
+    GET_SINGLE(CSceneManager)->Render(pBackBuffer->GetDC(), fDeltaTime);
+
+    // 백버퍼에 그려져 있는 것을 그린다.
+    BitBlt(m_hDC,
+        0, 0,
+        m_tRS.nWidth, m_tRS.nHeight,
+        pBackBuffer->GetDC(),
+        0, 0,
+        SRCCOPY);
+
+    // 쓴건 해제한다.
+    SAFE_RELEASE(pBackBuffer);
 }
 
 CCore::CCore() 

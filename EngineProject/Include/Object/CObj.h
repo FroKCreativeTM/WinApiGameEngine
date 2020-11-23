@@ -14,6 +14,7 @@ class CObj :
 	public CRef
 {
 public : 
+	/* Setter */
 	void SetTag(const string& tag)
 	{
 		this->m_strTag = tag;
@@ -41,6 +42,28 @@ public :
 		this->m_tSize.y = y;
 	}
 
+	void SetScene(class CScene* pScene)
+	{
+		this->m_pScene = pScene;
+	}
+
+	void SetLayer(class CLayer* pLayer)
+	{
+		this->m_pLayer = pLayer;
+	}
+
+	void SetPivot(const _SIZE& ref)
+	{
+		this->m_tPivot = ref;
+	}
+
+	void SetPivot(float x, float y)
+	{
+		this->m_tPivot.x = x;
+		this->m_tPivot.y = y;
+	}
+
+	/* Getter */
 	string GetTag() const
 	{
 		return m_strTag;
@@ -56,26 +79,9 @@ public :
 		return m_tSize;
 	}
 
-public : 
-	/* 게임 요소를 위한 메소드 */
-	virtual bool Init() = 0;
-	virtual void Input(float fDeltaTime);
-	virtual int Update(float fDeltaTime);
-	virtual int LateUpdate(float fDeltaTime);
-	virtual void Collision(float fDeltaTime);
-	virtual void Render(HDC hDC, float fDeltaTime);
-	// 
-	virtual CObj* Clone() = 0;	
-
-public : 
-	void SetScene(class CScene* pScene)
+	_SIZE GetPivot() const
 	{
-		this->m_pScene = pScene;
-	}
-
-	void SetLayer(class CLayer* pLayer)
-	{
-		this->m_pLayer = pLayer;
+		return m_tPivot;
 	}
 
 	class CScene* GetScene() const
@@ -87,6 +93,18 @@ public :
 	{
 		return m_pLayer;
 	}
+
+public : 
+	/* 게임 요소를 위한 메소드 */
+	virtual bool Init() = 0;
+	virtual void Input(float fDeltaTime);
+	virtual int Update(float fDeltaTime);
+	virtual int LateUpdate(float fDeltaTime);
+	virtual void Collision(float fDeltaTime);
+	virtual void Render(HDC hDC, float fDeltaTime);
+	// 
+	virtual CObj* Clone() = 0;	
+
 
 public :
 	static void AddObj(CObj* pObj);

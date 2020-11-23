@@ -10,6 +10,7 @@ CResourceManager::CResourceManager()
 
 CResourceManager::~CResourceManager()
 {
+	SAFE_RELEASE(m_pBackBuffer);
 	Safe_Release_Map(m_mapTexture);
 }
 
@@ -18,6 +19,10 @@ bool CResourceManager::Init(HINSTANCE hInst, HDC hDC)
 	// 리소스를 등록할 인스턴스와 DC를 가져온다.
 	m_hInst = hInst;
 	m_hDC = hDC;
+
+	// 백 버퍼 생성
+	m_pBackBuffer = LoadTexture("BackBuffer", L"BackBuffer.bmp");
+
 	return true;
 }
 
@@ -66,4 +71,10 @@ CTexture* CResourceManager::FindTexture(const string& strKey)
 
 	// 텍스처 반환.
 	return iter->second;
+}
+
+CTexture* CResourceManager::GetBackBuffer() const
+{
+	m_pBackBuffer->AddRef();
+	return m_pBackBuffer;
 }

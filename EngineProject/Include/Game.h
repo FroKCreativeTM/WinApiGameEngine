@@ -21,6 +21,9 @@ using namespace std;
 #define ROOT_PATH		"RootPath"
 #define TEXTURE_PATH	"TexturePath"
 
+// 필요한 정적 라이브러리 링크
+#pragma comment(lib, "msimg32") // 이미지 관련 헤더
+
 // STL을 날리기 위한 함수
 // 타입을 잡아줄 필요가 없기 때문에, 재사용성이 높다.
 template <typename T>

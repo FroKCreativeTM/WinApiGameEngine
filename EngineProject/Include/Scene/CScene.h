@@ -71,6 +71,14 @@ public:
 	static class CObj* FindPrototype(const string& strTag);
 
 private:
+	// 원본 객체(프로토타입)을 관리
+	// 복사할 용도, 
+	// 예로들어 오크를 만든다 치면
+	// HP 등등의 정보가 있을 것이다.
+	// 근데 문제는 모든 몬스터는 정보가 다를 것이다.
+	// 그러면 파일에 있는 것을 로딩할텐데 문제는 느려!
+	// 그렇기 때문에 여기다가 미리 만들어놓고, 리스폰될 객체들을
+	// 만들면 될 것이다.
 	static unordered_map<string, class CObj*> m_mapPrototype;
 };
 

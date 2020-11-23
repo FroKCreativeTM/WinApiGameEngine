@@ -2,6 +2,7 @@
 #include "Scene/CSceneManager.h"
 #include "Core/CTimer.h"
 #include "Core/CPathManager.h"
+#include "Resources/CResourceManager.h"
 
 // nullptr 선언은 여기서 가능하다.
 // 왜냐면 얘는 프로그램 시작과 생기는 인스턴스고
@@ -46,7 +47,14 @@ bool CCore::Init(HINSTANCE hInstance)
         return false;
     }
 
+    // 경로관리자 초기화
     if (!GET_SINGLE(CPathManager)->Init())
+    {
+        return false;
+    }
+
+    // 리소스 관리자 초기화
+    if (!GET_SINGLE(CResourceManager)->Init(hInstance, m_hDC))
     {
         return false;
     }
@@ -216,5 +224,9 @@ CCore::~CCore()
     // 서브 관리 클래스들을 전부 해제한다.
     DESTROY_SINGLE(CSceneManager);
     DESTROY_SINGLE(CPathManager);
+    DESTROY_SINGLE(CResourceManager);
     DESTROY_SINGLE(CTimer);
+
+    // DC 메모리 해제
+    ReleaseDC(m_hWnd, m_hDC);
 }

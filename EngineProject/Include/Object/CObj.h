@@ -95,6 +95,12 @@ public :
 	static void EraseObj(CObj* pObj);
 	static void EraseObj(const string& strTag);
 
+public : 
+	void SetTexture(class CTexture* pTexture);
+	void SetTexture(const string& strKey,
+		const wchar_t* pFileName = nullptr,
+		const string& strPathKey = TEXTURE_PATH);
+
 protected :
 	CObj();
 	CObj(const CObj& ref);
@@ -107,6 +113,8 @@ protected :
 	POSITION		m_tPos;
 	_SIZE			m_tSize;
 	POSITION		m_tPivot;
+	// 텍스처 정보
+	class CTexture* m_pTexture;
 
 protected : 
 	// 자기가 속한 장면과 레이어를 알게 한다.
@@ -120,15 +128,7 @@ private :
 	// 생성되는 모든 오브젝트들은 여기서 저장된다.
 	// 즉 레이어에 배치되면서 동시에 여기에 들어온다는 뜻이다.
 	// (실제 배치됨)
-	static list<CObj*> m_ObjList;
-	// 원본 객체(프로토타입)을 관리
-	// 복사할 용도, 
-	// 예로들어 오크를 만든다 치면
-	// HP 등등의 정보가 있을 것이다.
-	// 근데 문제는 모든 몬스터는 정보가 다를 것이다.
-	// 그러면 파일에 있는 것을 로딩할텐데 문제는 느려!
-	// 그렇기 때문에 여기다가 미리 만들어놓고, 리스폰될 객체들을
-	// 만들면 될 것이다.
+	static list<CObj*>	m_ObjList;
 
 public : 
 	// 굉장히 다양한 타입의 오브젝트를 만들기 위한 

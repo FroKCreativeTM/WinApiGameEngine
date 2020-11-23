@@ -23,9 +23,11 @@ CMushroom::~CMushroom()
 bool CMushroom::Init()
 {
 	SetPos(800.f, 100.f);
-	SetSize(100.f, 100.f);
+	SetSize(256.f, 271.f);
 
 	SetSpeed(300.f);
+
+	SetTexture("Mushroom", L"neil.bmp");
 
 	m_eDir = MD_FRONT;
 
@@ -77,8 +79,8 @@ void CMushroom::Collision(float fDeltaTime)
 void CMushroom::Render(HDC hDC, float fDeltaTime)
 {
 	CMoveObj::Render(hDC, fDeltaTime);
-	Rectangle(hDC, m_tPos.x, m_tPos.y,
-		m_tPos.x + m_tSize.x, m_tPos.y + m_tSize.y);
+	// Rectangle(hDC, m_tPos.x, m_tPos.y,
+	// 	m_tPos.x + m_tSize.x, m_tPos.y + m_tSize.y);
 }
 
 CMushroom* CMushroom::Clone()

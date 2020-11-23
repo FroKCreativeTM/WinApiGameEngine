@@ -16,9 +16,11 @@ CPlayer::~CPlayer()
 bool CPlayer::Init()
 {
     SetPos(100.f, 100.f);
-    SetSize(100.f, 100.f);
+    SetSize(256.f, 235.f);
 
     SetSpeed(400.f);
+
+    SetTexture("Player", L"todd.bmp");
 
     return true;
 }
@@ -75,8 +77,8 @@ void CPlayer::Render(HDC hDC, float fDeltaTime)
 {
     // 부모의 함수를 호출해준다.
     CMoveObj::Render(hDC, fDeltaTime);
-    Rectangle(hDC, m_tPos.x, m_tPos.y,
-        m_tPos.x + m_tSize.x, m_tPos.y + m_tSize.y);
+    // Rectangle(hDC, m_tPos.x, m_tPos.y,
+    //     m_tPos.x + m_tSize.x, m_tPos.y + m_tSize.y);
 }
 
 CPlayer* CPlayer::Clone()

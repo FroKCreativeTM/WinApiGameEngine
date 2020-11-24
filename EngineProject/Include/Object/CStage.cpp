@@ -1,6 +1,7 @@
 #include "CStage.h"
 #include "../Resources/CTexture.h"
 #include "../CCore.h"
+#include "../Core/CCamera.h"
 
 CStage::CStage()
 {
@@ -56,6 +57,7 @@ void CStage::Render(HDC hDC, float fDeltaTime)
 	if (m_pTexture)
 	{
 		POSITION tPos = m_tPos - m_tSize * m_tPivot;
+		POSITION tCameraPos = GET_SINGLE(CCamera)->GetPos();
 
 		// 화면에 DC에 들어가있는 도구를 출력해주는 함수이다.
 		// 1. DC
@@ -67,7 +69,7 @@ void CStage::Render(HDC hDC, float fDeltaTime)
 		BitBlt(hDC, tPos.x, tPos.y,
 			GET_RESOLUTION.nWidth, GET_RESOLUTION.nHeight,
 			m_pTexture->GetDC(),
-			0, 0,
+			tCameraPos.x, tCameraPos.y,
 			SRCCOPY);
 	}
 }

@@ -23,8 +23,7 @@ CMushroom::~CMushroom()
 bool CMushroom::Init()
 {
 	SetPos(800.f, 100.f);
-	SetSize(256.f, 271.f);
-
+	SetSize(100.f, 100.f);
 	SetSpeed(300.f);
 
 	SetTexture("Mushroom", L"neil.bmp");

@@ -4,6 +4,7 @@
 #include "../Object/CBullet.h"
 #include "../Object/CStage.h"
 #include "CLayer.h"
+#include "../Core/CCamera.h"
 
 CInGameScene::CInGameScene()
 {
@@ -29,6 +30,11 @@ bool CInGameScene::Init()
 	// Init는 자동으로 호출된다.
 	CPlayer* pPlayer = CObj::CreateObj<CPlayer>
 		("Player", pLayer);
+
+	/* 카메라 세팅을 한다. */
+	GET_SINGLE(CCamera)->SetTarget(pPlayer);
+	GET_SINGLE(CCamera)->SetPivot(0.8f, 0.3f);
+
 	/* 이제 레이어에 플레이어가 들어가서 필요 없으니 지운다. */
 	/* 지역 변수라 다른 곳에서 참조가 안 되니  */
 	SAFE_RELEASE(pPlayer);

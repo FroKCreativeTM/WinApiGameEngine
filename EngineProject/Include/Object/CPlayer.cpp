@@ -15,8 +15,8 @@ CPlayer::~CPlayer()
 
 bool CPlayer::Init()
 {
-    SetPos(0.f, 0.f);
-    SetSize(256.f, 235.f);
+    SetPos(100.f, 100.f);
+    SetSize(100.f, 100.f);
     SetSpeed(400.f);
     SetPivot(0.5f, 0.5f);
 

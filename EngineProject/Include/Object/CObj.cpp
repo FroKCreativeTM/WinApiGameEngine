@@ -4,6 +4,7 @@
 #include "../Scene/CScene.h"
 #include "../Resources/CResourceManager.h"
 #include "../Resources/CTexture.h"
+#include "../Core/CCamera.h"
 
 // static
 list<CObj*> CObj::m_ObjList;
@@ -32,6 +33,9 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 	if (m_pTexture)
 	{
 		POSITION tPos = m_tPos - m_tSize * m_tPivot;
+
+		// 카메라 위치를 빼야 스크롤이 된다.
+		tPos -= GET_SINGLE(CCamera)->GetPos();
 
 		// 화면에 DC에 들어가있는 도구를 출력해주는 함수이다.
 		// 1. DC

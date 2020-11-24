@@ -4,6 +4,12 @@ typedef struct _tagResolution
 {
 	unsigned int nWidth;
 	unsigned int nHeight;
+
+	_tagResolution() : 
+		nWidth(0), nHeight(0)	{}
+
+	_tagResolution(int x, int y) : 
+		nWidth(x), nHeight(y)	{}
 }RESOLUTION, *PRESOLUTION;
 
 // 오브젝트들의 위치를 표현하기 위한 것입니다.
@@ -106,6 +112,12 @@ typedef struct _tagPosition
 		tPos.x = x - f;
 		tPos.y = y - f;
 		return tPos;
+	}
+
+	void operator-=(const _tagPosition& ref)
+	{
+		this->x = x - ref.x;
+		this->y = y - ref.y;
 	}
 
 	/* 곱셈 */

@@ -42,10 +42,24 @@ bool CTexture::LoadTexture(HINSTANCE hInst,
 	return true;
 }
 
-CTexture::CTexture() : 
-	m_hMemDC(nullptr)
+void CTexture::SetColorKey(unsigned char r, unsigned char g, unsigned char b)
 {
+	m_ColorKey = RGB(r, g, b);
+	m_bColorKeyEnable = true;
+}
 
+void CTexture::SetColorKey(COLORREF colorKey)
+{
+	m_ColorKey = colorKey;
+	m_bColorKeyEnable = true;
+}
+
+CTexture::CTexture() : 
+	m_hMemDC(nullptr),
+	m_bColorKeyEnable(false),
+	m_ColorKey(RGB(255, 0, 255))
+{
+	// 컬러키는 제일 안 쓰는 마젠타 색으로 설정한다.
 }
 
 CTexture::~CTexture()

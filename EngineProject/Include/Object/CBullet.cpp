@@ -1,4 +1,5 @@
 #include "CBullet.h"
+#include "../Resources/CTexture.h"
 
 CBullet::CBullet() :
 	m_fDist(0.f),
@@ -20,8 +21,11 @@ CBullet::~CBullet()
 bool CBullet::Init()
 {
 	SetSpeed(500.f);
+	SetPivot(0.5f, 0.5f);
 
 	SetTexture("Bullet", L"golf.bmp");
+
+	m_pTexture->SetColorKey(0, 248, 0);
 
 	return true;
 }

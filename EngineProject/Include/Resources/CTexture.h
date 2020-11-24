@@ -18,6 +18,21 @@ public :
 		return m_hMemDC;
 	}
 
+public : 
+	void SetColorKey(unsigned char r,
+		unsigned char g,
+		unsigned char b);
+	void SetColorKey(COLORREF colorKey);
+	COLORREF GetColorKey() const
+	{
+		return m_ColorKey;
+	}
+
+	bool GetColorKeyEnable() const
+	{
+		return m_bColorKeyEnable;
+	}
+
 private : 
 	// 메모리 DC라는 것있다.
 	// 화면 DC를 이용해서, 이것과 같은 성질을 같는
@@ -33,6 +48,9 @@ private :
 	HBITMAP		m_hOldBitmap;
 	// 픽셀 정보 외 비트맵 정보를 저장하자!
 	BITMAP		m_tInfo;
+	// 컬러에 대한 정보를 저장한다.
+	COLORREF	m_ColorKey;
+	bool		m_bColorKeyEnable;	// 컬러키가 있는가
 
 private : 
 	// 이 관리자만 텍스처 생성 가능

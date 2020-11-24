@@ -77,8 +77,6 @@ void CPlayer::Render(HDC hDC, float fDeltaTime)
 {
     // 부모의 함수를 호출해준다.
     CMoveObj::Render(hDC, fDeltaTime);
-    // Rectangle(hDC, m_tPos.x, m_tPos.y,
-    //     m_tPos.x + m_tSize.x, m_tPos.y + m_tSize.y);
 }
 
 CPlayer* CPlayer::Clone()
@@ -91,17 +89,13 @@ void CPlayer::Fire()
     CObj* pBullet = 
         CObj::CreateCloneObj("Bullet", "PlayerBullet", m_pLayer);
 
-    // 30퍼 정도 간다고 가정하자.
-    // size * 0.3
-    // 0.3은 어떻게? 지정하는 것마다 다르게 대응하게
-    // 1에서 빼버려!
-    // 오른쪽 가운데를 구한다.
     POSITION tPos;
-    tPos.x = m_tPos.x + (1.f - m_tPivot.x) * m_tSize.x;
-    tPos.y = m_tPos.y + (0.5f - m_tPivot.y) * m_tSize.y;
+    tPos.x = GetRight() 
+        + pBullet->GetSize().x * pBullet->GetPivot().x;
+    tPos.y = GetCenter().y;
 
     // 위에서 구한 좌표를 적용한다.
-    pBullet->SetPos(tPos.x, tPos.y - pBullet->GetSize().y / 2.f);
+    pBullet->SetPos(tPos);
 
     SAFE_RELEASE(pBullet);
 }

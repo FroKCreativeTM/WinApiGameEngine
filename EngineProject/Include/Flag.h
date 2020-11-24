@@ -16,3 +16,15 @@ enum MOVE_DIR
 	MD_NONE,
 	MD_FRONT
 };
+
+// 충돌체도 여러가지가 있을 수 있기 때문에 이에 대한 대응책으로
+// 이 enum문을 선언한다.
+enum COLLIDER_TYPE
+{
+	CT_RECT,
+	CT_SPHERE,
+	CT_LINE,
+	CT_POINT,
+	CT_PIXEL,
+	CT_END
+};

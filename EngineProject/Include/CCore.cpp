@@ -6,6 +6,7 @@
 #include "Resources/CTexture.h"
 #include "Core/CCamera.h"
 #include "Core/CInput.h"
+#include "Collider/CCollisionManager.h"
 
 // nullptr 선언은 여기서 가능하다.
 // 왜냐면 얘는 프로그램 시작과 생기는 인스턴스고
@@ -265,6 +266,7 @@ CCore::~CCore()
 {
     // 서브 관리 클래스들을 전부 해제한다.
     DESTROY_SINGLE(CSceneManager);
+    DESTROY_SINGLE(CCollisionManager);
     DESTROY_SINGLE(CCamera);
     DESTROY_SINGLE(CInput);
     DESTROY_SINGLE(CPathManager);

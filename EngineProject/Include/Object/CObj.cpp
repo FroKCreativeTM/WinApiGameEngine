@@ -5,6 +5,7 @@
 #include "../Resources/CResourceManager.h"
 #include "../Resources/CTexture.h"
 #include "../Core/CCamera.h"
+#include "../Collider/CCollider.h"
 
 // static
 list<CObj*> CObj::m_ObjList;
@@ -169,10 +170,22 @@ CObj::CObj(const CObj& ref)
 	{
 		m_pTexture->AddRef();
 	}
+
+	m_ColliderList.clear();
+
+	list<CCollider*>::const_iterator iter;
+	list<CCollider*>::const_iterator iterEnd = ref.m_ColliderList.end();
+
+	for (iter = ref.m_ColliderList.begin(); iter != iterEnd; ++iter)
+	{
+		CCollider* pColl = (*iter)->Clone();
+		m_ColliderList.push_back(pColl); 
+	}
 }
 
 CObj::~CObj()
 {
+	Safe_Release_VecList(m_ColliderList);
 	SAFE_RELEASE(m_pTexture);
 }
 

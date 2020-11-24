@@ -149,6 +149,9 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="Collider\CCollider.cpp" />
+    <ClCompile Include="Collider\CCollisionManager.cpp" />
+    <ClCompile Include="Collider\CRectCollider.cpp" />
     <ClCompile Include="Core\CCamera.cpp" />
     <ClCompile Include="Core\CInput.cpp" />
     <ClCompile Include="Core\CPathManager.cpp" />
@@ -171,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="Collider\CCollider.h" />
+    <ClInclude Include="Collider\CCollisionManager.h" />
+    <ClInclude Include="Collider\CRectCollider.h" />
     <ClInclude Include="Core\CCamera.h" />
     <ClInclude Include="Core\CInput.h" />
     <ClInclude Include="Core\CPathManager.h" />

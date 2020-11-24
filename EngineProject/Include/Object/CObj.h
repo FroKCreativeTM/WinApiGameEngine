@@ -152,13 +152,15 @@ protected :
 
 protected :
 	// 오브젝트도 태그를 가진다.
-	string			m_strTag;	
+	string					m_strTag;	
 	// 위치와 크기
-	POSITION		m_tPos;
-	_SIZE			m_tSize;
-	POSITION		m_tPivot;
+	POSITION				m_tPos;
+	_SIZE					m_tSize;
+	POSITION				m_tPivot;
 	// 텍스처 정보
-	class CTexture* m_pTexture;
+	class CTexture*			m_pTexture;
+	// 충돌체에 대한 정보
+	list<class CCollider*>	m_ColliderList;
 
 protected : 
 	// 자기가 속한 장면과 레이어를 알게 한다.

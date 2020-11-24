@@ -50,11 +50,11 @@ void CInput::Update(float fDeltaTime)
 			if (!iter->second->bDown && !iter->second->bPress)
 			{
 				iter->second->bDown = true;
+				iter->second->bPress = true;
 			}
 			// 계속 누른 경우
-			else if (iter->second->bDown && !iter->second->bPress)
+			else if (iter->second->bDown)
 			{
-				iter->second->bPress = true;
 				iter->second->bDown = false;
 			}
 		}

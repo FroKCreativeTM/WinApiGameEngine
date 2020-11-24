@@ -5,6 +5,7 @@
 #include "Resources/CResourceManager.h"
 #include "Resources/CTexture.h"
 #include "Core/CCamera.h"
+#include "Core/CInput.h"
 
 // nullptr 선언은 여기서 가능하다.
 // 왜냐면 얘는 프로그램 시작과 생기는 인스턴스고
@@ -61,6 +62,12 @@ bool CCore::Init(HINSTANCE hInstance)
         return false;
     }
 
+    /* 입력관리지 초기화 */
+    if (!GET_SINGLE(CInput)->Init(m_hWnd))
+    {
+        return false; 
+    }
+
     /* 카메라 초기화 */
     // 1. 카메라 초기 위치
     // 2. 카메라가 담을 클라이언트 창 크기
@@ -70,6 +77,7 @@ bool CCore::Init(HINSTANCE hInstance)
     {
         return false;
     }
+    
 
     /* 서브 관리 클래스 초기화 */
     if (!GET_SINGLE(CSceneManager)->Init())
@@ -194,6 +202,7 @@ void CCore::Logic()
 
 void CCore::Input(float fDeltaTime)
 {
+    GET_SINGLE(CInput)->Update(fDeltaTime);
     GET_SINGLE(CSceneManager)->Input(fDeltaTime);
     GET_SINGLE(CCamera)->Input(fDeltaTime);
 }
@@ -257,6 +266,7 @@ CCore::~CCore()
     // 서브 관리 클래스들을 전부 해제한다.
     DESTROY_SINGLE(CSceneManager);
     DESTROY_SINGLE(CCamera);
+    DESTROY_SINGLE(CInput);
     DESTROY_SINGLE(CPathManager);
     DESTROY_SINGLE(CResourceManager);
     DESTROY_SINGLE(CTimer);

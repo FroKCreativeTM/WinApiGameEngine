@@ -150,6 +150,7 @@
     <ClCompile Include="app.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="Core\CCamera.cpp" />
+    <ClCompile Include="Core\CInput.cpp" />
     <ClCompile Include="Core\CPathManager.cpp" />
     <ClCompile Include="Core\CRef.cpp" />
     <ClCompile Include="Core\CTimer.cpp" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="CCore.h" />
     <ClInclude Include="Core\CCamera.h" />
+    <ClInclude Include="Core\CInput.h" />
     <ClInclude Include="Core\CPathManager.h" />
     <ClInclude Include="Core\CRef.h" />
     <ClInclude Include="Core\CTimer.h" />

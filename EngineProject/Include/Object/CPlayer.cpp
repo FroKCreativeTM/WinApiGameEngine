@@ -1,4 +1,5 @@
 #include "CPlayer.h"
+#include "../Core/CInput.h"
 
 CPlayer::CPlayer()
 {
@@ -30,23 +31,23 @@ void CPlayer::Input(float fDeltaTime)
     // 부모의 함수를 호출해준다.
     CMoveObj::Input(fDeltaTime);
 
-    if (GetAsyncKeyState('W') & 0x8000)
+    if (KEYPRESS("MoveFront"))
     {
         MoveYFromSpeed(fDeltaTime, MD_BACK);
     }
-    if (GetAsyncKeyState('S') & 0x8000)
+    if (KEYPRESS("MoveBack"))
     {
         MoveYFromSpeed(fDeltaTime, MD_FRONT);
     }
-    if (GetAsyncKeyState('A') & 0x8000)
+    if (KEYPRESS("MoveLeft"))
     {
         MoveXFromSpeed(fDeltaTime, MD_BACK);
     }
-    if (GetAsyncKeyState('D') & 0x8000)
+    if (KEYPRESS("MoveRight"))
     {
         MoveXFromSpeed(fDeltaTime, MD_FRONT);
     }
-    if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+    if (KEYPRESS("Fire"))
     {
         Fire();
     }

@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="01.Core">
+      <UniqueIdentifier>{c0e24d7a-7a54-4006-b437-5a567b61d37d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene">
+      <UniqueIdentifier>{e9d556d0-1cbf-4084-8422-3616baae27dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\01. Timer">
+      <UniqueIdentifier>{962f9e29-87b5-408c-b5f6-6407a7792d0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\01. Layer">
+      <UniqueIdentifier>{4d0dfabc-90d3-41e3-915d-d857549b68ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object">
+      <UniqueIdentifier>{ceea278f-4fa0-487b-abfa-35eefbb02685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\01. MoveObj">
+      <UniqueIdentifier>{b50b53c3-20b4-4239-9ea5-ea636cb6b37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\01. MoveObj\02.Monster">
+      <UniqueIdentifier>{9373335d-0e9c-4fa3-b9fc-b20119a2c337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\01. MoveObj\01. Player">
+      <UniqueIdentifier>{e9e366b5-e4b4-49bc-811d-f7a593f3a7e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\02. StaticObj">
+      <UniqueIdentifier>{b053c24a-9aca-4e0f-90b0-9d40df7e2055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\01. MoveObj\03. Bullet">
+      <UniqueIdentifier>{f4165dfa-447a-489d-ba4d-c906a4db650f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\02. Path">
+      <UniqueIdentifier>{a0b6ac2d-70d7-425c-9f93-45547410877c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Resources">
+      <UniqueIdentifier>{f94b70d6-9210-4757-ad3c-9052c8174566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\02. StaticObj\01. Stage">
+      <UniqueIdentifier>{5453a493-5fb1-42ac-9a59-804d0a7c717f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\03. Camera">
+      <UniqueIdentifier>{6da27d4d-112b-4702-b3ee-f46aec937058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\04. Input">
+      <UniqueIdentifier>{f4dc0e81-2d57-43e7-8517-d1be6723c32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Collider">
+      <UniqueIdentifier>{e051f116-a9f9-4c05-a1fe-c08a3b284d83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="app.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CCore.cpp">
+      <Filter>01.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CSceneManager.cpp">
+      <Filter>02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CScene.cpp">
+      <Filter>02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CInGameScene.cpp">
+      <Filter>02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CTimer.cpp">
+      <Filter>01.Core\01. Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CLayer.cpp">
+      <Filter>02.Scene\01. Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CObj.cpp">
+      <Filter>03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CRef.cpp">
+      <Filter>01.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CMoveObj.cpp">
+      <Filter>03. Object\01. MoveObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CStaticObj.cpp">
+      <Filter>03. Object\02. StaticObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CPlayer.cpp">
+      <Filter>03. Object\01. MoveObj\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CMushroom.cpp">
+      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CZako.cpp">
+      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CBullet.cpp">
+      <Filter>03. Object\01. MoveObj\03. Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CPathManager.cpp">
+      <Filter>01.Core\02. Path</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\CResourceManager.cpp">
+      <Filter>04. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\CTexture.cpp">
+      <Filter>04. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CStage.cpp">
+      <Filter>03. Object\02. StaticObj\01. Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CCamera.cpp">
+      <Filter>01.Core\03. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CInput.cpp">
+      <Filter>01.Core\04. Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\CCollider.cpp">
+      <Filter>05. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\CRectCollider.cpp">
+      <Filter>05. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\CCollisionManager.cpp">
+      <Filter>05. Collider</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CCore.h">
+      <Filter>01.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CSceneManager.h">
+      <Filter>02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CScene.h">
+      <Filter>02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CInGameScene.h">
+      <Filter>02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Flag.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CTimer.h">
+      <Filter>01.Core\01. Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CLayer.h">
+      <Filter>02.Scene\01. Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CObj.h">
+      <Filter>03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CRef.h">
+      <Filter>01.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CMoveObj.h">
+      <Filter>03. Object\01. MoveObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CStaticObj.h">
+      <Filter>03. Object\02. StaticObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CPlayer.h">
+      <Filter>03. Object\01. MoveObj\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CMushroom.h">
+      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CZako.h">
+      <Filter>03. Object\01. MoveObj\02.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CBullet.h">
+      <Filter>03. Object\01. MoveObj\03. Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CPathManager.h">
+      <Filter>01.Core\02. Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\CResourceManager.h">
+      <Filter>04. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\CTexture.h">
+      <Filter>04. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CStage.h">
+      <Filter>03. Object\02. StaticObj\01. Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CCamera.h">
+      <Filter>01.Core\03. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CInput.h">
+      <Filter>01.Core\04. Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\CCollider.h">
+      <Filter>05. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\CRectCollider.h">
+      <Filter>05. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\CCollisionManager.h">
+      <Filter>05. Collider</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="Object\CObj.inl">
+      <Filter>03. Object</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EngineProject.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

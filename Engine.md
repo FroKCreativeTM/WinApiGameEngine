@@ -20,3 +20,5 @@
 -- EngineProject
 27화 입력 관리자<br>
 28화 입력 개선 및 충돌 기본 클래스 구조 설계<br>
+-- BulletChaser 
+과제 실습 프로젝트 생성 및 구현 완료

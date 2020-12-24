@@ -16,11 +16,58 @@ void CObj::Input(float fDeltaTime)
 
 int CObj::Update(float fDeltaTime)
 {
+	/* 충돌체를 돌린다. */
+	list<CCollider*>::iterator iter;
+	list<CCollider*>::iterator iterEnd = m_ColliderList.end();
+
+	for (iter = m_ColliderList.begin(); iter != iterEnd;)
+	{
+		// 콜라이더가 비활성화 되어있다면
+		if (!(*iter)->GetEnable())
+		{
+			++iter;
+			continue;
+		}
+		(*iter)->Update(fDeltaTime);
+
+		if (!(*iter)->GetLife())
+		{
+			SAFE_RELEASE((*iter));
+			iter = m_ColliderList.erase(iter);
+			iterEnd = m_ColliderList.end();
+		}
+		else
+			++iter;
+	}
+
 	return 0;
 }
 
 int CObj::LateUpdate(float fDeltaTime)
 {
+	list<CCollider*>::iterator iter;
+	list<CCollider*>::iterator iterEnd = m_ColliderList.end();
+
+	for (iter = m_ColliderList.begin(); iter != iterEnd;)
+	{
+		// 콜라이더가 비활성화 되어있다면
+		if (!(*iter)->GetEnable())
+		{
+			++iter;
+			continue;
+		}
+		(*iter)->LateUpdate(fDeltaTime);
+
+		if (!(*iter)->GetLife())
+		{
+			SAFE_RELEASE((*iter));
+			iter = m_ColliderList.erase(iter);
+			iterEnd = m_ColliderList.end();
+		}
+		else
+			++iter;
+	}
+
 	return 0;
 }
 
@@ -64,6 +111,30 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 				0, 0,
 				SRCCOPY);
 		}		
+	}
+
+	list<CCollider*>::iterator iter;
+	list<CCollider*>::iterator iterEnd = m_ColliderList.end();
+
+	for (iter = m_ColliderList.begin(); iter != iterEnd;)
+	{
+		// 콜라이더가 비활성화 되어있다면
+		if (!(*iter)->GetEnable())
+		{
+			++iter;
+			continue;
+		}
+
+		(*iter)->Render(hDC, fDeltaTime);
+
+		if (!(*iter)->GetLife())
+		{
+			SAFE_RELEASE((*iter));
+			iter = m_ColliderList.erase(iter);
+			iterEnd = m_ColliderList.end();
+		}
+		else
+			++iter;
 	}
 }
 

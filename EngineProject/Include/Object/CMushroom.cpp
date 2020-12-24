@@ -1,5 +1,6 @@
 #include "CMushroom.h"
 #include "../CCore.h"
+#include "../Collider/CRectCollider.h"
 
 // 2초에 한 번씩 발사한다.
 CMushroom::CMushroom() : 
@@ -30,6 +31,10 @@ bool CMushroom::Init()
 	SetTexture("Mushroom", L"neil.bmp");
 
 	m_eDir = MD_FRONT;
+
+	CRectCollider* pRC = AddCollider<CRectCollider>("Mushroom");
+	pRC->SetRect(-50.f, -50.f, 50.f, 50.f);
+	SAFE_RELEASE(pRC);
 
 	return true;
 }

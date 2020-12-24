@@ -1,4 +1,5 @@
 #include "CCollider.h"
+#include "../Object/CObj.h"
 
 CCollider::CCollider()
 {

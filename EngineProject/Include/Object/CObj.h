@@ -162,6 +162,32 @@ protected :
 	// 충돌체에 대한 정보
 	list<class CCollider*>	m_ColliderList;
 
+public:
+	template <typename T>
+	T* AddCollider(const string& strTag)
+	{
+		// 충돌체를 생성하고 이 충돌체를 가질 오브젝트의 정보를 전달한다
+		T* pCollider = new T;
+		pCollider->SetObj(this);
+
+		if (pCollider->Init())
+		{
+			SAFE_RELEASE(pCollider);
+			return nullptr;
+		}
+
+		pCollider->AddRef();
+		m_ColliderList.push_back(pCollider);
+
+		return pCollider;
+	}
+
+	bool CheckCollider()
+	{
+		// 충돌이 있나없나를 검사한다.
+		return !m_ColliderList.empty();
+	}
+
 protected : 
 	// 자기가 속한 장면과 레이어를 알게 한다.
 	class CScene* m_pScene;

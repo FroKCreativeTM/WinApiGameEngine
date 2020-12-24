@@ -28,10 +28,19 @@ public :
 		return m_eColType;
 	}
 
+	class CObj* GetObj() const
+	{
+		return m_pObj;
+	}
 
+	void SetObj(class CObj* obj)
+	{
+		m_pObj = obj;
+	}
 
 protected :
-	COLLIDER_TYPE m_eColType;
+	COLLIDER_TYPE	m_eColType;
+	class CObj*		m_pObj;
 
 private : 
 	friend class CObj;

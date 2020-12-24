@@ -16,6 +16,19 @@ public:
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CRectCollider* Clone();
 
+public : 
+	void SetRect(float left, float top, float right, float bottom);
+
+	RECTANGLE GetInfo() const
+	{
+		return m_tInfo;
+	}
+
+	RECTANGLE GetWorldInfo() const
+	{
+		return m_tWorldInfo;
+	}
+
 protected:
 	CRectCollider();
 	CRectCollider(const CRectCollider& col);
@@ -23,5 +36,9 @@ protected:
 
 private:
 	friend class CObj;
+
+private :
+	RECTANGLE m_tInfo;
+	RECTANGLE m_tWorldInfo; // 최종위치
 };
 

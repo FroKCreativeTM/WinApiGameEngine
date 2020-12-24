@@ -1,5 +1,6 @@
 #include "CLayer.h"
 #include "../Object/CObj.h"
+#include "../Collider/CCollisionManager.h"
 
 void CLayer::Input(float fDeltaTime)
 {
@@ -127,6 +128,8 @@ void CLayer::Collision(float fDeltaTime)
 		}
 		else
 		{
+			// 인지워진 애들만 충돌체로써 넣어준다.
+			GET_SINGLE(CCollisionManager)->AddObject(*iter);
 			++iter;
 		}
 	}

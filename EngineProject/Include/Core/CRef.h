@@ -40,6 +40,16 @@ public :
 		return m_bEnable;
 	}
 
+	string GetTag() const
+	{
+		return m_strTag;
+	}
+
+	void SetTag(const string& strTag)
+	{
+		m_strTag = strTag;
+	}
+
 protected : 
 	CRef();
 	virtual ~CRef();
@@ -49,5 +59,6 @@ protected :
 	int			m_nRef;
 	bool		m_bEnable;	// 객체 활성화(객체는 있지만, 보이냐 안 보이는가)
 	bool		m_bLife;	// 살리는가 죽이는가.
+	string		m_strTag;	// 태그 이름
 };
 

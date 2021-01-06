@@ -152,8 +152,10 @@
     <ClCompile Include="Collider\CCollider.cpp" />
     <ClCompile Include="Collider\CCollisionManager.cpp" />
     <ClCompile Include="Collider\CRectCollider.cpp" />
+    <ClCompile Include="Collider\CSphereCollider.cpp" />
     <ClCompile Include="Core\CCamera.cpp" />
     <ClCompile Include="Core\CInput.cpp" />
+    <ClCompile Include="Core\CMath.cpp" />
     <ClCompile Include="Core\CPathManager.cpp" />
     <ClCompile Include="Core\CRef.cpp" />
     <ClCompile Include="Core\CTimer.cpp" />
@@ -177,8 +179,10 @@
     <ClInclude Include="Collider\CCollider.h" />
     <ClInclude Include="Collider\CCollisionManager.h" />
     <ClInclude Include="Collider\CRectCollider.h" />
+    <ClInclude Include="Collider\CSphereCollider.h" />
     <ClInclude Include="Core\CCamera.h" />
     <ClInclude Include="Core\CInput.h" />
+    <ClInclude Include="Core\CMath.h" />
     <ClInclude Include="Core\CPathManager.h" />
     <ClInclude Include="Core\CRef.h" />
     <ClInclude Include="Core\CTimer.h" />

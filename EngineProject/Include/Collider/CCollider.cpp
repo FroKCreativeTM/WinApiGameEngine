@@ -1,5 +1,6 @@
 #include "CCollider.h"
 #include "../Object/CObj.h"
+#include "../Core/CMath.h"
 
 bool CCollider::CollisionRectToRect(const RECTANGLE& src, const RECTANGLE& dst)
 {
@@ -20,6 +21,19 @@ bool CCollider::CollisionRectToRect(const RECTANGLE& src, const RECTANGLE& dst)
 		return false;
 	}
 	return true;
+}
+
+bool CCollider::CollisionRectToSphere(const RECTANGLE& src, const SPHERE& dst)
+{
+	return false;
+}
+
+bool CCollider::CollisionSphereToSphere(const SPHERE& src, const SPHERE& dst)
+{
+	float fDist = CMath::Distance(src.tCenter, dst.tCenter);
+
+	// 두 반지름의 합보다 작으면 true
+	return fDist <= src.fRadius + dst.fRadius;
 }
 
 CCollider::CCollider()

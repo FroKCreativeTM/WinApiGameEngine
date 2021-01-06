@@ -61,6 +61,9 @@
     <Filter Include="03. Object\01. MoveObj\02. Monster">
       <UniqueIdentifier>{9373335d-0e9c-4fa3-b9fc-b20119a2c337}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Core\05. Math">
+      <UniqueIdentifier>{a9e35e0a-be5b-4937-a0b9-cec8993a1046}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -134,6 +137,12 @@
     </ClCompile>
     <ClCompile Include="Collider\CCollisionManager.cpp">
       <Filter>05. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\CSphereCollider.cpp">
+      <Filter>05. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CMath.cpp">
+      <Filter>01.Core\05. Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="Collider\CCollisionManager.h">
       <Filter>05. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\CSphereCollider.h">
+      <Filter>05. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CMath.h">
+      <Filter>01.Core\05. Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@ bool CBullet::Init()
 
 	m_pTexture->SetColorKey(0, 248, 0);
 
-	CRectCollider* pRC = AddCollider<CRectCollider>("Bullet");
+	CRectCollider* pRC = AddCollider<CRectCollider>("BulletBody");
 	pRC->SetRect(-25.f, -25.f, 25.f, 25.f);
 	SAFE_RELEASE(pRC);
 
@@ -70,4 +70,9 @@ void CBullet::Render(HDC hDC, float fDeltaTime)
 CBullet* CBullet::Clone()
 {
 	return new CBullet(*this);
+}
+
+void CBullet::Hit(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
+{
+	Die();
 }

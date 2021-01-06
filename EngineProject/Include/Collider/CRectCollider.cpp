@@ -54,6 +54,7 @@ bool CRectCollider::Collision(CCollider* pDst)
 		return CollisionRectToRect(m_tWorldInfo, ((CRectCollider*)pDst)->GetWorldInfo());
 		break;
 	}
+	return false;
 }
 
 void CRectCollider::Render(HDC hDC, float fDeltaTime)

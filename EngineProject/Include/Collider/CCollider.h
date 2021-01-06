@@ -17,8 +17,10 @@ public :
 	// 
 	virtual CCollider* Clone() = 0;
 
-protected : 
+protected :
 	bool CollisionRectToRect(const RECTANGLE& src, const RECTANGLE& dst);
+	bool CollisionRectToSphere(const RECTANGLE& src, const SPHERE& dst);
+	bool CollisionSphereToSphere(const SPHERE& src, const SPHERE& dst);
 
 protected:
 	CCollider();

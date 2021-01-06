@@ -95,7 +95,7 @@ CMushroom* CMushroom::Clone()
 
 void CMushroom::CollisionBullet(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
 {
-	MessageBox(NULL, L"面倒", L"面倒", MB_OK);
+	// MessageBox(NULL, L"面倒", L"面倒", MB_OK);
 }
 
 void CMushroom::Fire()

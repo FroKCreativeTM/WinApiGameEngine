@@ -1,5 +1,6 @@
 #include "CPlayer.h"
 #include "../Core/CInput.h"
+#include "CBullet.h"
 
 CPlayer::CPlayer()
 {
@@ -89,6 +90,9 @@ void CPlayer::Fire()
 {
     CObj* pBullet = 
         CObj::CreateCloneObj("Bullet", "PlayerBullet", m_pLayer);
+
+    // CS_LEAVE : 빠지나갈때 삭제
+    pBullet->AddCollisionFunction("BulletBody", CS_ENTER, (CBullet*)pBullet, &CBullet::Hit);
 
     POSITION tPos;
     tPos.x = GetRight() 

@@ -5,7 +5,6 @@
 #include "../Resources/CResourceManager.h"
 #include "../Resources/CTexture.h"
 #include "../Core/CCamera.h"
-#include "../Collider/CCollider.h"
 
 // static
 list<CObj*> CObj::m_ObjList;

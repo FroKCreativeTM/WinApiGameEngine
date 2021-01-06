@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Core/CRef.h"
+#include "../Collider/CCollider.h"
 
 class CScene;
 class CLayer;
@@ -121,7 +122,7 @@ public :
 	}
 
 	// 리스트 포인터를 넘긴다.
-	const list<class CCollider*>* GetColliderList() const
+	const list<CCollider*>* GetColliderList() const
 	{
 		return &m_ColliderList;
 	}
@@ -166,7 +167,7 @@ protected :
 	// 텍스처 정보
 	class CTexture*			m_pTexture;
 	// 충돌체에 대한 정보
-	list<class CCollider*>	m_ColliderList;
+	list<CCollider*>	m_ColliderList;
 
 public:
 	template <typename T>
@@ -175,6 +176,7 @@ public:
 		// 충돌체를 생성하고 이 충돌체를 가질 오브젝트의 정보를 전달한다
 		T* pCollider = new T;
 		pCollider->SetObj(this);
+		pCollider->SetTag(strTag);
 
 		if (!pCollider->Init())
 		{
@@ -219,7 +221,10 @@ public :
 	static CObj* CreateCloneObj(const string& strProtoKey,
 		const string& strTag,
 		class CLayer* pLayer = nullptr);
-
+	template <typename T>
+	void AddCollisionFunction(const string& strTag,
+		COLLISION_STATE eState, T* pObj,
+		void(T::* pFunc)(CCollider*, CCollider*, float));
 };
 
 #include "CObj.inl"

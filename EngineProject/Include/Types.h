@@ -199,3 +199,14 @@ typedef struct _tagRectangle
 		left(0.0f), top(0.0f), right(0.0f), bottom(0.0f)
 	{}
 }RECTANGLE, *PRECTANGLE;
+
+typedef struct _tagSphere
+{
+	POSITION tCenter;
+	float fRadius;
+
+	_tagSphere() :
+		tCenter(0.f, 0.f), fRadius(0.f)
+	{}
+
+}SPHERE, *PSPHERE;

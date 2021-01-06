@@ -27,6 +27,9 @@ public:
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CBullet* Clone();
 
+public :
+	void Hit(class CCollider* pSrc, class CCollider* pDst, float fDeltaTime);
+
 private:
 	float m_fDist;		// 거리
 	float m_fLimitDist;	// 사정거리

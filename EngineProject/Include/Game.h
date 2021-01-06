@@ -8,6 +8,7 @@
 #include <crtdbg.h>			// 메모리 누수 체크용 헤더
 #include <typeinfo>
 #include <string>
+#include <functional>
 
 using namespace std;
 

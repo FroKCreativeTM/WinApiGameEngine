@@ -250,6 +250,7 @@ CObj::CObj(const CObj& ref)
 	for (iter = ref.m_ColliderList.begin(); iter != iterEnd; ++iter)
 	{
 		CCollider* pColl = (*iter)->Clone();
+		pColl->SetObj(this);
 		m_ColliderList.push_back(pColl); 
 	}
 }

@@ -12,7 +12,7 @@ public:
 	virtual void Input(float fDeltaTime);
 	virtual int Update(float fDeltaTime);
 	virtual int LateUpdate(float fDeltaTime);
-	virtual void Collision(float fDeltaTime);
+	virtual bool Collision(CCollider* pDst);
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CRectCollider* Clone();
 

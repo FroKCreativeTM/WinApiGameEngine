@@ -34,6 +34,8 @@ bool CMushroom::Init()
 
 	CRectCollider* pRC = AddCollider<CRectCollider>("Mushroom");
 	pRC->SetRect(-50.f, -50.f, 50.f, 50.f);
+	pRC->AddCollisionFunction(CS_ENTER, this, &CMushroom::CollisionBullet);
+
 	SAFE_RELEASE(pRC);
 
 	return true;
@@ -89,6 +91,11 @@ void CMushroom::Render(HDC hDC, float fDeltaTime)
 CMushroom* CMushroom::Clone()
 {
 	return new CMushroom(*this);
+}
+
+void CMushroom::CollisionBullet(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
+{
+	MessageBox(NULL, L"충돌", L"충돌", MB_OK);
 }
 
 void CMushroom::Fire()

@@ -26,6 +26,10 @@ public:
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CMushroom* Clone();
 
+public : 
+	void CollisionBullet(class CCollider* pSrc,
+		class CCollider* pDst, float fDeltaTime);
+
 private : 
 	void Fire();
 };

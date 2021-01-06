@@ -120,6 +120,12 @@ public :
 		return m_pLayer;
 	}
 
+	// 리스트 포인터를 넘긴다.
+	const list<class CCollider*>* GetColliderList() const
+	{
+		return &m_ColliderList;
+	}
+
 public : 
 	/* 게임 요소를 위한 메소드 */
 	virtual bool Init() = 0;
@@ -170,7 +176,7 @@ public:
 		T* pCollider = new T;
 		pCollider->SetObj(this);
 
-		if (pCollider->Init())
+		if (!pCollider->Init())
 		{
 			SAFE_RELEASE(pCollider);
 			return nullptr;

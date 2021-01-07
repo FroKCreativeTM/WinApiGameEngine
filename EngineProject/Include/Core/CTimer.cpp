@@ -11,7 +11,7 @@ CTimer::~CTimer()
 {
 }
 
-bool CTimer::Init()
+bool CTimer::Init(HWND hWnd)
 {
 	QueryPerformanceFrequency(&m_tSecond); 
 	QueryPerformanceCounter(&m_tTime);
@@ -19,8 +19,9 @@ bool CTimer::Init()
 	m_fDeltaTime = 0.0f;
 	m_fFPS = 0.0f;
 	m_fFPSTime = 0.0f;
-	m_nFrameMax = 60;	// 60프레임 기준
 	m_nFrame = 0;
+
+	m_hWnd = hWnd;
 
 	return true;
 }
@@ -35,4 +36,24 @@ void CTimer::Update()
 		/ (float)m_tSecond.QuadPart;
 
 	m_tTime = tTime;
+	
+	// 1 이상 되면 1초가 지난 것
+	m_fFPSTime += m_fDeltaTime;
+	++m_nFrame;
+
+	// 1초란 보장 불가
+	if (m_fFPSTime >= 1.f)
+	{
+		m_fFPS = m_nFrame / m_fFPSTime;
+		m_fFPSTime = 0.f;
+		m_nFrame = 0;
+
+#ifdef _DEBUG
+		char strFPS[64] = {};
+		sprintf_s(strFPS, "FPS : %.f\n", m_fFPS);
+		SetWindowTextA(m_hWnd, strFPS);
+		// 디버그 콘솔에 프린팅한다.
+		OutputDebugStringA(strFPS);
+#endif
+	}
 }

@@ -144,6 +144,9 @@
     <ClCompile Include="Core\CMath.cpp">
       <Filter>01.Core\05. Math</Filter>
     </ClCompile>
+    <ClCompile Include="Collider\CPixelCollider.cpp">
+      <Filter>05. Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="Core\CMath.h">
       <Filter>01.Core\05. Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\CPixelCollider.h">
+      <Filter>05. Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

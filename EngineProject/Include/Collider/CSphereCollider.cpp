@@ -1,5 +1,6 @@
 #include "CSphereCollider.h"
 #include "../Object/CObj.h"
+#include "CRectCollider.h"
 
 bool CSphereCollider::Init()
 {
@@ -35,8 +36,9 @@ bool CSphereCollider::Collision(CCollider* pDst)
     switch (pDst->GetColliderType())
     {
     case CT_SPHERE:
-        return CollisionRectToRect(m_tWorldInfo, ((CRectCollider*)pDst)->GetWorldInfo());
-        break;
+        return CollisionSphereToSphere(m_tWorldInfo, ((CSphereCollider*)pDst)->GetWorldInfo());
+    case CT_RECT:
+        return CollisionRectToSphere(((CRectCollider*)pDst)->GetWorldInfo(), m_tWorldInfo);
     }
 
     return false;

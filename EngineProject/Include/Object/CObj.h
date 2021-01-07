@@ -127,6 +127,16 @@ public :
 		return &m_ColliderList;
 	}
 
+	void SetPhysics(bool bPhysics)
+	{
+		m_bPhysics = bPhysics;
+	}
+
+	bool GetPhysics() const
+	{
+		return m_bPhysics;
+	}
+
 public : 
 	/* 게임 요소를 위한 메소드 */
 	virtual bool Init() = 0;
@@ -152,6 +162,7 @@ public :
 		const wchar_t* pFileName = nullptr,
 		const string& strPathKey = TEXTURE_PATH);
 
+
 protected :
 	CObj();
 	CObj(const CObj& ref);
@@ -168,6 +179,10 @@ protected :
 	class CTexture*			m_pTexture;
 	// 충돌체에 대한 정보
 	list<CCollider*>	m_ColliderList;
+	// 물리적인 힘을 받는 객체인다.
+	bool				m_bPhysics;
+	// 중력 시간값
+	float				m_fGravityTime;
 
 public:
 	template <typename T>

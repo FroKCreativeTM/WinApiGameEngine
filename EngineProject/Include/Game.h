@@ -1,6 +1,8 @@
 #pragma once
 
 // 게임을 총괄 및 관리
+
+// C/C++ runtime header
 #include <Windows.h>
 #include <list>
 #include <vector>
@@ -9,9 +11,11 @@
 #include <typeinfo>
 #include <string>
 #include <functional>
+#include <conio.h>
 
 using namespace std;
 
+// custom header
 #include "resource.h"
 #include "Macro.h"
 #include "Flag.h"
@@ -19,6 +23,7 @@ using namespace std;
 
 // 수학 연산에 필요한 상수들
 #define PI		3.141592f
+#define GRAVITY 0.98f
 
 // 경로 관련 상수들
 #define ROOT_PATH		"RootPath"

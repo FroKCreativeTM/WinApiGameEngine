@@ -1,6 +1,8 @@
 #include "CPlayer.h"
 #include "../Core/CInput.h"
 #include "CBullet.h"
+#include "../Collider/CRectCollider.h"
+#include "../Core/CCamera.h"
 
 CPlayer::CPlayer()
 {
@@ -23,6 +25,14 @@ bool CPlayer::Init()
     SetPivot(0.5f, 0.5f);
 
     SetTexture("Player", L"todd.bmp");
+
+    CRectCollider* pRC = AddCollider<CRectCollider>("PlayerBody");
+    pRC->SetRect(-50.f, -50.f, 50.f, 50.f);
+    pRC->AddCollisionFunction(CS_ENTER, this, &CPlayer::Hit);
+
+    m_nHP = 100;
+
+    SetPhysics(true);
 
     return true;
 }
@@ -79,11 +89,24 @@ void CPlayer::Render(HDC hDC, float fDeltaTime)
 {
     // 부모의 함수를 호출해준다.
     CMoveObj::Render(hDC, fDeltaTime);
+
+    wchar_t strHP[32] = {};
+    wsprintf(strHP, L"HP : %d", m_nHP);
+
+    POSITION tPos = m_tPos - m_tSize * m_tPivot;
+    tPos -= GET_SINGLE(CCamera)->GetPos();
+
+    TextOut(hDC, tPos.x, tPos.y, strHP, lstrlen(strHP));
 }
 
 CPlayer* CPlayer::Clone()
 {
     return new CPlayer(*this);
+}
+
+void CPlayer::Hit(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
+{
+    m_nHP -= 5;
 }
 
 void CPlayer::Fire()

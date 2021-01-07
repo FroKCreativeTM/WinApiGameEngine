@@ -25,6 +25,53 @@ bool CCollider::CollisionRectToRect(const RECTANGLE& src, const RECTANGLE& dst)
 
 bool CCollider::CollisionRectToSphere(const RECTANGLE& src, const SPHERE& dst)
 {
+	// 원의 중점의 x 좌표가 사각형의 가로 영역 안에 있는지,
+	// 원의 중점의 y 좌표가 사각형의 세로 영역 안에 있는지 체크한다.
+	if ((src.left <= dst.tCenter.x && dst.tCenter.x <= src.right) ||
+		(src.top <= dst.tCenter.y && dst.tCenter.y <= src.bottom))
+	{
+		RECTANGLE tRC = src;
+		tRC.left -= dst.fRadius;
+		tRC.top -= dst.fRadius;
+		tRC.right += dst.fRadius;
+		tRC.bottom += dst.fRadius;
+
+		if (dst.tCenter.x < tRC.left)
+		{
+			return false;
+		}
+		else if (dst.tCenter.x > tRC.right)
+		{
+			return false;
+		}
+		else if (dst.tCenter.y < tRC.top)
+		{
+			return false;
+		}
+		else if (dst.tCenter.y > tRC.bottom)
+		{
+			return false;
+		}
+
+		return true;
+	}
+	
+	// 사각형의 4개의 점이 하나라도 원 안에 있을 경우 충돌이다.
+	POSITION tPos[4];
+	tPos[0] = POSITION(src.left, src.top);
+	tPos[1] = POSITION(src.right, src.top);
+	tPos[2] = POSITION(src.left, src.bottom);
+	tPos[3] = POSITION(src.right, src.bottom);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		float fDist = CMath::Distance(tPos[i], dst.tCenter);
+		if (fDist <= dst.fRadius)
+		{
+			return true;
+		}
+	}
+
 	return false;
 }
 

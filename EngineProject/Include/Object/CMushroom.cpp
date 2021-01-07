@@ -1,6 +1,7 @@
 #include "CMushroom.h"
 #include "../CCore.h"
 #include "../Collider/CRectCollider.h"
+#include "CBullet.h"
 
 // 2초에 한 번씩 발사한다.
 CMushroom::CMushroom() : 
@@ -32,7 +33,7 @@ bool CMushroom::Init()
 
 	m_eDir = MD_FRONT;
 
-	CRectCollider* pRC = AddCollider<CRectCollider>("Mushroom");
+	CRectCollider* pRC = AddCollider<CRectCollider>("MushroomBody");
 	pRC->SetRect(-50.f, -50.f, 50.f, 50.f);
 	pRC->AddCollisionFunction(CS_ENTER, this, &CMushroom::CollisionBullet);
 
@@ -100,13 +101,13 @@ void CMushroom::CollisionBullet(CCollider* pSrc, CCollider* pDst, float fDeltaTi
 
 void CMushroom::Fire()
 {
-	CObj* pBullet =
-		CObj::CreateCloneObj("Bullet", "EnemyBullet", m_pLayer);
+	CObj* pBullet = CObj::CreateCloneObj("Bullet", "EnemyBullet", m_pLayer);
+
+	pBullet->AddCollisionFunction("BulletBody", CS_ENTER, (CBullet*)pBullet, &CBullet::Hit);
 
 	((CMoveObj*)pBullet)->SetAngle(PI);
 
-	float x = GetLeft() - 
-		pBullet->GetSize().x * (1.f - pBullet->GetPivot().x);
+	float x = GetLeft() - pBullet->GetSize().x * (1.f - pBullet->GetPivot().x);
 	float y = GetCenter().y;
 
 	pBullet->SetPos(x, y);

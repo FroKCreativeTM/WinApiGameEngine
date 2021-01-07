@@ -1,6 +1,6 @@
 #include "CBullet.h"
 #include "../Resources/CTexture.h"
-#include "../Collider/CRectCollider.h"
+#include "../Collider/CSphereCollider.h"
 
 CBullet::CBullet() :
 	m_fDist(0.f),
@@ -28,9 +28,9 @@ bool CBullet::Init()
 
 	m_pTexture->SetColorKey(0, 248, 0);
 
-	CRectCollider* pRC = AddCollider<CRectCollider>("BulletBody");
-	pRC->SetRect(-25.f, -25.f, 25.f, 25.f);
-	SAFE_RELEASE(pRC);
+	CSphereCollider* pSphere = AddCollider<CSphereCollider>("BulletBody");
+	pSphere->SetSphere(POSITION(0.f, 0.f), 25.f);
+	SAFE_RELEASE(pSphere);
 
 	return true;
 }
@@ -74,5 +74,12 @@ CBullet* CBullet::Clone()
 
 void CBullet::Hit(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
 {
-	Die();
+	if (GetTag() == "PlayerBullet" && pDst->GetTag() == "MushroomBody")
+	{
+		Die();
+	}
+	else if (GetTag() == "EnemyBullet" && pDst->GetTag() == "PlayerBody")
+	{
+		Die();
+	}
 }

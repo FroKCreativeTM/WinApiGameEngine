@@ -15,6 +15,14 @@ void CObj::Input(float fDeltaTime)
 
 int CObj::Update(float fDeltaTime)
 {
+	// 물리 적용
+	if (m_bPhysics)
+	{
+		m_fGravityTime += fDeltaTime;
+
+		m_tPos.y += (GRAVITY * m_fGravityTime * m_fGravityTime);
+	}
+
 	/* 충돌체를 돌린다. */
 	list<CCollider*>::iterator iter;
 	list<CCollider*>::iterator iterEnd = m_ColliderList.end();
@@ -225,7 +233,7 @@ void CObj::SetTexture(const string& strKey,
 // m_nRef가 0이면 지워진다.
 // 즉 이것을 만드는 시점에서 누군가는 이 오브젝트를 참조한다.
 CObj::CObj() :
-	m_pTexture(nullptr)
+	m_pTexture(nullptr), m_bPhysics(false), m_fGravityTime(0.f)
 {
 }
 
@@ -233,6 +241,8 @@ CObj::CObj() :
 CObj::CObj(const CObj& ref)
 {
 	*this = ref;
+
+	m_fGravityTime = 0.f;
 
 	// 만약 텍스처를 가지고 있다면 공유기 때문에
 	// 레퍼런스 카운터만 증가시킨다.

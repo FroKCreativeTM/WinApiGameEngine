@@ -46,7 +46,7 @@ bool CCore::Init(HINSTANCE hInstance)
     m_hDC = GetDC(m_hWnd);
 
     // 타이머(FPS, 델타타임) 초기화
-    if (!GET_SINGLE(CTimer)->Init())
+    if (!GET_SINGLE(CTimer)->Init(m_hWnd))
     {
         return false;
     }
@@ -261,6 +261,12 @@ CCore::CCore()
     // 매개변수로 그 메모리의 블록 번호를 넣어주면,
     // 메모리 릭 부분을 바로 이동한다. (호출 스택을 잘 볼 수 있어야..)
     // _CrtSetBreakAlloc();
+
+    // 컴파일 시간에 체크해서 이걸 동작시킬지 말지 결정한다.
+#ifdef _DEBUG   
+    // 콘솔창을 생성시켜주는 함수
+    AllocConsole();
+#endif
 }
 
 CCore::~CCore()
@@ -276,4 +282,10 @@ CCore::~CCore()
 
     // DC 메모리 해제
     ReleaseDC(m_hWnd, m_hDC);
+
+    // 콘솔창 해제
+#ifdef _DEBUG
+    FreeConsole();
+#endif // _DEBUG
+
 }

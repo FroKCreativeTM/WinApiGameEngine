@@ -23,7 +23,13 @@ public:
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CPlayer* Clone();
 
+public :
+	void Hit(CCollider* pSrc, CCollider* pDst, float fDeltaTime);
+
 private : 
 	void Fire();
+
+private : 
+	int m_nHP;
 };
 

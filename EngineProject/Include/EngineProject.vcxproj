@@ -151,6 +151,7 @@
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="Collider\CCollider.cpp" />
     <ClCompile Include="Collider\CCollisionManager.cpp" />
+    <ClCompile Include="Collider\CPixelCollider.cpp" />
     <ClCompile Include="Collider\CRectCollider.cpp" />
     <ClCompile Include="Collider\CSphereCollider.cpp" />
     <ClCompile Include="Core\CCamera.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="CCore.h" />
     <ClInclude Include="Collider\CCollider.h" />
     <ClInclude Include="Collider\CCollisionManager.h" />
+    <ClInclude Include="Collider\CPixelCollider.h" />
     <ClInclude Include="Collider\CRectCollider.h" />
     <ClInclude Include="Collider\CSphereCollider.h" />
     <ClInclude Include="Core\CCamera.h" />

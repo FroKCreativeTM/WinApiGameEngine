@@ -29,6 +29,7 @@ bool CPlayer::Init()
     CRectCollider* pRC = AddCollider<CRectCollider>("PlayerBody");
     pRC->SetRect(-50.f, -50.f, 50.f, 50.f);
     pRC->AddCollisionFunction(CS_ENTER, this, &CPlayer::Hit);
+    pRC->AddCollisionFunction(CS_STAY, this, &CPlayer::HitStay);
 
     m_nHP = 100;
 
@@ -106,7 +107,24 @@ CPlayer* CPlayer::Clone()
 
 void CPlayer::Hit(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
 {
-    m_nHP -= 5;
+    if (pDst->GetObj()->GetTag() == "EnemyBullet") 
+    {
+        m_nHP -= 5;
+    }
+    else if (pDst->GetTag() == "StageCollder")
+    {
+        ClearGravity();
+    }
+}
+
+// 중력이 멈춘 경우처럼 충돌이 지속적으로 일어날 때
+// 이를 이용해서 그 상태로 냅둔다. (유한 상태머신)
+void CPlayer::HitStay(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
+{
+    if (pDst->GetTag() == "StageCollder")
+    {
+        ClearGravity();
+    }
 }
 
 void CPlayer::Fire()

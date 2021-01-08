@@ -211,6 +211,11 @@ public:
 		return !m_ColliderList.empty();
 	}
 
+	void ClearGravity()
+	{
+		m_fGravityTime = 0.f;
+	}
+
 protected : 
 	// 자기가 속한 장면과 레이어를 알게 한다.
 	class CScene* m_pScene;

@@ -25,6 +25,7 @@ public:
 
 public :
 	void Hit(CCollider* pSrc, CCollider* pDst, float fDeltaTime);
+	void HitStay(CCollider* pSrc, CCollider* pDst, float fDeltaTime);
 
 private : 
 	void Fire();

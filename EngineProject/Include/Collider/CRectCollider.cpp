@@ -1,6 +1,7 @@
 #include "CRectCollider.h"
 #include "../Object/CObj.h"
 #include "CSphereCollider.h"
+#include "CPixelCollider.h"
 
 CRectCollider::CRectCollider()
 {
@@ -55,6 +56,9 @@ bool CRectCollider::Collision(CCollider* pDst)
 		return CollisionRectToRect(m_tWorldInfo, ((CRectCollider*)pDst)->GetWorldInfo());
 	case CT_SPHERE:
 		return CollisionRectToSphere(m_tWorldInfo, ((CSphereCollider*)pDst)->GetWorldInfo());
+	case CT_PIXEL:
+		return CollisionRectToPixel(m_tWorldInfo, ((CPixelCollider*)pDst)->GetPixel(), 
+			((CPixelCollider*)pDst)->GetWidth(), ((CPixelCollider*)pDst)->GetHeight());
 	}
 	return false;
 }

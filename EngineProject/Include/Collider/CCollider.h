@@ -21,6 +21,8 @@ protected :
 	bool CollisionRectToRect(const RECTANGLE& src, const RECTANGLE& dst);
 	bool CollisionRectToSphere(const RECTANGLE& src, const SPHERE& dst);
 	bool CollisionSphereToSphere(const SPHERE& src, const SPHERE& dst);
+	bool CollisionRectToPixel(const RECTANGLE& src, const vector<PIXEL>& dst, 
+		int nWidth, int nHeight);
 
 protected:
 	CCollider();

@@ -87,3 +87,19 @@ const wchar_t* CPathManager::FindPath(const string& strKey)
 
 	return iter->second.c_str();
 }
+
+const char* CPathManager::FindPathMultiByte(const string& strKey)
+{
+	// 일단 먼저 유니코드 패스를 찾는다.
+	const wchar_t* pPath = FindPath(strKey);
+	if (!pPath)
+	{
+		return nullptr;
+	}
+
+	// 유니코드를 멀티바이트로
+	memset(m_strPath, 0, MAX_PATH);
+	WideCharToMultiByte(CP_ACP, 0, pPath, -1, m_strPath, lstrlen(pPath), 0, 0);
+
+	return m_strPath;
+}

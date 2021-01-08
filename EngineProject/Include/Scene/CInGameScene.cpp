@@ -5,6 +5,7 @@
 #include "../Object/CStage.h"
 #include "CLayer.h"
 #include "../Core/CCamera.h"
+#include "../Collider/CPixelCollider.h"
 
 CInGameScene::CInGameScene()
 {
@@ -55,6 +56,12 @@ bool CInGameScene::Init()
 	CLayer* pStageLayer = FindLayer("Stage");
 	CStage* pStage = CObj::CreateObj<CStage>
 		("Stage", pStageLayer);
+
+	// 스테이지 콜리더 설정
+	CPixelCollider* pPixel = pStage->AddCollider<CPixelCollider>("StageCollder");
+	pPixel->SetPixelInfo("Background.bmp");
+
+	SAFE_RELEASE(pPixel);
 	SAFE_RELEASE(pStage);
 
 	return true;

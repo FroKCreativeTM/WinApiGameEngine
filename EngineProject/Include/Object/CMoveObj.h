@@ -30,6 +30,10 @@ public :
 	void MoveAngle();
 	void MoveAngle(float fDeltaTime);
 
+	// 점프에 대한 메서드
+	void Jump();
+	void JumpEnd();
+
 public:
 	virtual bool Init() = 0;// 하위에 있어야되니 순수 가상함수;
 	virtual void Input(float fDeltaTime);
@@ -43,8 +47,20 @@ protected :
 	// 자식도 못 건들이는 앵글!
 	float			m_fAngle;
 	float			m_fSpeed;
+	// 움직이고 떨어지고 있는 상태인가
+	bool			m_isMove;
+	bool			m_isFalling;
+	// 점프하는 힘
+	float			m_fForce;
+	float			m_fForceOrigin;
 
 public : 
+	// 처음 띄었을 때 값
+	void SetForce(float fForce)
+	{
+		m_fForceOrigin = fForce;
+	}
+
 	void SetAngle(float fAngle)
 	{
 		m_fAngle = fAngle;

@@ -34,6 +34,7 @@ bool CPlayer::Init()
     m_nHP = 100;
 
     SetPhysics(true);
+    SetForce(2d00.f);
 
     return true;
 }
@@ -58,6 +59,10 @@ void CPlayer::Input(float fDeltaTime)
     if (KEYPRESS("MoveRight"))
     {
         MoveXFromSpeed(fDeltaTime, MD_FRONT);
+    }
+    if (KEYPRESS("Jump"))
+    {
+        Jump();
     }
     if (KEYPRESS("Fire"))
     {
@@ -114,6 +119,7 @@ void CPlayer::Hit(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
     else if (pDst->GetTag() == "StageCollder")
     {
         ClearGravity();
+        JumpEnd();
     }
 }
 

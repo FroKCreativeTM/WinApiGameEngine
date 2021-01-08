@@ -21,7 +21,8 @@ bool CInput::Init(HWND hWnd)
 	AddKey('S', "MoveBack");
 	AddKey('D', "MoveRight");
 	AddKey('A', "MoveLeft");
-	AddKey(VK_SPACE, "Fire");
+	AddKey(VK_CONTROL, "Fire");
+	AddKey(VK_SPACE, "Jump");
 
 	return true;
 }

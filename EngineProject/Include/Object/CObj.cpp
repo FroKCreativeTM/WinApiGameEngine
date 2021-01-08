@@ -15,14 +15,6 @@ void CObj::Input(float fDeltaTime)
 
 int CObj::Update(float fDeltaTime)
 {
-	// 물리 적용
-	if (m_bPhysics)
-	{
-		m_fGravityTime += fDeltaTime;
-
-		m_tPos.y += (GRAVITY * m_fGravityTime * m_fGravityTime);
-	}
-
 	/* 충돌체를 돌린다. */
 	list<CCollider*>::iterator iter;
 	list<CCollider*>::iterator iterEnd = m_ColliderList.end();

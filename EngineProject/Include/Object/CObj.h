@@ -64,6 +64,11 @@ public :
 		this->m_tPivot.y = y;
 	}
 
+	void SetPhysics(bool bPhysics)
+	{
+		m_bPhysics = bPhysics;
+	}
+
 	/* Getter */
 	string GetTag() const
 	{
@@ -127,28 +132,22 @@ public :
 		return &m_ColliderList;
 	}
 
-	void SetPhysics(bool bPhysics)
-	{
-		m_bPhysics = bPhysics;
-	}
-
 	bool GetPhysics() const
 	{
 		return m_bPhysics;
 	}
 
-public : 
-	/* 게임 요소를 위한 메소드 */
+/* 게임 요소를 위한 메소드 */
+public : 	
 	virtual bool Init() = 0;
 	virtual void Input(float fDeltaTime);
 	virtual int Update(float fDeltaTime);
 	virtual int LateUpdate(float fDeltaTime);
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
-	// 
 	virtual CObj* Clone() = 0;	
 
-
+// 오브젝트 자료 다루기 
 public :
 	static void AddObj(CObj* pObj);
 	static CObj* FindObj(const string& strTag);
@@ -156,33 +155,32 @@ public :
 	static void EraseObj(CObj* pObj);
 	static void EraseObj(const string& strTag);
 
+// 텍스쳐 세팅
 public : 
 	void SetTexture(class CTexture* pTexture);
 	void SetTexture(const string& strKey,
 		const wchar_t* pFileName = nullptr,
 		const string& strPathKey = TEXTURE_PATH);
 
+// 애니메이션 관련 메서드
+public : 
+	class CAnimation* CreateAnimation(const string& strTag);
 
-protected :
-	CObj();
-	CObj(const CObj& ref);
-	virtual ~CObj();
-
-protected :
-	// 오브젝트도 태그를 가진다.
-	string					m_strTag;	
-	// 위치와 크기
-	POSITION				m_tPos;
-	_SIZE					m_tSize;
-	POSITION				m_tPivot;
-	// 텍스처 정보
-	class CTexture*			m_pTexture;
-	// 충돌체에 대한 정보
-	list<CCollider*>	m_ColliderList;
-	// 물리적인 힘을 받는 객체인다.
-	bool				m_bPhysics;
-	// 중력 시간값
-	float				m_fGravityTime;
+public:
+	// 굉장히 다양한 타입의 오브젝트를 만들기 위한 
+	// 템플릿 타입의 메소드이다.
+	template <typename T>
+	static T* CreateObj(const string& strTag,
+		class CLayer* pLayer = nullptr);
+	// 생성된 프로토타입의 복사를 생성한다.
+	// 템플릿으로 만들 이유도 없다.
+	static CObj* CreateCloneObj(const string& strProtoKey,
+		const string& strTag,
+		class CLayer* pLayer = nullptr);
+	template <typename T>
+	void AddCollisionFunction(const string& strTag,
+		COLLISION_STATE eState, T* pObj,
+		void(T::* pFunc)(CCollider*, CCollider*, float));
 
 public:
 	template <typename T>
@@ -216,7 +214,31 @@ public:
 		m_fGravityTime = 0.f;
 	}
 
-protected : 
+
+protected :
+	CObj();
+	CObj(const CObj& ref);
+	virtual ~CObj();
+
+protected :
+	// 오브젝트도 태그를 가진다.
+	string					m_strTag;	
+	// 위치와 크기
+	POSITION				m_tPos;
+	_SIZE					m_tSize;
+	POSITION				m_tPivot;
+	// 텍스처 정보
+	class CTexture*			m_pTexture;
+	// 충돌체에 대한 정보
+	list<CCollider*>		m_ColliderList;
+	// 물리적인 힘을 받는 객체인다.
+	bool					m_bPhysics;
+	// 중력 시간값
+	float					m_fGravityTime;
+	// 오브젝트의 애니메이션 정보가 담기는 클래스
+	class CAnimation*		m_pAnimation;
+
+protected:
 	// 자기가 속한 장면과 레이어를 알게 한다.
 	class CScene* m_pScene;
 	class CLayer* m_pLayer;
@@ -230,21 +252,7 @@ private :
 	// (실제 배치됨)
 	static list<CObj*>	m_ObjList;
 
-public : 
-	// 굉장히 다양한 타입의 오브젝트를 만들기 위한 
-	// 템플릿 타입의 메소드이다.
-	template <typename T>
-	static T* CreateObj(const string& strTag,
-		class CLayer* pLayer = nullptr);
-	// 생성된 프로토타입의 복사를 생성한다.
-	// 템플릿으로 만들 이유도 없다.
-	static CObj* CreateCloneObj(const string& strProtoKey,
-		const string& strTag,
-		class CLayer* pLayer = nullptr);
-	template <typename T>
-	void AddCollisionFunction(const string& strTag,
-		COLLISION_STATE eState, T* pObj,
-		void(T::* pFunc)(CCollider*, CCollider*, float));
+
 };
 
 #include "CObj.inl"

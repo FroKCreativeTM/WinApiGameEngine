@@ -34,7 +34,7 @@ bool CPlayer::Init()
     m_nHP = 100;
 
     SetPhysics(true);
-    SetForce(2d00.f);
+    SetForce(200.f);
 
     return true;
 }

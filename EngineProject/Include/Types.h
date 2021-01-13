@@ -217,3 +217,29 @@ typedef struct _tagPixel
 	unsigned char g;
 	unsigned char b;
 }PIXEL, * PPIXEL;
+
+// 하나하나의 모션 정보를 저장하는 구조체입니다.
+typedef struct _tagAnimationClip
+{
+	ANIMATION_TYPE eType;
+	ANIMATION_OPTION eOption;
+	// 텍스처 이미지를 저장하는 vector
+	vector<class CTexture*> vecTexture;
+	// 애니메이션 시간이 얼마나 되는가.
+	float fAnimationTime;
+	float fAnimationLimitTime;
+	int nFrameX;
+	int nFrameY;
+	int nFrameMaxX;
+	int nFrameMaxY;
+	// 여러 프레임이 같이 묶여있는 사진에서 추출하는 경우 
+	// 그 프레임의 시작 위치를 준다.
+	int nStartX;
+	int nStartY;
+	// 그 프레임의 길이가 얼마나 되는가.
+	int nLengthX;
+	int nLengthY;
+	// 옵션 시간
+	float fOptionTime;
+	float fOptionLimitTime;
+}ANIMATIONCLIP, *PANIMATIONCLIP;

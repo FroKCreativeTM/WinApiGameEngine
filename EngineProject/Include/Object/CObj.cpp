@@ -5,6 +5,7 @@
 #include "../Resources/CResourceManager.h"
 #include "../Resources/CTexture.h"
 #include "../Core/CCamera.h"
+#include "../Animation/CAnimation.h"
 
 // static
 list<CObj*> CObj::m_ObjList;
@@ -220,12 +221,27 @@ void CObj::SetTexture(const string& strKey,
 		LoadTexture(strKey, pFileName, strPathKey);
 }
 
+CAnimation* CObj::CreateAnimation(const string& strTag)
+{
+	SAFE_RELEASE(m_pAnimation);
 
+	m_pAnimation = new CAnimation;
+
+	m_pAnimation->SetTag(strTag);
+	
+	if (m_pAnimation->Init())
+	{
+		SAFE_RELEASE(m_pAnimation);
+		return nullptr;
+	}
+
+	return m_pAnimation;
+}
 
 // m_nRef가 0이면 지워진다.
 // 즉 이것을 만드는 시점에서 누군가는 이 오브젝트를 참조한다.
 CObj::CObj() :
-	m_pTexture(nullptr), m_bPhysics(false), m_fGravityTime(0.f)
+	m_pTexture(nullptr), m_bPhysics(false), m_fGravityTime(0.f), m_pAnimation(nullptr)
 {
 }
 
@@ -233,6 +249,12 @@ CObj::CObj() :
 CObj::CObj(const CObj& ref)
 {
 	*this = ref;
+
+	// 복사할 객체가 애니메이션이 있다면
+	if (ref.m_pAnimation)
+	{
+		m_pAnimation = ref.m_pAnimation->Clone();
+	}
 
 	m_fGravityTime = 0.f;
 
@@ -258,6 +280,7 @@ CObj::CObj(const CObj& ref)
 
 CObj::~CObj()
 {
+	SAFE_RELEASE(m_pAnimation);
 	Safe_Release_VecList(m_ColliderList);
 	SAFE_RELEASE(m_pTexture);
 }

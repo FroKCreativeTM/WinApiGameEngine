@@ -37,3 +37,29 @@ enum COLLISION_STATE
 	CS_LEAVE,
 	CS_END
 };
+
+// 애니메이션 클립 이미지 타입
+// 하나하나 낱장(아틀라스)
+// 한 장에 많은 그림이 그려져 있음(프레임)
+// 프레임의 장점은 한 번의 IO로 애니메이션을 로딩한다.
+enum ANIMATION_TYPE
+{
+	AT_ATLAS,
+	AT_FRAME,
+	AT_END
+};
+
+// 애니메이션 옵션
+// 루프 : 반복(Idle 모션에서 보통 사용한다.)
+// AO_ONCE_RETURN : 한 번 돌고 default 모션으로 돌아간다.
+// AO_ONCE_DESTROY : 애니메이션이 돌고 이 오브젝트를 삭제한다. (이펙트에서 사용)
+// AO_TIME_RETURN : 일정 시간동안 돌아가다 idle로 돌아간다. (버프 받은 경우)
+// AO_TIME_DESTROY : 일정 이상의 시간동안 돌아가다 이펙트가 사라진다.
+enum ANIMATION_OPTION
+{
+	AO_LOOP,
+	AO_ONCE_RETURN,
+	AO_ONCE_DESTROY,
+	AO_TIME_RETURN,
+	AO_TIME_DESTROY
+};

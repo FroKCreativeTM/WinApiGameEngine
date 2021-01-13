@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\CAnimation.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="Collider\CCollider.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Scene\CSceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\CAnimation.h" />
     <ClInclude Include="CCore.h" />
     <ClInclude Include="Collider\CCollider.h" />
     <ClInclude Include="Collider\CCollisionManager.h" />

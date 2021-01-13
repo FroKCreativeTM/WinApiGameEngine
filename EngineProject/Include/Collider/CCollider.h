@@ -14,7 +14,6 @@ public :
 	virtual int LateUpdate(float fDeltaTime);
 	virtual bool Collision(CCollider* pDst);
 	virtual void Render(HDC hDC, float fDeltaTime);
-	// 
 	virtual CCollider* Clone() = 0;
 
 protected :
@@ -29,21 +28,32 @@ protected:
 	CCollider(const CCollider& col);
 	virtual ~CCollider() = 0;
 
-public : 
+public :
+	/* Setter */
+	void SetObj(class CObj* obj)
+	{
+		m_pObj = obj;
+	}
+
+	void SetHitPoint(const POINT& tPos)
+	{
+		m_tHitPoint = tPos;
+	}
+
+	/* Getter */
 	COLLIDER_TYPE GetColliderType() const
 	{
 		return m_eColType;
 	}
-
 
 	class CObj* GetObj() const
 	{
 		return m_pObj;
 	}
 
-	void SetObj(class CObj* obj)
+	POINT GetHitPoint() const
 	{
-		m_pObj = obj;
+		return m_tHitPoint;
 	}
 
 public : 
@@ -124,6 +134,7 @@ protected:
 	// C++11
 	// 다양한 충돌체에 관련된 함수 저장소(callback)
 	list<function<void(CCollider*, CCollider*, float)>> m_FuncList[CS_END];
+	POINT m_tHitPoint;
 
 private : 
 	friend class CObj;

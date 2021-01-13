@@ -85,6 +85,10 @@ bool CCollider::CollisionSphereToSphere(const SPHERE& src, const SPHERE& dst)
 
 bool CCollider::CollisionRectToPixel(const RECTANGLE& src, const vector<PIXEL>& dst, int nWidth, int nHeight)
 {
+	// 아직 없다고 가정한다.
+	m_tHitPoint.x = -1;
+	m_tHitPoint.y = -1;
+
 	int nStartX, nEndX;
 	int nStartY, nEndY;
 
@@ -103,6 +107,8 @@ bool CCollider::CollisionRectToPixel(const RECTANGLE& src, const vector<PIXEL>& 
 
 			if (pixel.r == 255 && pixel.g == 0 && pixel.b == 255)
 			{
+				m_tHitPoint.x = x;
+				m_tHitPoint.y = y;
 				return true;
 			}
 		}

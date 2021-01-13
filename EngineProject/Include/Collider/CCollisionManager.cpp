@@ -75,6 +75,10 @@ bool CCollisionManager::Collision(CObj* pSrc, CObj* pDst, float fDeltaTime)
 			{
 				bCollision = true;
 
+				// 이미 히트포인트는 만들어져 있을 것
+				// dest의 히트 포인트를 세팅한다.
+				(*iterDst)->SetHitPoint((*iterSrc)->GetHitPoint());
+
 				// 충돌목록에서 이전에 충돌된 적이 없다면 처음 막 충돌되었다는 뜻이다.
 				if (!(*iterSrc)->CheckCollisionList(*iterDst))
 				{

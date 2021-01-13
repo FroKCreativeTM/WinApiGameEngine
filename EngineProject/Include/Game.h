@@ -23,7 +23,7 @@ using namespace std;
 
 // 수학 연산에 필요한 상수들
 #define PI		3.141592f
-#define GRAVITY 0.98f
+#define GRAVITY 9.8f
 
 // 경로 관련 상수들
 #define ROOT_PATH		"RootPath"

@@ -39,8 +39,8 @@ bool CAnimation::AddClip(const string& strName, ANIMATION_TYPE eType, ANIMATION_
 	CTexture* pTexture = GET_SINGLE(CResourceManager)->LoadTexture(strTexKey, pFileName, strPathKey);
 
 	pClip->fAnimationTime = 0.f;
-	pClip->nFrameX = 0;
-	pClip->nFrameY = 0;
+	pClip->nFrameX = nStartX;
+	pClip->nFrameY = nStartY;
 	pClip->fOptionTime = 0.f;
 
 	m_mapClip.insert(make_pair(strName, pClip));

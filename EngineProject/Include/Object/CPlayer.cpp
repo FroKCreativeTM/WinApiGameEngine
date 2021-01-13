@@ -24,7 +24,7 @@ bool CPlayer::Init()
     SetSpeed(400.f);
     SetPivot(0.5f, 0.5f);
 
-    SetTexture("Player", L"todd.bmp");
+    SetTexture("Player", L"Player.bmp");
 
     CRectCollider* pRC = AddCollider<CRectCollider>("PlayerBody");
     pRC->SetRect(-50.f, -50.f, 50.f, 50.f);
@@ -120,6 +120,7 @@ void CPlayer::Hit(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
     {
         ClearGravity();
         JumpEnd();
+        m_tPos.y = pSrc->GetHitPoint().y - m_tPivot.y * m_tSize.y;
     }
 }
 
@@ -130,6 +131,9 @@ void CPlayer::HitStay(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
     if (pDst->GetTag() == "StageCollder")
     {
         ClearGravity();
+        JumpEnd();
+        m_tPos.y = pSrc->GetHitPoint().y - m_tPivot.y * m_tSize.y;
+
     }
 }
 

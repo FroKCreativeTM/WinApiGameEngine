@@ -227,15 +227,39 @@ CAnimation* CObj::CreateAnimation(const string& strTag)
 
 	m_pAnimation = new CAnimation;
 
+	// 태그와 함께 자기 자신이 이 애니메이션을 가지고 있음을 명시한다.
 	m_pAnimation->SetTag(strTag);
-	
+	m_pAnimation->SetObj(this);
 	if (m_pAnimation->Init())
 	{
 		SAFE_RELEASE(m_pAnimation);
 		return nullptr;
 	}
 
+	m_pAnimation->AddRef();
+
 	return m_pAnimation;
+}
+
+bool CObj::AddAnimationClip(const string& strName, ANIMATION_TYPE eType, ANIMATION_OPTION eOption, 
+	float fAnimationLimitTime, 
+	int nFrameMaxX, int nFrameMaxY,
+	int nStartX, int nStartY, 
+	int nLengthX, int nLengthY, 
+	float fOptionLimitTime, 
+	const string& strTexKey, const wchar_t* pFileName, const string& strPathKey)
+{
+	// 애니메이션이 생성되지 않은 상태에서 클립추가 불가
+	if (!m_pAnimation)
+	{
+		return false;
+	}
+
+	m_pAnimation->AddClip(strName, eType, eOption, fAnimationLimitTime,
+		nFrameMaxX, nFrameMaxY, nStartX, nStartY, nLengthX, nLengthY,
+		fOptionLimitTime, strTexKey, pFileName, strPathKey);
+
+	return true;
 }
 
 // m_nRef가 0이면 지워진다.

@@ -165,6 +165,12 @@ public :
 // 애니메이션 관련 메서드
 public : 
 	class CAnimation* CreateAnimation(const string& strTag);
+	bool AddAnimationClip(const string& strName, ANIMATION_TYPE eType,
+		ANIMATION_OPTION eOption, float fAnimationLimitTime,
+		int nFrameMaxX, int nFrameMaxY, int nStartX, int nStartY,
+		int nLengthX, int nLengthY, float fOptionLimitTime,
+		const string& strTexKey, const wchar_t* pFileName,
+		const string& strPathKey = TEXTURE_PATH);
 
 public:
 	// 굉장히 다양한 타입의 오브젝트를 만들기 위한 

@@ -3,6 +3,7 @@
 #include "CBullet.h"
 #include "../Collider/CRectCollider.h"
 #include "../Core/CCamera.h"
+#include "../Animation/CAnimation.h"
 
 CPlayer::CPlayer()
 {
@@ -35,6 +36,25 @@ bool CPlayer::Init()
 
     SetPhysics(true);
     SetForce(200.f);
+
+    CAnimation * pAnima = CreateAnimation("PlayerAnimation");
+
+    AddAnimationClip("IdleLeft", AT_ATLAS, AO_LOOP,
+        1.f,
+        8, 1, // 8장에 1줄짜리
+        0, 0,
+        8, 1,
+        0.f,
+        "PlayerIdleLeft", L"Player/Idle/Left/PlayerIdleLeft.bmp");
+    AddAnimationClip("IdleLeft", AT_ATLAS, AO_LOOP,
+        1.f,
+        8, 1, // 8장에 1줄짜리
+        0, 0,
+        8, 1,
+        0.f,
+        "PlayerIdleLeft", L"Player/Idle/Right/PlayerIdleRight.bmp");
+
+    SAFE_RELEASE(pAnima);
 
     return true;
 }

@@ -12,6 +12,8 @@ public :
     CAnimation* Clone();
 
 public : 
+    void SetObj(class CObj* pObj);
+
     bool AddClip(const string& strName, ANIMATION_TYPE eType,
         ANIMATION_OPTION eOption, float fAnimationLimitTime,
         int nFrameMaxX, int nFrameMaxY, int nStartX, int nStartY,
@@ -19,8 +21,19 @@ public :
         const string& strTexKey, const wchar_t* pFileName,
         const string& strPathKey = TEXTURE_PATH);
 
+    void SetCurrentClip(const string& strCurClip);
+    void SetDefaultClip(const string& strDefaultClip);
+    void ChangeClip(const string& strClip);
+
 private : 
-    unordered_map<string, PANIMATIONCLIP> m_mapClip;
+    PANIMATIONCLIP FindClip(const string& strClip);
+
+private : 
+    unordered_map<string, PANIMATIONCLIP>   m_mapClip;
+    PANIMATIONCLIP                          m_pCurClip;
+    string                                  m_strCurClip;
+    string                                  m_strDefaultClip;
+    class CObj*                             m_pObj;
 
 private : 
     friend class CObj;

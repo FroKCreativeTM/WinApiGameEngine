@@ -228,6 +228,8 @@ typedef struct _tagAnimationClip
 	// 애니메이션 시간이 얼마나 되는가.
 	float fAnimationTime;
 	float fAnimationLimitTime;
+	// 프레임당 시간을 고정한다.
+	float fAnimationFrameTime;
 	int nFrameX;
 	int nFrameY;
 	int nFrameMaxX;

@@ -40,6 +40,11 @@ int CObj::Update(float fDeltaTime)
 			++iter;
 	}
 
+	if (m_pAnimation)
+	{
+		m_pAnimation->Update(fDeltaTime);
+	}
+
 	return 0;
 }
 
@@ -85,6 +90,18 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 		// 카메라 위치를 빼야 스크롤이 된다.
 		tPos -= GET_SINGLE(CCamera)->GetPos();
 
+		POSITION tImagePos; // (0,0)
+
+		// 만약 애니메이션이 있다면
+		if (m_pAnimation)
+		{
+			PANIMATIONCLIP pClip = m_pAnimation->GetCurrentClip();
+
+			// 이미지 크기 갱신
+			tImagePos.x = pClip->nFrameX * m_tSize.x;
+			tImagePos.y = pClip->nFrameY * m_tSize.x;
+		}
+
 		// 컬러키 활성화 여부에 따라 다르다.
 		if (m_pTexture->GetColorKeyEnable())
 		{
@@ -92,7 +109,7 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 			TransparentBlt(hDC, tPos.x, tPos.y,
 				m_tSize.x, m_tSize.y,
 				m_pTexture->GetDC(),
-				0, 0,		// 시작 위치
+				tImagePos.x, tImagePos.y,		// 시작 위치
 				m_tSize.x, m_tSize.y, 	// 크기
 				m_pTexture->GetColorKey());
 		}
@@ -108,7 +125,7 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 			BitBlt(hDC, tPos.x, tPos.y,
 				m_tSize.x, m_tSize.y,
 				m_pTexture->GetDC(),
-				0, 0,
+				tImagePos.x, tImagePos.y,
 				SRCCOPY);
 		}		
 	}
@@ -230,7 +247,7 @@ CAnimation* CObj::CreateAnimation(const string& strTag)
 	// 태그와 함께 자기 자신이 이 애니메이션을 가지고 있음을 명시한다.
 	m_pAnimation->SetTag(strTag);
 	m_pAnimation->SetObj(this);
-	if (m_pAnimation->Init())
+	if (!m_pAnimation->Init())
 	{
 		SAFE_RELEASE(m_pAnimation);
 		return nullptr;
@@ -260,6 +277,19 @@ bool CObj::AddAnimationClip(const string& strName, ANIMATION_TYPE eType, ANIMATI
 		fOptionLimitTime, strTexKey, pFileName, strPathKey);
 
 	return true;
+}
+
+void CObj::SetColorKey(unsigned char r, unsigned char g, unsigned char b)
+{
+	m_pTexture->SetColorKey(r, g, b);
+}
+
+void CObj::SetAnimationClipColorKey(const string& strClip, unsigned char r, unsigned char g, unsigned b)
+{
+	if (m_pAnimation)
+	{
+		m_pAnimation->SetClipColorKey(strClip, r, g, b);
+	}
 }
 
 // m_nRef가 0이면 지워진다.

@@ -21,14 +21,15 @@ CPlayer::~CPlayer()
 bool CPlayer::Init()
 {
     SetPos(100.f, 100.f);
-    SetSize(100.f, 100.f);
+    SetSize(108.75f, 121.f);
     SetSpeed(400.f);
     SetPivot(0.5f, 0.5f);
 
     SetTexture("Player", L"Player.bmp");
+    SetColorKey(255, 255, 255); // 흰색
 
     CRectCollider* pRC = AddCollider<CRectCollider>("PlayerBody");
-    pRC->SetRect(-50.f, -50.f, 50.f, 50.f);
+    pRC->SetRect(-54.375f, -60.5f, 54.375f, 60.5f);
     pRC->AddCollisionFunction(CS_ENTER, this, &CPlayer::Hit);
     pRC->AddCollisionFunction(CS_STAY, this, &CPlayer::HitStay);
 
@@ -40,19 +41,21 @@ bool CPlayer::Init()
     CAnimation * pAnima = CreateAnimation("PlayerAnimation");
 
     AddAnimationClip("IdleLeft", AT_ATLAS, AO_LOOP,
-        1.f,
+        0.5f,
         8, 1, // 8장에 1줄짜리
         0, 0,
         8, 1,
         0.f,
         "PlayerIdleLeft", L"Player/Idle/Left/PlayerIdleLeft.bmp");
-    AddAnimationClip("IdleLeft", AT_ATLAS, AO_LOOP,
-        1.f,
+    SetAnimationClipColorKey("IdleLeft", 255, 255, 255);
+    AddAnimationClip("IdleRight", AT_ATLAS, AO_LOOP,
+        0.5f,
         8, 1, // 8장에 1줄짜리
         0, 0,
         8, 1,
         0.f,
-        "PlayerIdleLeft", L"Player/Idle/Right/PlayerIdleRight.bmp");
+        "PlayerIdleRight", L"Player/Idle/Right/PlayerIdleRight.bmp");
+    SetAnimationClipColorKey("IdleRight", 255, 255, 255);
 
     SAFE_RELEASE(pAnima);
 

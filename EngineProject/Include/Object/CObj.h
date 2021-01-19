@@ -171,6 +171,8 @@ public :
 		int nLengthX, int nLengthY, float fOptionLimitTime,
 		const string& strTexKey, const wchar_t* pFileName,
 		const string& strPathKey = TEXTURE_PATH);
+	void SetColorKey(unsigned char r, unsigned char g, unsigned char b);
+	void SetAnimationClipColorKey(const string& strClip, unsigned char r, unsigned char g, unsigned b);
 
 public:
 	// 굉장히 다양한 타입의 오브젝트를 만들기 위한 

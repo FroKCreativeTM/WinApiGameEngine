@@ -14,6 +14,11 @@ public :
 public : 
     void SetObj(class CObj* pObj);
 
+    PANIMATIONCLIP GetCurrentClip() const
+    {
+        return m_pCurClip;
+    }
+
     bool AddClip(const string& strName, ANIMATION_TYPE eType,
         ANIMATION_OPTION eOption, float fAnimationLimitTime,
         int nFrameMaxX, int nFrameMaxY, int nStartX, int nStartY,
@@ -21,6 +26,8 @@ public :
         const string& strTexKey, const wchar_t* pFileName,
         const string& strPathKey = TEXTURE_PATH);
 
+    void SetClipColorKey(const string& strClip,
+        unsigned char r, unsigned char g, unsigned b);
     void SetCurrentClip(const string& strCurClip);
     void SetDefaultClip(const string& strDefaultClip);
     void ChangeClip(const string& strClip);

@@ -10,7 +10,48 @@ bool CAnimation::Init()
 
 void CAnimation::Update(float fDeltaTime)
 {
+	// 순간적으로 렉이 걸릴 수 있다.
+	// 예로들어 지금 8장의 프레임이 있으니
+	// 8 / 0.125(1/8)이다.
+	m_pCurClip->fAnimationTime += fDeltaTime;
 
+	// 만약 렉 걸려서 프레임 시간을 지났다면
+	// 그냥 건너도록 한다.
+	while (m_pCurClip->fAnimationTime >= m_pCurClip->fAnimationFrameTime)
+	{
+		m_pCurClip->fAnimationTime -= m_pCurClip->fAnimationFrameTime;
+
+		++m_pCurClip->nFrameX;
+
+		if (m_pCurClip->nFrameX - m_pCurClip->nStartX == m_pCurClip->nLengthX)
+		{
+			// x축 초기화
+			m_pCurClip->nFrameX = m_pCurClip->nStartX;
+			++m_pCurClip->nFrameY;
+
+			// 다 돌았을 경우
+			if (m_pCurClip->nFrameY - m_pCurClip->nStartY == m_pCurClip->nLengthY)
+			{
+				// y축 초기화
+				m_pCurClip->nFrameY = m_pCurClip->nStartY;
+				// 옵션체크
+				switch (m_pCurClip->eOption)
+				{
+				case AO_ONCE_RETURN : 
+					ChangeClip(m_strDefaultClip);
+					break;
+				case AO_ONCE_DESTROY:
+					// 가지고 있는 오브젝트를 죽인다.
+					m_pObj->Die();
+					break;
+				case AO_TIME_RETURN:
+					break;
+				case AO_TIME_DESTROY:
+					break;
+				}
+			}
+		}
+	}
 }
 
 CAnimation* CAnimation::Clone()
@@ -43,7 +84,12 @@ bool CAnimation::AddClip(const string& strName, ANIMATION_TYPE eType, ANIMATION_
 	pClip->nLengthY = nLengthY;
 	pClip->fOptionLimitTime = fOptionLimitTime;
 
+	//  nLengthX * nLengthY : 프레임 전체 갯수 
+	pClip->fAnimationFrameTime = fAnimationLimitTime / (nLengthX * nLengthY);
+
 	CTexture* pTexture = GET_SINGLE(CResourceManager)->LoadTexture(strTexKey, pFileName, strPathKey);
+
+	pClip->vecTexture.push_back(pTexture);
 
 	pClip->fAnimationTime = 0.f;
 	pClip->nFrameX = nStartX;
@@ -51,16 +97,34 @@ bool CAnimation::AddClip(const string& strName, ANIMATION_TYPE eType, ANIMATION_
 	pClip->fOptionTime = 0.f;
 
 	// 만약 첫 애니메이션 클립이라면
-	if (m_mapClip.empty())
+	m_mapClip.insert(make_pair(strName, pClip));
+
+	if (m_strDefaultClip.empty())
 	{
 		// 기본 애니메이션 클립으로 지정한다.
 		SetDefaultClip(strName);
+	}
+	if (m_strCurClip.empty())
+	{
 		SetCurrentClip(strName);
 	}
 
-	m_mapClip.insert(make_pair(strName, pClip));
-
 	return true;
+}
+
+void CAnimation::SetClipColorKey(const string& strClip, unsigned char r, unsigned char g, unsigned b)
+{
+	PANIMATIONCLIP pClip = FindClip(strClip);
+
+	if (!pClip)
+	{
+		return;
+	}
+
+	for (size_t i = 0; i < pClip->vecTexture.size(); ++i)
+	{
+		pClip->vecTexture[i]->SetColorKey(r, g, b);
+	}
 }
 
 void CAnimation::SetCurrentClip(const string& strCurClip)
@@ -117,7 +181,8 @@ PANIMATIONCLIP CAnimation::FindClip(const string& strClip)
 	return iter->second;
 }
 
-CAnimation::CAnimation()
+CAnimation::CAnimation() : 
+	m_pCurClip(nullptr)
 {
 }
 
@@ -141,6 +206,10 @@ CAnimation::CAnimation(const CAnimation& anim)
 			pClip->vecTexture[i]->AddRef();
 		}
 	}
+
+	m_pCurClip = nullptr;
+	m_strCurClip = "";
+	SetCurrentClip(anim.m_strCurClip);
 }
 
 CAnimation::~CAnimation()

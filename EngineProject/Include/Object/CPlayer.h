@@ -31,6 +31,8 @@ private :
 	void Fire();
 
 private : 
-	int m_nHP;
+	int			m_nHP;
+	bool		m_isAttack;
+	bool		m_isLeft;
 };
 

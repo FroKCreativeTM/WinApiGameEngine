@@ -10,6 +10,8 @@ bool CAnimation::Init()
 
 void CAnimation::Update(float fDeltaTime)
 {
+	m_bMotionEnd = false;
+
 	// 순간적으로 렉이 걸릴 수 있다.
 	// 예로들어 지금 8장의 프레임이 있으니
 	// 8 / 0.125(1/8)이다.
@@ -32,6 +34,8 @@ void CAnimation::Update(float fDeltaTime)
 			// 다 돌았을 경우
 			if (m_pCurClip->nFrameY - m_pCurClip->nStartY == m_pCurClip->nLengthY)
 			{
+				// 모션 끝
+				m_bMotionEnd = true;
 				// y축 초기화
 				m_pCurClip->nFrameY = m_pCurClip->nStartY;
 				// 옵션체크
@@ -88,6 +92,9 @@ bool CAnimation::AddClip(const string& strName, ANIMATION_TYPE eType, ANIMATION_
 	pClip->fAnimationFrameTime = fAnimationLimitTime / (nLengthX * nLengthY);
 
 	CTexture* pTexture = GET_SINGLE(CResourceManager)->LoadTexture(strTexKey, pFileName, strPathKey);
+
+	pClip->tFrameSize.x = pTexture->GetWidth() / nFrameMaxX;
+	pClip->tFrameSize.y = pTexture->GetHeight() / nFrameMaxY;
 
 	pClip->vecTexture.push_back(pTexture);
 
@@ -169,6 +176,12 @@ void CAnimation::ChangeClip(const string& strClip)
 	}
 }
 
+void CAnimation::ReturnClip()
+{
+	// 디폴트로 돌아간다.
+	ChangeClip(m_strDefaultClip);
+}
+
 PANIMATIONCLIP CAnimation::FindClip(const string& strClip)
 {
 	unordered_map<string, PANIMATIONCLIP>::iterator iter = m_mapClip.find(strClip);
@@ -182,13 +195,15 @@ PANIMATIONCLIP CAnimation::FindClip(const string& strClip)
 }
 
 CAnimation::CAnimation() : 
-	m_pCurClip(nullptr)
+	m_pCurClip(nullptr),
+	m_bMotionEnd(false)
 {
 }
 
 CAnimation::CAnimation(const CAnimation& anim)
 {
 	*this = anim;
+	m_bMotionEnd = false;
 
 	unordered_map<string, PANIMATIONCLIP>::const_iterator iter;
 	unordered_map<string, PANIMATIONCLIP>::const_iterator iterEnd = anim.m_mapClip.end();

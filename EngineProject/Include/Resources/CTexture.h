@@ -15,7 +15,7 @@ public :
 	// 메모리 DC를 반환!
 	HDC GetDC() const
 	{
-		return m_hMemDC;
+		return m_hMemDC; 
 	}
 
 public : 
@@ -31,6 +31,16 @@ public :
 	bool GetColorKeyEnable() const
 	{
 		return m_bColorKeyEnable;
+	}
+
+	LONG GetWidth() const
+	{
+		return m_tInfo.bmWidth;
+	}
+
+	LONG GetHeight() const
+	{
+		return m_tInfo.bmHeight;
 	}
 
 private : 

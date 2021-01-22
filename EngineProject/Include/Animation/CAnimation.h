@@ -19,6 +19,11 @@ public :
         return m_pCurClip;
     }
 
+    bool GetMotionEnd() const
+    {
+        return m_bMotionEnd;
+    }
+
     bool AddClip(const string& strName, ANIMATION_TYPE eType,
         ANIMATION_OPTION eOption, float fAnimationLimitTime,
         int nFrameMaxX, int nFrameMaxY, int nStartX, int nStartY,
@@ -31,6 +36,7 @@ public :
     void SetCurrentClip(const string& strCurClip);
     void SetDefaultClip(const string& strDefaultClip);
     void ChangeClip(const string& strClip);
+    void ReturnClip();
 
 private : 
     PANIMATIONCLIP FindClip(const string& strClip);
@@ -41,6 +47,7 @@ private :
     string                                  m_strCurClip;
     string                                  m_strDefaultClip;
     class CObj*                             m_pObj;
+    bool                                    m_bMotionEnd;
 
 private : 
     friend class CObj;

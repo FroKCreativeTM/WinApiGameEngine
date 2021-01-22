@@ -22,6 +22,7 @@ bool CPlayer::Init()
 {
     SetPos(100.f, 100.f);
     SetSize(108.75f, 121.f);
+    SetImageOffset(108.75f, 121.f);
     SetSpeed(400.f);
     SetPivot(0.5f, 0.5f);
 
@@ -47,7 +48,26 @@ bool CPlayer::Init()
         8, 1,
         0.f,
         "PlayerIdleLeft", L"Player/Idle/Left/PlayerIdleLeft.bmp");
-    SetAnimationClipColorKey("IdleLeft", 255, 255, 255);
+    SetAnimationClipColorKey("IdleLeft", 255, 0, 255);
+
+    AddAnimationClip("RunLeft", AT_ATLAS, AO_ONCE_RETURN,
+        0.5f,
+        4, 1, // 4장에 1줄짜리
+        0, 0,
+        4, 1,
+        0.f,
+        "PlayerRunLeft", L"Player/Run/Left/PlayerRunLeft.bmp");
+    SetAnimationClipColorKey("RunLeft", 255, 0, 255);
+
+    AddAnimationClip("AttackLeft", AT_ATLAS, AO_ONCE_RETURN,
+        0.5f,
+        4, 1, // 4장에 1줄짜리
+        0, 0,
+        4, 1,
+        0.f,
+        "PlayerAttackLeft", L"Player/Attack/Left/PlayerAttackLeft.bmp");
+    SetAnimationClipColorKey("AttackLeft", 255, 0, 255);
+
     AddAnimationClip("IdleRight", AT_ATLAS, AO_LOOP,
         0.5f,
         8, 1, // 8장에 1줄짜리
@@ -55,7 +75,25 @@ bool CPlayer::Init()
         8, 1,
         0.f,
         "PlayerIdleRight", L"Player/Idle/Right/PlayerIdleRight.bmp");
-    SetAnimationClipColorKey("IdleRight", 255, 255, 255);
+    SetAnimationClipColorKey("IdleRight", 255, 0, 255);
+
+    AddAnimationClip("RunRight", AT_ATLAS, AO_ONCE_RETURN,
+        0.5f,
+        4, 1, // 4장에 1줄짜리
+        0, 0,
+        4, 1,
+        0.f,
+        "PlayerRunRight", L"Player/Run/Right/PlayerRunRight.bmp");
+    SetAnimationClipColorKey("RunRight", 255, 0, 255);
+
+    AddAnimationClip("AttackRight", AT_ATLAS, AO_ONCE_RETURN,
+        0.5f,
+        4, 1, // 4장에 1줄짜리
+        0, 0,
+        4, 1,
+        0.f,
+        "PlayerAttackRight", L"Player/Attack/Right/PlayerAttackRight.bmp");
+    SetAnimationClipColorKey("AttackRight", 255, 0, 255);
 
     SAFE_RELEASE(pAnima);
 
@@ -64,6 +102,7 @@ bool CPlayer::Init()
 
 void CPlayer::Input(float fDeltaTime)
 {
+
     // 부모의 함수를 호출해준다.
     CMoveObj::Input(fDeltaTime);
 
@@ -77,11 +116,15 @@ void CPlayer::Input(float fDeltaTime)
     }
     if (KEYPRESS("MoveLeft"))
     {
+        m_isLeft = true;
         MoveXFromSpeed(fDeltaTime, MD_BACK);
+        m_pAnimation->ChangeClip("RunLeft");
     }
     if (KEYPRESS("MoveRight"))
     {
+        m_isLeft = false;
         MoveXFromSpeed(fDeltaTime, MD_FRONT);
+        m_pAnimation->ChangeClip("RunRight");
     }
     if (KEYPRESS("Jump"))
     {
@@ -90,6 +133,7 @@ void CPlayer::Input(float fDeltaTime)
     if (KEYPRESS("Fire"))
     {
         Fire();
+        m_pAnimation->ChangeClip("AttackRight");
     }
 }
 
@@ -97,6 +141,25 @@ int CPlayer::Update(float fDeltaTime)
 {
     // 부모의 함수를 호출해준다.
     CMoveObj::Update(fDeltaTime);
+
+    // 공격이 끝난 경우
+    if (m_isAttack && m_pAnimation->GetMotionEnd())
+    {
+        m_isAttack = false;
+    }
+
+    if (!m_isMove && !m_isAttack)
+    {
+        if (m_isLeft)
+        {
+            m_pAnimation->ReturnClip();
+        }
+        else
+        {
+            m_pAnimation->SetCurrentClip("IdleRight");
+        }
+    }
+
     return 0;
 }
 
@@ -162,6 +225,8 @@ void CPlayer::HitStay(CCollider* pSrc, CCollider* pDst, float fDeltaTime)
 
 void CPlayer::Fire()
 {
+    m_isAttack = true;
+
     CObj* pBullet = 
         CObj::CreateCloneObj("Bullet", "PlayerBullet", m_pLayer);
 

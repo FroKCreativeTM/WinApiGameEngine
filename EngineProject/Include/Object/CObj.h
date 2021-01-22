@@ -69,6 +69,17 @@ public :
 		m_bPhysics = bPhysics;
 	}
 
+	void SetImageOffset(const _SIZE& tOffset)
+	{
+		m_tImageOffset = tOffset;
+	}
+
+	void SetImageOffset(float x, float y)
+	{
+		m_tImageOffset.x = x;
+		m_tImageOffset.y = y;
+	}
+
 	/* Getter */
 	string GetTag() const
 	{
@@ -234,6 +245,7 @@ protected :
 	// 위치와 크기
 	POSITION				m_tPos;
 	_SIZE					m_tSize;
+	_SIZE					m_tImageOffset;		// 오프셋? 내가 원하는 특정 좌표값만큼 출력한다.
 	POSITION				m_tPivot;
 	// 텍스처 정보
 	class CTexture*			m_pTexture;

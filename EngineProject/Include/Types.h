@@ -244,4 +244,5 @@ typedef struct _tagAnimationClip
 	// 옵션 시간
 	float fOptionTime;
 	float fOptionLimitTime;
+	_SIZE tFrameSize;
 }ANIMATIONCLIP, *PANIMATIONCLIP;

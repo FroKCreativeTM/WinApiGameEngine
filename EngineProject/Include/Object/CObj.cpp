@@ -97,10 +97,14 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 		{
 			PANIMATIONCLIP pClip = m_pAnimation->GetCurrentClip();
 
+
 			// 이미지 크기 갱신
-			tImagePos.x = pClip->nFrameX * m_tSize.x;
-			tImagePos.y = pClip->nFrameY * m_tSize.x;
+			// 오프셋은 애니메이션이 있던 없던 둘 다 적용한다.
+			tImagePos.x = pClip->nFrameX * pClip->tFrameSize.x;
+			tImagePos.y = pClip->nFrameY * pClip->tFrameSize.y;
 		}
+
+		// tImagePos += m_tImageOffset;
 
 		// 컬러키 활성화 여부에 따라 다르다.
 		if (m_pTexture->GetColorKeyEnable())

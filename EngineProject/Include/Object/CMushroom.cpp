@@ -29,7 +29,7 @@ bool CMushroom::Init()
 	SetSpeed(300.f);
 	SetPivot(0.5f, 0.5f);
 
-	SetTexture("Mushroom", L"neil.bmp");
+	SetTexture("Mushroom", L"Adel.bmp");
 
 	m_eDir = MD_FRONT;
 

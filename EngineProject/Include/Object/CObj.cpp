@@ -97,11 +97,13 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 		{
 			PANIMATIONCLIP pClip = m_pAnimation->GetCurrentClip();
 
-
 			// 이미지 크기 갱신
-			// 오프셋은 애니메이션이 있던 없던 둘 다 적용한다.
-			tImagePos.x = pClip->nFrameX * pClip->tFrameSize.x;
-			tImagePos.y = pClip->nFrameY * pClip->tFrameSize.y;
+			if (pClip->eType == AT_ATLAS)
+			{
+				// 아틀라스는 오프셋은 애니메이션이 있던 없던 둘 다 적용한다.
+				tImagePos.x = pClip->nFrameX * pClip->tFrameSize.x;
+				tImagePos.y = pClip->nFrameY * pClip->tFrameSize.y;
+			}
 		}
 
 		// tImagePos += m_tImageOffset;
@@ -279,6 +281,28 @@ bool CObj::AddAnimationClip(const string& strName, ANIMATION_TYPE eType, ANIMATI
 	m_pAnimation->AddClip(strName, eType, eOption, fAnimationLimitTime,
 		nFrameMaxX, nFrameMaxY, nStartX, nStartY, nLengthX, nLengthY,
 		fOptionLimitTime, strTexKey, pFileName, strPathKey);
+
+	return true;
+}
+
+bool CObj::AddAnimationClip(const string& strName, 
+	ANIMATION_TYPE eType, ANIMATION_OPTION eOption, 
+	float fAnimationLimitTime, 
+	int nFrameMaxX, int nFrameMaxY, 
+	int nStartX, int nStartY, 
+	int nLengthX, int nLengthY, 
+	float fOptionLimitTime, 
+	const string& strTexKey, const vector<wstring>& vecFileName, const string& strPathKey)
+{
+	// 애니메이션이 생성되지 않은 상태에서 클립추가 불가
+	if (!m_pAnimation)
+	{
+		return false;
+	}
+
+	m_pAnimation->AddClip(strName, eType, eOption, fAnimationLimitTime,
+		nFrameMaxX, nFrameMaxY, nStartX, nStartY, nLengthX, nLengthY,
+		fOptionLimitTime, strTexKey, vecFileName, strPathKey);
 
 	return true;
 }

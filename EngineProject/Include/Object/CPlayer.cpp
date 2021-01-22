@@ -59,14 +59,7 @@ bool CPlayer::Init()
         "PlayerRunLeft", L"Player/Run/Left/PlayerRunLeft.bmp");
     SetAnimationClipColorKey("RunLeft", 255, 0, 255);
 
-    AddAnimationClip("AttackLeft", AT_ATLAS, AO_ONCE_RETURN,
-        0.5f,
-        4, 1, // 4장에 1줄짜리
-        0, 0,
-        4, 1,
-        0.f,
-        "PlayerAttackLeft", L"Player/Attack/Left/PlayerAttackLeft.bmp");
-    SetAnimationClipColorKey("AttackLeft", 255, 0, 255);
+    /* AttackLeft는 프레임 애니메이션으로 따로 만듭니다. */
 
     AddAnimationClip("IdleRight", AT_ATLAS, AO_LOOP,
         0.5f,
@@ -95,7 +88,28 @@ bool CPlayer::Init()
         "PlayerAttackRight", L"Player/Attack/Right/PlayerAttackRight.bmp");
     SetAnimationClipColorKey("AttackRight", 255, 0, 255);
 
+    vector<wstring> vecFileName;
+
+    for (size_t i = 1; i <= 4 ; ++i)
+    {
+        wchar_t strFileName[MAX_PATH] = {};
+        // 문자열 구성함수
+        wsprintf(strFileName, L"Player/Attack/Left/%d.bmp", i);
+        vecFileName.push_back(strFileName);
+    }
+
+    AddAnimationClip("AttackLeft", AT_FRAME, AO_ONCE_RETURN,
+        0.5f,
+        4, 1, // 4장에 1줄짜리
+        0, 0,
+        4, 1,
+        0.f,
+        "PlayerAttackRight", vecFileName);
+    SetAnimationClipColorKey("AttackLeft", 255, 0, 255);
+
     SAFE_RELEASE(pAnima);
+
+    m_isLeft = false;
 
     return true;
 }
@@ -116,15 +130,17 @@ void CPlayer::Input(float fDeltaTime)
     }
     if (KEYPRESS("MoveLeft"))
     {
-        m_isLeft = true;
         MoveXFromSpeed(fDeltaTime, MD_BACK);
         m_pAnimation->ChangeClip("RunLeft");
+        m_isLeft = true;
+        m_pAnimation->SetDefaultClip("IdleLeft");
     }
     if (KEYPRESS("MoveRight"))
     {
-        m_isLeft = false;
         MoveXFromSpeed(fDeltaTime, MD_FRONT);
         m_pAnimation->ChangeClip("RunRight");
+        m_isLeft = false;
+        m_pAnimation->SetDefaultClip("IdleRight");
     }
     if (KEYPRESS("Jump"))
     {
@@ -133,7 +149,15 @@ void CPlayer::Input(float fDeltaTime)
     if (KEYPRESS("Fire"))
     {
         Fire();
-        m_pAnimation->ChangeClip("AttackRight");
+
+        if (m_isLeft)
+        {
+            m_pAnimation->ChangeClip("AttackLeft");
+        }
+        else
+        {
+            m_pAnimation->ChangeClip("AttackRight");
+        }
     }
 }
 
@@ -150,14 +174,7 @@ int CPlayer::Update(float fDeltaTime)
 
     if (!m_isMove && !m_isAttack)
     {
-        if (m_isLeft)
-        {
-            m_pAnimation->ReturnClip();
-        }
-        else
-        {
-            m_pAnimation->SetCurrentClip("IdleRight");
-        }
+        m_pAnimation->ReturnClip();
     }
 
     return 0;
@@ -234,12 +251,25 @@ void CPlayer::Fire()
     pBullet->AddCollisionFunction("BulletBody", CS_ENTER, (CBullet*)pBullet, &CBullet::Hit);
 
     POSITION tPos;
-    tPos.x = GetRight() 
-        + pBullet->GetSize().x * pBullet->GetPivot().x;
+
+    if (m_isLeft)
+    {
+        tPos.x = GetLeft() + pBullet->GetSize().x * (1.f - pBullet->GetPivot().x);
+    }
+    else
+    {
+        tPos.x = GetRight() + pBullet->GetSize().x * pBullet->GetPivot().x;
+    }
+
     tPos.y = GetCenter().y;
 
     // 위에서 구한 좌표를 적용한다.
     pBullet->SetPos(tPos);
+
+    if (m_isLeft)
+    {
+        ((CMoveObj*)pBullet)->SetAngle(PI);
+    }
 
     SAFE_RELEASE(pBullet);
 }

@@ -24,11 +24,21 @@ public :
         return m_bMotionEnd;
     }
 
+    // 아틀라스 애니메이션용
     bool AddClip(const string& strName, ANIMATION_TYPE eType,
         ANIMATION_OPTION eOption, float fAnimationLimitTime,
         int nFrameMaxX, int nFrameMaxY, int nStartX, int nStartY,
         int nLengthX, int nLengthY, float fOptionLimitTime,
         const string& strTexKey, const wchar_t* pFileName,
+        const string& strPathKey = TEXTURE_PATH);
+
+    // 프레임 애니메이션은 문제는 키값도 여러개
+    // 텍스트키도 여러개가 된다.
+    bool AddClip(const string& strName, ANIMATION_TYPE eType,
+        ANIMATION_OPTION eOption, float fAnimationLimitTime,
+        int nFrameMaxX, int nFrameMaxY, int nStartX, int nStartY,
+        int nLengthX, int nLengthY, float fOptionLimitTime,
+        const string& strTexKey, const vector<wstring>& vecFileName,
         const string& strPathKey = TEXTURE_PATH);
 
     void SetClipColorKey(const string& strClip,

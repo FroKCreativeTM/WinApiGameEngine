@@ -176,12 +176,21 @@ public :
 // 애니메이션 관련 메서드
 public : 
 	class CAnimation* CreateAnimation(const string& strTag);
+	// 아틀라스 애니메이션용
 	bool AddAnimationClip(const string& strName, ANIMATION_TYPE eType,
 		ANIMATION_OPTION eOption, float fAnimationLimitTime,
 		int nFrameMaxX, int nFrameMaxY, int nStartX, int nStartY,
 		int nLengthX, int nLengthY, float fOptionLimitTime,
 		const string& strTexKey, const wchar_t* pFileName,
 		const string& strPathKey = TEXTURE_PATH);
+	// 프레임 애니메이션용
+	bool AddAnimationClip(const string& strName, ANIMATION_TYPE eType,
+		ANIMATION_OPTION eOption, float fAnimationLimitTime,
+		int nFrameMaxX, int nFrameMaxY, int nStartX, int nStartY,
+		int nLengthX, int nLengthY, float fOptionLimitTime,
+		const string& strTexKey, const vector<wstring>& vecFileName,
+		const string& strPathKey = TEXTURE_PATH);
+
 	void SetColorKey(unsigned char r, unsigned char g, unsigned char b);
 	void SetAnimationClipColorKey(const string& strClip, unsigned char r, unsigned char g, unsigned b);
 

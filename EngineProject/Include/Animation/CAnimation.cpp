@@ -31,13 +31,19 @@ void CAnimation::Update(float fDeltaTime)
 			m_pCurClip->nFrameX = m_pCurClip->nStartX;
 			++m_pCurClip->nFrameY;
 
+			if (m_pCurClip->eType == AT_FRAME)
+			{	// 만약 프레임이라면 
+				// nFrameX의 이미지로 교체해준다.
+				m_pObj->SetTexture(m_pCurClip->vecTexture[m_pCurClip->nFrameX]);
+			}
+			
 			// 다 돌았을 경우
 			if (m_pCurClip->nFrameY - m_pCurClip->nStartY == m_pCurClip->nLengthY)
 			{
-				// 모션 끝
-				m_bMotionEnd = true;
 				// y축 초기화
 				m_pCurClip->nFrameY = m_pCurClip->nStartY;
+				// 모션 끝
+				m_bMotionEnd = true;
 				// 옵션체크
 				switch (m_pCurClip->eOption)
 				{
@@ -53,6 +59,14 @@ void CAnimation::Update(float fDeltaTime)
 				case AO_TIME_DESTROY:
 					break;
 				}
+			}
+		}
+		else
+		{
+			if (m_pCurClip->eType == AT_FRAME)
+			{	// 만약 프레임이라면 
+				// nFrameX의 이미지로 교체해준다.
+				m_pObj->SetTexture(m_pCurClip->vecTexture[m_pCurClip->nFrameX]);
 			}
 		}
 	}
@@ -97,6 +111,64 @@ bool CAnimation::AddClip(const string& strName, ANIMATION_TYPE eType, ANIMATION_
 	pClip->tFrameSize.y = pTexture->GetHeight() / nFrameMaxY;
 
 	pClip->vecTexture.push_back(pTexture);
+
+	pClip->fAnimationTime = 0.f;
+	pClip->nFrameX = nStartX;
+	pClip->nFrameY = nStartY;
+	pClip->fOptionTime = 0.f;
+
+	// 만약 첫 애니메이션 클립이라면
+	m_mapClip.insert(make_pair(strName, pClip));
+
+	if (m_strDefaultClip.empty())
+	{
+		// 기본 애니메이션 클립으로 지정한다.
+		SetDefaultClip(strName);
+	}
+	if (m_strCurClip.empty())
+	{
+		SetCurrentClip(strName);
+	}
+
+	return true;
+}
+
+bool CAnimation::AddClip(const string& strName, 
+	ANIMATION_TYPE eType, ANIMATION_OPTION eOption, float 
+	fAnimationLimitTime, 
+	int nFrameMaxX, int nFrameMaxY, 
+	int nStartX, int nStartY, 
+	int nLengthX, int nLengthY, 
+	float fOptionLimitTime, 
+	const string& strTexKey, const vector<wstring>& vecFileName, const string& strPathKey)
+{
+	PANIMATIONCLIP pClip = new ANIMATIONCLIP;
+
+	pClip->eType = eType;
+	pClip->eOption = eOption;
+	pClip->fAnimationLimitTime = fAnimationLimitTime;
+	pClip->nFrameMaxX = nFrameMaxX;
+	pClip->nFrameMaxY = nFrameMaxY;
+	pClip->nStartX = nStartX;
+	pClip->nStartY = nStartY;
+	pClip->nLengthX = nLengthX;
+	pClip->nLengthY = nLengthY;
+	pClip->fOptionLimitTime = fOptionLimitTime;
+
+	//  nLengthX * nLengthY : 프레임 전체 갯수 
+	pClip->fAnimationFrameTime = fAnimationLimitTime / (nLengthX * nLengthY);
+
+	for (size_t i = 0; i < vecFileName.size(); i++)
+	{
+		char strKey[256] = {};
+		sprintf_s(strKey, "%s%d", strTexKey.c_str(), i + 1);
+		CTexture* pTexture = GET_SINGLE(CResourceManager)->LoadTexture(strKey, vecFileName[i].c_str(), strPathKey);
+
+		pClip->vecTexture.push_back(pTexture);
+	}
+
+	pClip->tFrameSize.x = pClip->vecTexture[0]->GetWidth() / nFrameMaxX;
+	pClip->tFrameSize.y = pClip->vecTexture[0]->GetHeight() / nFrameMaxY;
 
 	pClip->fAnimationTime = 0.f;
 	pClip->nFrameX = nStartX;

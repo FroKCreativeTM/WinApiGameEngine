@@ -67,6 +67,9 @@
     <Filter Include="06. Animation">
       <UniqueIdentifier>{bf35c598-0201-4bf9-a00b-d51980e8544f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\01. MoveObj\04. UI">
+      <UniqueIdentifier>{01c48107-9749-440b-9d65-03ee239285a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -152,6 +155,15 @@
     </ClCompile>
     <ClCompile Include="Animation\CAnimation.cpp">
       <Filter>06. Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CUI.cpp">
+      <Filter>03. Object\01. MoveObj\04. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CUIPanel.cpp">
+      <Filter>03. Object\01. MoveObj\04. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CStartScene.cpp">
+      <Filter>02.Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +262,15 @@
     </ClInclude>
     <ClInclude Include="Animation\CAnimation.h">
       <Filter>06. Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CUI.h">
+      <Filter>03. Object\01. MoveObj\04. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CUIPanel.h">
+      <Filter>03. Object\01. MoveObj\04. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CStartScene.h">
+      <Filter>02.Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

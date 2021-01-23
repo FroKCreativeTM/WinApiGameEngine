@@ -106,7 +106,7 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 			}
 		}
 
-		// tImagePos += m_tImageOffset;
+		tImagePos += m_tImageOffset;
 
 		// 컬러키 활성화 여부에 따라 다르다.
 		if (m_pTexture->GetColorKeyEnable())

@@ -5,14 +5,6 @@
 class CPlayer :
     public CMoveObj
 {
-private : 
-	friend class CObj;
-	friend class CScene;
-
-private :
-	CPlayer();
-	CPlayer(const CPlayer& ref);
-    ~CPlayer();
 
 public:
 	virtual bool Init();		
@@ -34,5 +26,14 @@ private :
 	int			m_nHP;
 	bool		m_isAttack;
 	bool		m_isLeft;
+
+private:
+	friend class CObj;
+	friend class CScene;
+
+private:
+	CPlayer();
+	CPlayer(const CPlayer& ref);
+	~CPlayer();
 };
 

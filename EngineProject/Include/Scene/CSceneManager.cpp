@@ -1,5 +1,6 @@
 #include "CSceneManager.h"
 #include "CInGameScene.h"
+#include "CStartScene.h"
 
 DEFINITION_SINGLE(CSceneManager)
 
@@ -20,7 +21,7 @@ CSceneManager::~CSceneManager()
 bool CSceneManager::Init()
 {
 	// 기본 장면은 무조건 하나 만들어둔다.
-	CreateScene<CInGameScene>(SC_CURRENT);
+	CreateScene<CStartScene>(SC_CURRENT);
 
 	return true;
 }

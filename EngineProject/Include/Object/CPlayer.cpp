@@ -25,6 +25,7 @@ bool CPlayer::Init()
     SetImageOffset(108.75f, 121.f);
     SetSpeed(400.f);
     SetPivot(0.5f, 0.5f);
+    SetImageOffset(0.f, 0.f);
 
     SetTexture("Player", L"Player.bmp");
     SetColorKey(255, 255, 255); // 흰색
@@ -42,7 +43,7 @@ bool CPlayer::Init()
     CAnimation * pAnima = CreateAnimation("PlayerAnimation");
 
     AddAnimationClip("IdleLeft", AT_ATLAS, AO_LOOP,
-        0.5f,
+        1.f,
         8, 1, // 8장에 1줄짜리
         0, 0,
         8, 1,
@@ -51,7 +52,7 @@ bool CPlayer::Init()
     SetAnimationClipColorKey("IdleLeft", 255, 0, 255);
 
     AddAnimationClip("RunLeft", AT_ATLAS, AO_ONCE_RETURN,
-        0.5f,
+        1.f,
         4, 1, // 4장에 1줄짜리
         0, 0,
         4, 1,
@@ -62,7 +63,7 @@ bool CPlayer::Init()
     /* AttackLeft는 프레임 애니메이션으로 따로 만듭니다. */
 
     AddAnimationClip("IdleRight", AT_ATLAS, AO_LOOP,
-        0.5f,
+        1.f,
         8, 1, // 8장에 1줄짜리
         0, 0,
         8, 1,
@@ -71,7 +72,7 @@ bool CPlayer::Init()
     SetAnimationClipColorKey("IdleRight", 255, 0, 255);
 
     AddAnimationClip("RunRight", AT_ATLAS, AO_ONCE_RETURN,
-        0.5f,
+        1.f,
         4, 1, // 4장에 1줄짜리
         0, 0,
         4, 1,
@@ -80,7 +81,7 @@ bool CPlayer::Init()
     SetAnimationClipColorKey("RunRight", 255, 0, 255);
 
     AddAnimationClip("AttackRight", AT_ATLAS, AO_ONCE_RETURN,
-        0.5f,
+        1.f,
         4, 1, // 4장에 1줄짜리
         0, 0,
         4, 1,
@@ -99,7 +100,7 @@ bool CPlayer::Init()
     }
 
     AddAnimationClip("AttackLeft", AT_FRAME, AO_ONCE_RETURN,
-        0.5f,
+        1.f,
         4, 1, // 4장에 1줄짜리
         0, 0,
         4, 1,

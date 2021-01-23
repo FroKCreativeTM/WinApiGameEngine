@@ -83,7 +83,8 @@ void CAnimation::SetObj(CObj* pObj)
 }
 
 bool CAnimation::AddClip(const string& strName, ANIMATION_TYPE eType, ANIMATION_OPTION eOption,
-	float fAnimationLimitTime, int nFrameMaxX, int nFrameMaxY,
+	float fAnimationLimitTime, 
+	int nFrameMaxX, int nFrameMaxY,
 	int nStartX, int nStartY, 
 	int nLengthX, int nLengthY, 
 	float fOptionLimitTime, 

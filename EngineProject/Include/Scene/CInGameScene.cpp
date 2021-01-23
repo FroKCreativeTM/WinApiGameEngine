@@ -54,8 +54,7 @@ bool CInGameScene::Init()
 	/* 스테이지(백그라운드) 생성 */
 	// 레이어를 약간 다른 것을 쓸 것이다.
 	CLayer* pStageLayer = FindLayer("Stage");
-	CStage* pStage = CObj::CreateObj<CStage>
-		("Stage", pStageLayer);
+	CStage* pStage = CObj::CreateObj<CStage>("Stage", pStageLayer);
 
 	// 스테이지 콜리더 설정
 	CPixelCollider* pPixel = pStage->AddCollider<CPixelCollider>("StageCollder");

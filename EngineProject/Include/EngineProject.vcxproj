@@ -168,6 +168,8 @@
     <ClCompile Include="Object\CPlayer.cpp" />
     <ClCompile Include="Object\CStage.cpp" />
     <ClCompile Include="Object\CStaticObj.cpp" />
+    <ClCompile Include="Object\CUI.cpp" />
+    <ClCompile Include="Object\CUIPanel.cpp" />
     <ClCompile Include="Object\CZako.cpp" />
     <ClCompile Include="Resources\CResourceManager.cpp" />
     <ClCompile Include="Resources\CTexture.cpp" />
@@ -175,6 +177,7 @@
     <ClCompile Include="Scene\CLayer.cpp" />
     <ClCompile Include="Scene\CScene.cpp" />
     <ClCompile Include="Scene\CSceneManager.cpp" />
+    <ClCompile Include="Scene\CStartScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\CAnimation.h" />
@@ -200,6 +203,8 @@
     <ClInclude Include="Object\CPlayer.h" />
     <ClInclude Include="Object\CStage.h" />
     <ClInclude Include="Object\CStaticObj.h" />
+    <ClInclude Include="Object\CUI.h" />
+    <ClInclude Include="Object\CUIPanel.h" />
     <ClInclude Include="Object\CZako.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Resources\CResourceManager.h" />
@@ -208,6 +213,7 @@
     <ClInclude Include="Scene\CLayer.h" />
     <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="Scene\CSceneManager.h" />
+    <ClInclude Include="Scene\CStartScene.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>

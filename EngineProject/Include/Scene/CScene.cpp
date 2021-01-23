@@ -9,6 +9,7 @@ CScene::CScene()
     // 장면이 시작하면 아무 레이어도 없으니
     // 하나는 만들어두자.
     CLayer* pLayer = CreateLayer("Default", 1);
+    pLayer = CreateLayer("HUD", INT_MAX - 1);
     pLayer = CreateLayer("UI", INT_MAX); // 맨 뒤에 있단 뜻
     pLayer = CreateLayer("Stage", 0); // 맨 뒤에 있단 뜻
 }

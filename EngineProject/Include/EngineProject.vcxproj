@@ -153,6 +153,7 @@
     <ClCompile Include="Collider\CCollider.cpp" />
     <ClCompile Include="Collider\CCollisionManager.cpp" />
     <ClCompile Include="Collider\CPixelCollider.cpp" />
+    <ClCompile Include="Collider\CPointCollider.cpp" />
     <ClCompile Include="Collider\CRectCollider.cpp" />
     <ClCompile Include="Collider\CSphereCollider.cpp" />
     <ClCompile Include="Core\CCamera.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Core\CRef.cpp" />
     <ClCompile Include="Core\CTimer.cpp" />
     <ClCompile Include="Object\CBullet.cpp" />
+    <ClCompile Include="Object\CMouse.cpp" />
     <ClCompile Include="Object\CMoveObj.cpp" />
     <ClCompile Include="Object\CMushroom.cpp" />
     <ClCompile Include="Object\CObj.cpp" />
@@ -169,6 +171,7 @@
     <ClCompile Include="Object\CStage.cpp" />
     <ClCompile Include="Object\CStaticObj.cpp" />
     <ClCompile Include="Object\CUI.cpp" />
+    <ClCompile Include="Object\CUIButton.cpp" />
     <ClCompile Include="Object\CUIPanel.cpp" />
     <ClCompile Include="Object\CZako.cpp" />
     <ClCompile Include="Resources\CResourceManager.cpp" />
@@ -185,6 +188,7 @@
     <ClInclude Include="Collider\CCollider.h" />
     <ClInclude Include="Collider\CCollisionManager.h" />
     <ClInclude Include="Collider\CPixelCollider.h" />
+    <ClInclude Include="Collider\CPointCollider.h" />
     <ClInclude Include="Collider\CRectCollider.h" />
     <ClInclude Include="Collider\CSphereCollider.h" />
     <ClInclude Include="Core\CCamera.h" />
@@ -197,6 +201,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Object\CBullet.h" />
+    <ClInclude Include="Object\CMouse.h" />
     <ClInclude Include="Object\CMoveObj.h" />
     <ClInclude Include="Object\CMushroom.h" />
     <ClInclude Include="Object\CObj.h" />
@@ -204,6 +209,7 @@
     <ClInclude Include="Object\CStage.h" />
     <ClInclude Include="Object\CStaticObj.h" />
     <ClInclude Include="Object\CUI.h" />
+    <ClInclude Include="Object\CUIButton.h" />
     <ClInclude Include="Object\CUIPanel.h" />
     <ClInclude Include="Object\CZako.h" />
     <ClInclude Include="resource.h" />

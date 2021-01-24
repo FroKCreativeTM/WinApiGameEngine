@@ -81,6 +81,8 @@ public :
 	}
 
 	/* Getter */
+	CCollider* GetCollider(const string& strTag);
+
 	string GetTag() const
 	{
 		return m_strTag;

@@ -20,6 +20,18 @@ public :
 		return m_tRS;
 	}
 
+	// 윈도우 핸들 반환
+	HWND GetWindowHandle() const
+	{
+		return m_hWnd;
+	}
+
+	// 윈도우 종료 함수
+	void DestroyGame()
+	{
+		DestroyWindow(m_hWnd);
+	}
+
 public : 
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 

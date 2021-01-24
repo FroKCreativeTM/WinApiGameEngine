@@ -2,6 +2,7 @@
 #include "../Object/CObj.h"
 #include "CRectCollider.h"
 #include "CSphereCollider.h"
+#include "CPointCollider.h"
 #include "../Core/CPathManager.h"		// Full Path 만들기 위한 용도
 
 bool CPixelCollider::Init()
@@ -11,15 +12,18 @@ bool CPixelCollider::Init()
 
 void CPixelCollider::Input(float fDeltaTime)
 {
+	CCollider::Input(fDeltaTime);
 }
 
 int CPixelCollider::Update(float fDeltaTime)
 {
+	CCollider::Update(fDeltaTime);
 	return 0;
 }
 
 int CPixelCollider::LateUpdate(float fDeltaTime)
 {
+	CCollider::LateUpdate(fDeltaTime);
 	return 0;
 }
 
@@ -27,13 +31,16 @@ bool CPixelCollider::Collision(CCollider* pDst)
 {
 	switch (pDst->GetColliderType())
 	{
-	case CT_RECT : 
+	case CT_RECT:
 		return CollisionRectToPixel(((CRectCollider*)pDst)->GetWorldInfo(), m_vecPixel, m_nWidth, m_nHeight);
+	case CT_POINT:
+		return CollisionPixelToPoint(m_vecPixel, m_nWidth, m_nHeight, ((CPointCollider*)pDst)->GetPoint());
 	}
 }
 
 void CPixelCollider::Render(HDC hDC, float fDeltaTime)
 {
+	CCollider::Render(hDC, fDeltaTime);
 }
 
 CPixelCollider* CPixelCollider::Clone()

@@ -96,6 +96,11 @@ public :
 		return true;
 	}
 
+	class CMouse* GetMouse() const
+	{
+		return m_pMouse;
+	}
+
 private : 
 	PKEYINFO FindKey(const string& strKey) const;
 
@@ -105,6 +110,12 @@ private :
 	unordered_map<string, PKEYINFO>	m_mapKey;
 	// 재귀 함수 돌리기용
 	PKEYINFO	m_pCreateKey;
+
+private : 
+	// 마우스에 대한 정보
+	POINT				m_tMousePos;
+	POINT				m_tMouseMove;
+	class CMouse*		m_pMouse;
 
 	DECLARE_SINGLE(CInput)
 };

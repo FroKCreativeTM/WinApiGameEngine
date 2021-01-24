@@ -20,8 +20,14 @@ protected :
 	bool CollisionRectToRect(const RECTANGLE& src, const RECTANGLE& dst);
 	bool CollisionRectToSphere(const RECTANGLE& src, const SPHERE& dst);
 	bool CollisionSphereToSphere(const SPHERE& src, const SPHERE& dst);
-	bool CollisionRectToPixel(const RECTANGLE& src, const vector<PIXEL>& dst, 
+	bool CollisionRectToPixel(const RECTANGLE& src, const vector<PIXEL>& dst,
 		int nWidth, int nHeight);
+	bool CollisionSphereToPixel(const SPHERE& src, const vector<PIXEL>& dst,
+		int nWidth, int nHeight);
+	bool CollisionRectToPoint(const RECTANGLE& src, const POSITION& dst);
+	bool CollisionSphereToPoint(const SPHERE& src, const POSITION& dst);
+	bool CollisionPixelToPoint(const vector<PIXEL>& src,
+		int nWidth, int nHeight, const POSITION& dst);
 
 protected:
 	CCollider();
@@ -35,7 +41,7 @@ public :
 		m_pObj = obj;
 	}
 
-	void SetHitPoint(const POINT& tPos)
+	void SetHitPoint(const POSITION& tPos)
 	{
 		m_tHitPoint = tPos;
 	}
@@ -51,7 +57,7 @@ public :
 		return m_pObj;
 	}
 
-	POINT GetHitPoint() const
+	POSITION GetHitPoint() const
 	{
 		return m_tHitPoint;
 	}
@@ -134,7 +140,7 @@ protected:
 	// C++11
 	// 다양한 충돌체에 관련된 함수 저장소(callback)
 	list<function<void(CCollider*, CCollider*, float)>> m_FuncList[CS_END];
-	POINT m_tHitPoint;
+	POSITION m_tHitPoint;
 
 private : 
 	friend class CObj;

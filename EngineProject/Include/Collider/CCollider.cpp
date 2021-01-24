@@ -117,6 +117,53 @@ bool CCollider::CollisionRectToPixel(const RECTANGLE& src, const vector<PIXEL>& 
 	return false;
 }
 
+bool CCollider::CollisionSphereToPixel(const SPHERE& src, const vector<PIXEL>& dst, int nWidth, int nHeight)
+{
+	return false;
+}
+
+bool CCollider::CollisionRectToPoint(const RECTANGLE& src, const POSITION& dst)
+{
+	if (dst.x < src.left)
+	{
+		return false;
+	}
+	else if (dst.x > src.right)
+	{
+		return false;
+	}
+	else if (dst.y < src.top)
+	{
+		return false;
+	}
+	else if (dst.y > src.bottom)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool CCollider::CollisionSphereToPoint(const SPHERE& src, const POSITION& dst)
+{
+	return CMath::Distance(dst, src.tCenter) <= src.fRadius;
+}
+
+bool CCollider::CollisionPixelToPoint(const vector<PIXEL>& src,
+	int nWidth, int nHeight, const POSITION& dst)
+{
+	int idx = (int)dst.y * nWidth + (int)dst.x;
+	const PIXEL& pixel = src[idx];
+
+	if (pixel.r == 255 && pixel.g == 0 && pixel.b == 255)
+	{
+		m_tHitPoint = dst;
+		return true;
+	}
+
+	return false;
+}
+
 CCollider::CCollider()
 {
 }

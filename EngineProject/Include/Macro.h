@@ -32,8 +32,10 @@ private : \
 #define DESTROY_SINGLE(Type) Type::DestroyInst()
 
 // 해상도를 얻어오는 매크로
-#define GET_RESOLUTION  CCore::GetInst()->GetResolution()
-
+#define GET_RESOLUTION		CCore::GetInst()->GetResolution()
+// 윈도우 핸들 가져오기
+#define GET_WINDOWHANDLE	CCore::GetInst()->GetWindowHandle()
+ 
 #define KEYDOWN(key)	CInput::GetInst()->KeyDown(key)
 #define KEYPRESS(key)	CInput::GetInst()->KeyPress(key)
 #define KEYUP(key)		CInput::GetInst()->KeyUp(key)

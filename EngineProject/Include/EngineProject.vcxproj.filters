@@ -165,6 +165,15 @@
     <ClCompile Include="Scene\CStartScene.cpp">
       <Filter>02.Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Object\CUIButton.cpp">
+      <Filter>03. Object\01. MoveObj\04. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CMouse.cpp">
+      <Filter>03. Object\01. MoveObj\04. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\CPointCollider.cpp">
+      <Filter>05. Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -271,6 +280,15 @@
     </ClInclude>
     <ClInclude Include="Scene\CStartScene.h">
       <Filter>02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CUIButton.h">
+      <Filter>03. Object\01. MoveObj\04. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CMouse.h">
+      <Filter>03. Object\01. MoveObj\04. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\CPointCollider.h">
+      <Filter>05. Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

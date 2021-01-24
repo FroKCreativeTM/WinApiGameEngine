@@ -1,15 +1,22 @@
 #include "CInput.h"
+#include "../Object/CMouse.h"
+#include "../Animation/CAnimation.h"
+#include "../Scene/CLayer.h"
+#include "../Collider/CCollisionManager.h"
 
 DEFINITION_SINGLE(CInput);
 
 CInput::CInput() : 
-	m_pCreateKey(nullptr)
+	m_pCreateKey(nullptr),
+	m_pMouse(nullptr)
 {
 
 }
 
 CInput::~CInput()
 {
+	CObj::EraseObj(m_pMouse);	// 오브젝트 목록에서 지운 뒤에 SAFE_RELEASE
+	SAFE_RELEASE(m_pMouse);
 	Safe_Delete_Map(m_mapKey);
 }
 
@@ -23,6 +30,29 @@ bool CInput::Init(HWND hWnd)
 	AddKey('A', "MoveLeft");
 	AddKey(VK_CONTROL, "Fire");
 	AddKey(VK_SPACE, "Jump");
+	AddKey(VK_LBUTTON, "MouseLButton");
+
+	// 마우스 위치를 얻어오는 함수
+	GetCursorPos(&m_tMousePos);
+
+	// 마우스 생성
+	m_pMouse = CObj::CreateObj<CMouse>("Mouse");
+
+	m_pMouse->SetSize(32, 31);
+	// m_pMouse->SetTexture("Mouse0", L"StartBackground.bmp");
+
+	CAnimation* pAni = m_pMouse->CreateAnimation("MouseAnimation");
+
+	m_pMouse->AddAnimationClip("MouseIdle", AT_ATLAS, AO_LOOP,
+		1.f,
+		1, 1, // 4장에 1줄짜리
+		0, 0,
+		1, 1,
+		0.f,
+		"MouseIdle", L"Mouse/MouseCursor.bmp");
+	m_pMouse->SetAnimationClipColorKey("MouseIdle", 255, 0, 255);
+
+	SAFE_RELEASE(pAni);
 
 	return true;
 }
@@ -75,6 +105,12 @@ void CInput::Update(float fDeltaTime)
 			}
 		}
 	}
+
+	m_pMouse->Update(fDeltaTime);
+	m_pMouse->LateUpdate(fDeltaTime);
+
+	// 충돌 매니저에 등록해줘야 충돌 처리가 된다.
+	GET_SINGLE(CCollisionManager)->AddObject(m_pMouse);
 }
 
 bool CInput::KeyDown(const string& strKey) const

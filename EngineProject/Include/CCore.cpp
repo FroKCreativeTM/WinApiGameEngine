@@ -7,6 +7,7 @@
 #include "Core/CCamera.h"
 #include "Core/CInput.h"
 #include "Collider/CCollisionManager.h"
+#include "Object/CMouse.h"
 
 // nullptr 선언은 여기서 가능하다.
 // 왜냐면 얘는 프로그램 시작과 생기는 인스턴스고
@@ -79,7 +80,6 @@ bool CCore::Init(HINSTANCE hInstance)
         return false;
     }
     
-
     /* 서브 관리 클래스 초기화 */
     if (!GET_SINGLE(CSceneManager)->Init())
     {
@@ -241,6 +241,10 @@ void CCore::Render(float fDeltaTime)
     // 백버퍼 DC에 그린다. (문제는 이렇게 하면 백버퍼에만 그린다.)
     GET_SINGLE(CSceneManager)->Render(pBackBuffer->GetDC(), fDeltaTime);
 
+    // 마지막으로 마우스 그린다.
+    CMouse* pMouse = GET_SINGLE(CInput)->GetMouse();
+    pMouse->Render(pBackBuffer->GetDC(), fDeltaTime);
+
     // 백버퍼에 그려져 있는 것을 그린다.
     BitBlt(m_hDC,
         0, 0,
@@ -248,6 +252,7 @@ void CCore::Render(float fDeltaTime)
         pBackBuffer->GetDC(),
         0, 0,
         SRCCOPY);
+
 
     // 쓴건 해제한다.
     SAFE_RELEASE(pBackBuffer);
@@ -260,7 +265,7 @@ CCore::CCore()
     // 메모리 릭이 있을 때만 쓴다.
     // 매개변수로 그 메모리의 블록 번호를 넣어주면,
     // 메모리 릭 부분을 바로 이동한다. (호출 스택을 잘 볼 수 있어야..)
-    // _CrtSetBreakAlloc();
+    // _CrtSetBreakAlloc(313);
 
     // 컴파일 시간에 체크해서 이걸 동작시킬지 말지 결정한다.
 #ifdef _DEBUG   

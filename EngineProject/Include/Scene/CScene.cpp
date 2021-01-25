@@ -2,7 +2,7 @@
 #include "CLayer.h"
 #include "../Object/CObj.h"
 
-unordered_map<string, CObj*> CScene::m_mapPrototype;
+unordered_map<string, CObj*> CScene::m_mapPrototype[SC_END];
 
 CScene::CScene()
 {
@@ -12,10 +12,12 @@ CScene::CScene()
     pLayer = CreateLayer("HUD", INT_MAX - 1);
     pLayer = CreateLayer("UI", INT_MAX); // 맨 뒤에 있단 뜻
     pLayer = CreateLayer("Stage", 0); // 맨 뒤에 있단 뜻
+    m_eSceneType = SC_CURRENT;
 }
 
 CScene::~CScene()
 {
+    ErasePrototype(m_eSceneType);
     Safe_Delete_VecList(m_LayerList);
 }
 
@@ -229,16 +231,16 @@ void CScene::Render(HDC hDC, float fDeltaTime)
     }
 }
 
-void CScene::ErasePrototype()
+void CScene::ErasePrototype(SCENE_CREATE sc)
 {
     // 전체 프로토타입을 통으로 날린다.
-    Safe_Release_Map(m_mapPrototype);
+    Safe_Release_Map(m_mapPrototype[sc]);
 }
 
-void CScene::ErasePrototype(const string& strTag)
+void CScene::ErasePrototype(const string& strTag, SCENE_CREATE sc)
 {
     unordered_map<string, CObj*>::iterator iter
-        = m_mapPrototype.find(strTag);
+        = m_mapPrototype[sc].find(strTag);
 
     if (!iter->second)
     {
@@ -246,17 +248,24 @@ void CScene::ErasePrototype(const string& strTag)
     }
 
     SAFE_RELEASE(iter->second);
-    m_mapPrototype.erase(iter);
+    m_mapPrototype[sc].erase(iter);
 }
 
-CObj* CScene::FindPrototype(const string& strTag)
+CObj* CScene::FindPrototype(const string& strTag, SCENE_CREATE sc)
 {
-    unordered_map<string, CObj*>::iterator iter = m_mapPrototype.find(strTag);
+    unordered_map<string, CObj*>::iterator iter = m_mapPrototype[sc].find(strTag);
 
-    if (iter == m_mapPrototype.end())
+    if (iter == m_mapPrototype[sc].end())
     {
         return nullptr;
     }
 
     return iter->second;
+}
+
+void CScene::ChangePrototype()
+{
+    ErasePrototype(SC_CURRENT);
+    m_mapPrototype[SC_CURRENT] = m_mapPrototype[SC_NEXT];
+    m_mapPrototype[SC_NEXT].clear();
 }

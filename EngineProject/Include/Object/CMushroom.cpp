@@ -2,6 +2,7 @@
 #include "../CCore.h"
 #include "../Collider/CRectCollider.h"
 #include "CBullet.h"
+#include "../Scene/CScene.h"
 
 // 2초에 한 번씩 발사한다.
 CMushroom::CMushroom() : 
@@ -101,7 +102,7 @@ void CMushroom::CollisionBullet(CCollider* pSrc, CCollider* pDst, float fDeltaTi
 
 void CMushroom::Fire()
 {
-	CObj* pBullet = CObj::CreateCloneObj("Bullet", "EnemyBullet", m_pLayer);
+	CObj* pBullet = CObj::CreateCloneObj("Bullet", "EnemyBullet", m_pScene->GetSceneType(), m_pLayer);
 
 	pBullet->AddCollisionFunction("BulletBody", CS_ENTER, (CBullet*)pBullet, &CBullet::Hit);
 

@@ -205,7 +205,8 @@ public:
 	// 생성된 프로토타입의 복사를 생성한다.
 	// 템플릿으로 만들 이유도 없다.
 	static CObj* CreateCloneObj(const string& strProtoKey,
-		const string& strTag,
+		const string& strTag, 
+		SCENE_CREATE sc,
 		class CLayer* pLayer = nullptr);
 	template <typename T>
 	void AddCollisionFunction(const string& strTag,

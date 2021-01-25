@@ -5,6 +5,8 @@
 #include "../Collider/CRectCollider.h"
 #include "../CCore.h"
 #include "../Object/CUIButton.h"
+#include "CSceneManager.h"
+#include "CInGameScene.h"
 
 CStartScene::CStartScene()
 {
@@ -73,6 +75,7 @@ bool CStartScene::Init()
 
 void CStartScene::StartButtonCallback(float fDeltaTime)
 {
+	GET_SINGLE(CSceneManager)->CreateScene<CInGameScene>(SC_NEXT);
 }
 
 void CStartScene::EndButtonCallback(float fDeltaTime)

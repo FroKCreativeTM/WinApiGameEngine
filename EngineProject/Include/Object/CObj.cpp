@@ -386,11 +386,12 @@ CObj::~CObj()
 
 CObj* CObj::CreateCloneObj(const string& strProtoKey,
 	const string& strTag,
+	SCENE_CREATE sc,
 	CLayer* pLayer)
 {
 	// 어떤 타입인지 알아서 찾아서 복사하도록
 	// 짜피 static이라 CScene::
-	CObj* pPrototype = CScene::FindPrototype(strProtoKey);
+	CObj* pPrototype = CScene::FindPrototype(strProtoKey, sc);
 
 	if (!pPrototype)
 	{

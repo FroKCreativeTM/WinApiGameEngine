@@ -152,6 +152,12 @@ bool CCollider::CollisionSphereToPoint(const SPHERE& src, const POSITION& dst)
 bool CCollider::CollisionPixelToPoint(const vector<PIXEL>& src,
 	int nWidth, int nHeight, const POSITION& dst)
 {
+	/* 이거 없으면 마우스 포인터 빠져 나가면 게임 뻗는다!!!!!!! */
+	if (dst.y < 0 || dst.x < 0 || dst.y >= nHeight || dst.x >= nWidth)
+	{
+		return false;
+	}
+
 	int idx = (int)dst.y * nWidth + (int)dst.x;
 	const PIXEL& pixel = src[idx];
 

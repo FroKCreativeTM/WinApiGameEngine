@@ -10,16 +10,18 @@ public :
 	bool Init();	
 	/* 코어에도 있던 부분이다. */
 	void Input(float fDeltaTime);
-	int Update(float fDeltaTime);
-	int LateUpdate(float fDeltaTime);
+	SCENE_CHANGE Update(float fDeltaTime);
+	SCENE_CHANGE LateUpdate(float fDeltaTime);
 	void Collision(float fDeltaTime);
 	void Render(HDC hDC, float fDeltaTime); // 그려야 하기 때문에 DC를 얻어온다.
 
 public : 
 	template <typename T>
-	T* CreateScene(SCENE_CREATE sc)
+	T* CreateScene(SCENE_CREATE sc = SC_CURRENT)
 	{
 		T* pScene = new T;
+
+		pScene->SetSceneType(sc);
 
 		if (!pScene->Init())
 		{
@@ -48,6 +50,9 @@ public :
 	{
 		return m_pScene;
 	}
+
+private : 
+	SCENE_CHANGE ChangeScene();
 
 private:
 	class CScene* m_pScene;

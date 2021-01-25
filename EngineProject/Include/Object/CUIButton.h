@@ -1,6 +1,14 @@
 #pragma once
 #include "CUI.h"
 
+// 버튼 상태
+enum BUTTON_STATE
+{
+	BS_NONE,
+	BS_MOUSEON,
+	BS_CLICK
+};
+
 class CUIButton :
     public CUI
 {
@@ -37,6 +45,8 @@ private :
 	function<void(float fTime)> m_BtnCallback;
 	// 콜백이 활성화 되어있는가
 	bool						m_bEnableCallback;
+	// 현재 마우스 버튼의 상태를 저장한다.
+	BUTTON_STATE				m_eButtonState;
 
 private:
 	friend class CObj;

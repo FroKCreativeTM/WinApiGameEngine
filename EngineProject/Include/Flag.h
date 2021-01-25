@@ -6,7 +6,8 @@
 enum SCENE_CREATE
 {
 	SC_CURRENT,
-	SC_NEXT
+	SC_NEXT,
+	SC_END
 };
 
 // 방향을 정하는 타입
@@ -62,4 +63,11 @@ enum ANIMATION_OPTION
 	AO_ONCE_DESTROY,
 	AO_TIME_RETURN,
 	AO_TIME_DESTROY
+};
+
+// 장면 전환 관련 플래그
+enum SCENE_CHANGE
+{
+	SC_NONE,
+	SC_CHANGE
 };

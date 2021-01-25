@@ -28,12 +28,12 @@ public:
 
 public : 
 	// 프로토타입 관련 메소드
-	static void ErasePrototype();	// 전체
-	static void ErasePrototype(const string& strTag);
+	static void ErasePrototype(SCENE_CREATE sc);	// 전체
+	static void ErasePrototype(const string& strTag, SCENE_CREATE sc);
 
 	// 프로토타입 제작 메소드
 	template<typename T>
-	T* CreatePrototype(const string& strTag)
+	T* CreatePrototype(const string& strTag, SCENE_CREATE sc)
 	{
 		T* pObj = new T;
 
@@ -46,7 +46,7 @@ public :
 		}
 
 		pObj->AddRef();
-		m_mapPrototype.insert(make_pair(strTag, pObj));
+		m_mapPrototype[sc].insert(make_pair(strTag, pObj));
 
 		return pObj;
 	}
@@ -65,10 +65,23 @@ protected :
 	// 이 방식을 이용하면 장면이 날아가면 그 장면에 종속된 모든
 	// 레이어들도 함께 날아간다.
 	list<class CLayer*> m_LayerList;	
+	SCENE_CREATE		m_eSceneType;
+
+public :
+	void SetSceneType(SCENE_CREATE eType)
+	{
+		m_eSceneType = eType;
+	}
+
+	SCENE_CREATE GetSceneType() const
+	{
+		return m_eSceneType;
+	}
 
 public:
 	// 생성할 때만 필요하다.
-	static class CObj* FindPrototype(const string& strTag);
+	static class CObj* FindPrototype(const string& strTag, SCENE_CREATE sc);
+	static void ChangePrototype();
 
 private:
 	// 원본 객체(프로토타입)을 관리
@@ -79,6 +92,6 @@ private:
 	// 그러면 파일에 있는 것을 로딩할텐데 문제는 느려!
 	// 그렇기 때문에 여기다가 미리 만들어놓고, 리스폰될 객체들을
 	// 만들면 될 것이다.
-	static unordered_map<string, class CObj*> m_mapPrototype;
+	static unordered_map<string, class CObj*> m_mapPrototype[SC_END];
 };
 

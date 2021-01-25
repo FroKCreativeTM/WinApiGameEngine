@@ -195,8 +195,16 @@ void CCore::Logic()
 
     // 입력을 받는다.
     Input(fDeltaTime);
-    Update(fDeltaTime);
-    LateUpdate(fDeltaTime);
+
+    if (Update(fDeltaTime) == SC_CHANGE)
+    {
+        return; // 장면 변환이 일어난다면 
+    }
+    if (LateUpdate(fDeltaTime) == SC_CHANGE)
+    {
+        return; // 장면 변환이 일어난다면 
+    }
+
     Collision(fDeltaTime);
     Render(fDeltaTime);
 }
@@ -210,14 +218,19 @@ void CCore::Input(float fDeltaTime)
 
 int CCore::Update(float fDeltaTime)
 {
-    GET_SINGLE(CSceneManager)->Update(fDeltaTime);
+    // 장면 변환이 일어나는가?
+    SCENE_CHANGE sc;
+
+    sc = GET_SINGLE(CSceneManager)->Update(fDeltaTime);
     GET_SINGLE(CCamera)->Update(fDeltaTime);
     return 0;
 }
 
 int CCore::LateUpdate(float fDeltaTime)
 {
-    GET_SINGLE(CSceneManager)->LateUpdate(fDeltaTime);
+    SCENE_CHANGE sc;
+
+    sc = GET_SINGLE(CSceneManager)->LateUpdate(fDeltaTime);
     return 0;
 }
 

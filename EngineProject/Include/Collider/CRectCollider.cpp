@@ -3,6 +3,7 @@
 #include "CSphereCollider.h"
 #include "CPixelCollider.h"
 #include "CPointCollider.h"
+#include "../Core/CCamera.h"
 
 CRectCollider::CRectCollider()
 {
@@ -69,12 +70,23 @@ bool CRectCollider::Collision(CCollider* pDst)
 void CRectCollider::Render(HDC hDC, float fDeltaTime)
 {
 	CCollider::Render(hDC, fDeltaTime);
+#ifdef _DEBUG
+	/* 컬링 작업용! (화면 밖으로 나간 오브젝트는 걸러내자! */
 
-	MoveToEx(hDC, m_tInfo.left, m_tInfo.top, nullptr);
-	LineTo(hDC, m_tInfo.right, m_tInfo.top);
-	LineTo(hDC, m_tInfo.right, m_tInfo.bottom);
-	LineTo(hDC, m_tInfo.left, m_tInfo.bottom);
-	LineTo(hDC, m_tInfo.left, m_tInfo.top);
+	POSITION tCamPos = GET_SINGLE(CCamera)->GetPos();
+
+	RECTANGLE tRect = m_tWorldInfo;
+	tRect.left -= tCamPos.x;
+	tRect.right -= tCamPos.x;
+	tRect.top -= tCamPos.y;
+	tRect.bottom -= tCamPos.y;
+
+	MoveToEx(hDC, tRect.left, tRect.top, nullptr);
+	LineTo(hDC, tRect.right, tRect.top);
+	LineTo(hDC, tRect.right, tRect.bottom);
+	LineTo(hDC, tRect.left, tRect.bottom);
+	LineTo(hDC, tRect.left, tRect.top);
+#endif // DEBUG
 }
 
 CRectCollider* CRectCollider::Clone()

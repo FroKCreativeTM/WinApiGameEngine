@@ -99,14 +99,40 @@ void CObj::Collision(float fDeltaTime)
 
 void CObj::Render(HDC hDC, float fDeltaTime)
 {
+	POSITION tPos = m_tPos - m_tSize * m_tPivot;
+
+	// 카메라 위치를 빼야 스크롤이 된다.
+	tPos -= GET_SINGLE(CCamera)->GetPos();
+
+	// 해상도를 들고온다.
+	RESOLUTION tClientRS = GET_SINGLE(CCamera)->GetClientResolution();
+	// 클라이언트 창 안에 있나를 선별한다.
+	bool isInClient = true;
+
+	// 출력하고자하는 right가 0보다 크다.
+	if (tPos.x + m_tSize.x < 0)
+	{
+		isInClient = false;
+	}
+	// left가 만약 클라이언트 오른쪽 밖이라면
+	else if (tPos.x > tClientRS.nWidth)
+	{
+		isInClient = false;
+	}
+	// 출력하고자하는 bottom이 0보다 크다.
+	else if (tPos.y + m_tSize.y < 0)
+	{
+		isInClient = false;
+	}
+	// top이 만약 클라이언트 아래에 있다면
+	else if (tPos.y > tClientRS.nHeight)
+	{
+		isInClient = false;
+	}
+
 	// 텍스처가 있는 경우
 	if (m_pTexture)
 	{
-		POSITION tPos = m_tPos - m_tSize * m_tPivot;
-
-		// 카메라 위치를 빼야 스크롤이 된다.
-		tPos -= GET_SINGLE(CCamera)->GetPos();
-
 		POSITION tImagePos; // (0,0)
 
 		// 만약 애니메이션이 있다면
@@ -152,29 +178,33 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 				SRCCOPY);
 		}		
 	}
-
-	list<CCollider*>::iterator iter;
-	list<CCollider*>::iterator iterEnd = m_ColliderList.end();
-
-	for (iter = m_ColliderList.begin(); iter != iterEnd;)
+	
+	// 창 안에 있어야만 출력한다.
+	if (isInClient) 
 	{
-		// 콜라이더가 비활성화 되어있다면
-		if (!(*iter)->GetEnable())
-		{
-			++iter;
-			continue;
-		}
+		list<CCollider*>::iterator iter;
+		list<CCollider*>::iterator iterEnd = m_ColliderList.end();
 
-		(*iter)->Render(hDC, fDeltaTime);
-
-		if (!(*iter)->GetLife())
+		for (iter = m_ColliderList.begin(); iter != iterEnd;)
 		{
-			SAFE_RELEASE((*iter));
-			iter = m_ColliderList.erase(iter);
-			iterEnd = m_ColliderList.end();
+			// 콜라이더가 비활성화 되어있다면
+			if (!(*iter)->GetEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			(*iter)->Render(hDC, fDeltaTime);
+
+			if (!(*iter)->GetLife())
+			{
+				SAFE_RELEASE((*iter));
+				iter = m_ColliderList.erase(iter);
+				iterEnd = m_ColliderList.end();
+			}
+			else
+				++iter;
 		}
-		else
-			++iter;
 	}
 }
 

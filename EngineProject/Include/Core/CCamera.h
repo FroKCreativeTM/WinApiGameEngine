@@ -59,6 +59,11 @@ public :
 		return m_tPos;
 	}
 
+	RESOLUTION GetClientResolution() const
+	{
+		return m_tClientRS;
+	}
+
 private : 
 	// 카메라도 월드 상의 위치가 필요하다.
 	POSITION		m_tPos;

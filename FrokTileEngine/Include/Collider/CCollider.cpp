@@ -213,3 +213,22 @@ bool CCollider::Collision(CCollider* pDst)
 void CCollider::Render(HDC hDC, float fDeltaTime)
 {
 }
+
+void CCollider::Save(FILE* pFile)
+{
+	// 태그 저장(무조건!!!)
+	int nLength = m_strTag.length();
+
+	// 태그 길이 저장
+	fwrite(&nLength, 4, 1, pFile);
+
+	// 문자열 저장
+	fwrite(m_strTag.c_str(), 1, nLength, pFile);
+
+	// 충돌체 타입 저장
+	fwrite(&m_eColType, 4, 1, pFile); 
+}
+
+void CCollider::Load(FILE* pFile)
+{
+}

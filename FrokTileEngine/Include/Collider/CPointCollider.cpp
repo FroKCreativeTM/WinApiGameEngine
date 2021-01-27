@@ -70,3 +70,11 @@ CPointCollider* CPointCollider::Clone()
 {
 	return new CPointCollider(*this);
 }
+
+void CPointCollider::Save(FILE* pFile)
+{
+}
+
+void CPointCollider::Load(FILE* pFile)
+{
+}

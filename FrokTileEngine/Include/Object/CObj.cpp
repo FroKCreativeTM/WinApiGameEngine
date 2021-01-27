@@ -6,6 +6,7 @@
 #include "../Resources/CTexture.h"
 #include "../Core/CCamera.h"
 #include "../Animation/CAnimation.h"
+#include "../Core/CPathManager.h"
 
 // static
 list<CObj*> CObj::m_ObjList;
@@ -205,6 +206,130 @@ void CObj::Render(HDC hDC, float fDeltaTime)
 			else
 				++iter;
 		}
+	}
+}
+
+void CObj::SaveFromPath(const char* pFileName, const string& strPathKey)
+{
+	const char* pPath = GET_SINGLE(CPathManager)->FindPathMultiByte(DATA_PATH);
+	string strFullPath;
+
+	if (pPath)
+	{
+		strFullPath = pPath;
+	}
+	strFullPath += pFileName;
+ 
+	SaveFromFullPath(strFullPath.c_str());
+}
+
+void CObj::Save(FILE* pFile)
+{
+	// 태그 저장(무조건!!!)
+	int nLength = m_strTag.length();
+
+	// 태그 길이 저장
+	fwrite(&nLength, 4, 1, pFile);
+
+	// 문자열 저장
+	fwrite(m_strTag.c_str(), 1, nLength, pFile);
+
+	// 물리 사용여부 저장
+	fwrite(&m_bPhysics, 1, 1, pFile);
+
+	// 위치 저장
+	fwrite(&m_tPos, sizeof(m_tPos), 1, pFile);
+
+	// 크기 저장
+	fwrite(&m_tSize, sizeof(m_tSize), 1, pFile);
+
+	// 이미지 오프셋
+	fwrite(&m_tImageOffset, sizeof(m_tImageOffset), 1, pFile);
+
+	// 피봇 저장
+	fwrite(&m_tPivot, sizeof(m_tPivot), 1, pFile);
+
+	// 텍스처 정보 저장
+	bool bTexture = false;
+	if (m_pTexture) 
+	{
+		bTexture = true;
+		fwrite(&bTexture, 1, 1, pFile);
+		m_pTexture->Save(pFile);
+	}
+	else
+	{
+		fwrite(&bTexture, 1, 1, pFile);
+	}
+
+	// 충돌체 정보 저장
+	// 충돌체 수를 저장한다.
+	nLength = m_ColliderList.size();
+	fwrite(&nLength, 4, 1, pFile);
+	
+	list<CCollider*>::iterator iter;
+	list<CCollider*>::iterator iterEnd = m_ColliderList.end();
+
+	for (iter = m_ColliderList.begin(); iter != iterEnd; iter++)
+	{
+		((*iter)->Save(pFile));
+	}
+
+	// 애니메이션 저장
+	bool bAnimation = false;
+	if (m_pAnimation)
+	{
+		bAnimation = true;
+		fwrite(&bAnimation, 1, 1, pFile);
+		m_pAnimation->Save(pFile);
+	}
+	else
+	{
+		fwrite(&bAnimation, 1, 1, pFile);
+	}
+}
+
+void CObj::SaveFromFullPath(const char* pFullPath)
+{
+	FILE* pFile = nullptr;
+
+	fopen_s(&pFile, pFullPath, "wb");
+
+	if (pFile)
+	{
+		Save(pFile);
+		fclose(pFile);
+	}
+}
+
+void CObj::LoadFromPath(const char* pFileName, const string& strPathKey)
+{
+	const char* pPath = GET_SINGLE(CPathManager)->FindPathMultiByte(DATA_PATH);
+	string strFullPath;
+
+	if (pPath)
+	{
+		strFullPath = pPath;
+	}
+	strFullPath += pFileName;
+
+	LoadFromFullPath(strFullPath.c_str());
+}
+
+void CObj::Load(FILE* pFile)
+{
+}
+
+void CObj::LoadFromFullPath(const char* pFullPath)
+{
+	FILE* pFile = nullptr;
+
+	fopen_s(&pFile, pFullPath, "rb");
+
+	if (pFile)
+	{
+		Load(pFile);
+		fclose(pFile);
 	}
 }
 

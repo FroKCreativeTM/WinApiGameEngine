@@ -15,6 +15,8 @@ public:
 	virtual bool Collision(CCollider* pDst);
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CRectCollider* Clone();
+	virtual void Save(FILE* pFile);
+	virtual void Load(FILE* pFile);
 
 public : 
 	void SetRect(float left, float top, float right, float bottom);

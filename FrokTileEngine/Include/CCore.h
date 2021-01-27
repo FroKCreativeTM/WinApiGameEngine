@@ -32,6 +32,12 @@ public :
 		DestroyWindow(m_hWnd);
 	}
 
+	// 윈도우 인스턴스를 반환한다.
+	HINSTANCE GetWindowInstance() const
+	{
+		return m_hInst;
+	}
+
 public : 
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 

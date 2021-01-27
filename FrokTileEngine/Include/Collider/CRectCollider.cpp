@@ -94,6 +94,14 @@ CRectCollider* CRectCollider::Clone()
 	return new CRectCollider(*this);
 }
 
+void CRectCollider::Save(FILE* pFile)
+{
+}
+
+void CRectCollider::Load(FILE* pFile)
+{
+}
+
 void CRectCollider::SetRect(
 	float left, float top, float right, float bottom)
 {

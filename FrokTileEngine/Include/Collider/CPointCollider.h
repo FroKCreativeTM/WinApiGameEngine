@@ -12,6 +12,8 @@ public:
 	virtual bool Collision(CCollider* pDst);
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CPointCollider* Clone();
+	virtual void Save(FILE* pFile);
+	virtual void Load(FILE* pFile);
 
 public : 
 	POSITION GetPoint() const

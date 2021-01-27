@@ -48,8 +48,30 @@ CPixelCollider* CPixelCollider::Clone()
 	return new CPixelCollider(*this);
 }
 
+void CPixelCollider::Save(FILE* pFile)
+{
+	CCollider::Save(pFile);
+
+	int nLength = m_strFileName.length();
+	fwrite(&nLength, 4, 1, pFile);
+	fwrite(m_strFileName.c_str(), 1, nLength, pFile);
+
+	nLength = m_strPathKey.length();
+	fwrite(&nLength, 4, 1, pFile);
+	fwrite(m_strPathKey.c_str(), 1, nLength, pFile);
+
+}
+
+void CPixelCollider::Load(FILE* pFile)
+{
+	CCollider::Load(pFile);
+}
+
 bool CPixelCollider::SetPixelInfo(const char* pFileName, const string& strPathKey)
 {
+	m_strFileName = pFileName;
+	m_strPathKey = strPathKey;
+
 	const char* pPath = GET_SINGLE(CPathManager)->FindPathMultiByte(strPathKey);
 	string strPath;
 

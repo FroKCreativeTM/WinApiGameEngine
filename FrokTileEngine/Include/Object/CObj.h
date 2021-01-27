@@ -16,11 +16,6 @@ class CObj :
 {
 public : 
 	/* Setter */
-	void SetTag(const string& tag)
-	{
-		this->m_strTag = tag;
-	}
-
 	void SetPos(const POSITION& ref)
 	{
 		this->m_tPos = ref;
@@ -82,11 +77,6 @@ public :
 
 	/* Getter */
 	CCollider* GetCollider(const string& strTag);
-
-	string GetTag() const
-	{
-		return m_strTag;
-	}
 
 	POSITION GetPos() const
 	{
@@ -158,7 +148,15 @@ public :
 	virtual int LateUpdate(float fDeltaTime);
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
-	virtual CObj* Clone() = 0;	
+	virtual CObj* Clone() = 0;
+	virtual void Save(FILE* pFile);
+	virtual void Load(FILE* pFile);
+
+public : 
+	void SaveFromPath(const char* pFileName, const string& strPathKey = DATA_PATH);
+	void SaveFromFullPath(const char* pFullPath);
+	void LoadFromPath(const char* pFileName, const string& strPathKey = DATA_PATH);
+	void LoadFromFullPath(const char* pFullPath);
 
 // 오브젝트 자료 다루기 
 public :
@@ -252,8 +250,6 @@ protected :
 	virtual ~CObj();
 
 protected :
-	// 오브젝트도 태그를 가진다.
-	string					m_strTag;	
 	// 위치와 크기
 	POSITION				m_tPos;
 	_SIZE					m_tSize;

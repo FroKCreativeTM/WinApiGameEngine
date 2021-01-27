@@ -1,5 +1,6 @@
 #include "CTexture.h"
 #include "../Core/CPathManager.h"
+#include "CResourceManager.h"
 
 bool CTexture::LoadTexture(HINSTANCE hInst,
 	HDC hDC,
@@ -7,6 +8,10 @@ bool CTexture::LoadTexture(HINSTANCE hInst,
 	const wchar_t* pFileName, 
 	const string& strPathKey)
 {
+	m_strFileName = pFileName;
+	m_strKey = strKey;
+	m_strPathKey = strPathKey;
+
 	// 메모리 DC를 만들어주자
 	// CreateCompatibleDC
 	// 인자용 메모리 DC가 만들어진다.
@@ -40,6 +45,66 @@ bool CTexture::LoadTexture(HINSTANCE hInst,
 	GetObject(m_hBitmap, sizeof(m_tInfo), &m_tInfo);
 
 	return true;
+}
+
+void CTexture::SaveFromPath(const char* pFileName, const string& strPathKey)
+{
+	
+}
+
+void CTexture::Save(FILE* pFile)
+{
+	// key의 길이 저장
+	int nLength = m_strKey.length();
+	fwrite(&nLength, 4, 1, pFile);
+	fwrite(m_strKey.c_str(), 1, nLength, pFile);
+
+	// FileName 저장
+	nLength = m_strFileName.length();
+	fwrite(&nLength, 4, 1, pFile);
+	fwrite(m_strFileName.c_str(), 2, nLength, pFile);
+
+	// PathKey 저장
+	nLength = m_strPathKey.length();
+	fwrite(&nLength, 4, 1, pFile);
+	fwrite(m_strPathKey.c_str(), 1, nLength, pFile);
+
+	// 컬러키
+	fwrite(&m_bColorKeyEnable, 1, 1, pFile);
+	fwrite(&m_ColorKey, sizeof(COLORREF), 1, pFile);
+}
+
+void CTexture::LoadFromPath(const char* pFileName, const string& strPathKey)
+{
+
+}
+
+void CTexture::Load(FILE* pFile)
+{
+	// key의 길이 불러오기
+	int nLength = 0;
+	char strKey[MAX_PATH] = {};
+	char strPathKey[MAX_PATH] = {};
+	wchar_t strFileName[MAX_PATH] = {};
+
+	fread(&nLength, 4, 1, pFile);
+	fread(strKey, 1, nLength, pFile);
+	strKey[nLength] = 0;
+
+	// FileName 저장
+	nLength = 0;
+	fread(&nLength, 4, 1, pFile);
+	fread(strFileName, 2, nLength, pFile);
+	strFileName[nLength] = 0;
+
+	// PathKey 저장
+	nLength = 0;
+	fread(&nLength, 4, 1, pFile);
+	fread(strPathKey, 1, nLength, pFile);
+	strPathKey[nLength] = 0;
+
+	// 텍스처를 가져온다.
+	GET_SINGLE(CResourceManager)->LoadTexture(strKey, strFileName, strPathKey);
 }
 
 void CTexture::SetColorKey(unsigned char r, unsigned char g, unsigned char b)

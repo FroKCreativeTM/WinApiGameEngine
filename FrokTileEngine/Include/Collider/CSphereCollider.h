@@ -3,6 +3,19 @@
 class CSphereCollider :
     public CCollider
 {
+
+public:
+	/* 게임 요소를 위한 메소드 */
+	virtual bool Init();
+	virtual void Input(float fDeltaTime);
+	virtual int Update(float fDeltaTime);
+	virtual int LateUpdate(float fDeltaTime);
+	virtual bool Collision(CCollider* pDst);
+	virtual void Render(HDC hDC, float fDeltaTime);
+	virtual CSphereCollider* Clone();
+	virtual void Save(FILE* pFile);
+	virtual void Load(FILE* pFile);
+
 public:
 	void SetSphere(const POSITION& tCenter, float fRadius)
 	{
@@ -19,16 +32,6 @@ public:
 	{
 		return m_tWorldInfo;
 	}
-
-public:
-	/* 게임 요소를 위한 메소드 */
-	virtual bool Init();
-	virtual void Input(float fDeltaTime);
-	virtual int Update(float fDeltaTime);
-	virtual int LateUpdate(float fDeltaTime);
-	virtual bool Collision(CCollider* pDst);
-	virtual void Render(HDC hDC, float fDeltaTime);
-	virtual CSphereCollider* Clone();
 
 protected:
 	CSphereCollider();

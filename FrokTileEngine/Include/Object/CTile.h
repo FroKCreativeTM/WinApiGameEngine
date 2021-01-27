@@ -10,7 +10,9 @@ public:
 	virtual int LateUpdate(float fDeltaTime);
 	virtual void Collision(float fDeltaTime);
 	virtual void Render(HDC hDC, float fDeltaTime);
-	virtual CTile* Clone();
+	virtual CTile* Clone();	
+	virtual void Save(FILE* pFile);
+	virtual void Load(FILE* pFile);
 
 public : 
 	void SetTileOption(TILE_OPTION eType);

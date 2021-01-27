@@ -15,6 +15,8 @@ public:
 	virtual bool Collision(CCollider* pDst);
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CPixelCollider* Clone();
+	virtual void Save(FILE* pFile);
+	virtual void Load(FILE* pFile);
 
 public:
 	// 비트맵 이미지를 불러와서 이에 대한 충돌처리를 한다.
@@ -46,6 +48,8 @@ private:
 private:
 	// 픽셀 정보를 받아서 저장하기 위한 배열
 	vector<PIXEL>		m_vecPixel;
+	string				m_strFileName;
+	string				m_strPathKey;
 	int					m_nWidth;
 	int					m_nHeight;
 };

@@ -11,7 +11,11 @@
 #include "../Core/CCamera.h"
 #include "../Core/CInput.h"
 #include "../Resources/CResourceManager.h"
+#include "../resource.h"
 #include "../Resources/CTexture.h"
+#include "../Core/CPathManager.h"
+
+wchar_t CMapEditScene::m_strText[MAX_PATH] = {};
 
 CMapEditScene::CMapEditScene() : 
 	m_nEditTileTex(0)
@@ -56,6 +60,9 @@ bool CMapEditScene::Init()
 
 	m_nEditTileTex = 0;
 	m_eEditOption = TO_NONE;
+
+	GET_SINGLE(CInput)->AddKey("Save", 'S', VK_CONTROL);
+	GET_SINGLE(CInput)->AddKey("Load", 'O', VK_CONTROL);
 
 	return true;
 }
@@ -152,4 +159,48 @@ void CMapEditScene::Input(float fDeltaTime)
 	{
 
 	}
+
+	if (KEYDOWN("Save"))
+	{
+		ShowCursor(TRUE);
+		// 그냥 모달 방식으로 띄우자
+		DialogBox(GET_WINDOWINSTANCE, MAKEINTRESOURCE(IDD_DIALOG1),
+			GET_WINDOWHANDLE, CMapEditScene::DlgProc);
+		ShowCursor(FALSE);
+
+		// 파일명을 이용해서 저장한다.
+		// 멀티바이트로 변환 필요
+		char strFileName[MAX_PATH] = {};
+		WideCharToMultiByte(CP_ACP, 0, m_strText, -1, strFileName, lstrlen(m_strText), 0, 0);
+
+		m_pStage->SaveFromPath(strFileName);
+	}
+
+	if (KEYDOWN("Load"))
+	{
+
+	}
+}
+
+INT_PTR CMapEditScene::DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_INITDIALOG : 
+		return TRUE;
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case IDOK:
+			// Edit Box에서 문자열을 가져온다.
+			memset(m_strText, 0, sizeof(wchar_t) * MAX_PATH);
+			GetDlgItemText(hWnd, IDC_EDIT1, m_strText, MAX_PATH);
+		case IDCANCEL:
+			EndDialog(hWnd, IDOK);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	return LRESULT();
 }

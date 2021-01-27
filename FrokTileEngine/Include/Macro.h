@@ -35,6 +35,7 @@ private : \
 #define GET_RESOLUTION		CCore::GetInst()->GetResolution()
 // 윈도우 핸들 가져오기
 #define GET_WINDOWHANDLE	CCore::GetInst()->GetWindowHandle()
+#define GET_WINDOWINSTANCE	CCore::GetInst()->GetWindowInstance()
  
 #define KEYDOWN(key)	CInput::GetInst()->KeyDown(key)
 #define KEYPRESS(key)	CInput::GetInst()->KeyPress(key)

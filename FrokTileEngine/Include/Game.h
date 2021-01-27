@@ -28,6 +28,7 @@ using namespace std;
 // 경로 관련 상수들
 #define ROOT_PATH		"RootPath"
 #define TEXTURE_PATH	"TexturePath"
+#define DATA_PATH		"DataPath"
 
 // 필요한 정적 라이브러리 링크
 #pragma comment(lib, "msimg32") // 이미지 관련 헤더

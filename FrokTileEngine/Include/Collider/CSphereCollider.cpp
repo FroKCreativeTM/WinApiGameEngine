@@ -58,6 +58,14 @@ CSphereCollider* CSphereCollider::Clone()
     return new CSphereCollider(*this);
 }
 
+void CSphereCollider::Save(FILE* pFile)
+{
+}
+
+void CSphereCollider::Load(FILE* pFile)
+{
+}
+
 CSphereCollider::CSphereCollider()
 {
     m_eColType = CT_SPHERE;

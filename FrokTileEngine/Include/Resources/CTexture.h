@@ -17,6 +17,12 @@ public :
 	{
 		return m_hMemDC; 
 	}
+	
+	void SaveFromPath(const char* pFileName, const string& strPathKey = DATA_PATH);
+	void Save(FILE* pFile);
+	void LoadFromPath(const char* pFileName, const string& strPathKey = DATA_PATH);
+	void Load(FILE* pFile);
+	
 
 public : 
 	void SetColorKey(unsigned char r,
@@ -61,6 +67,10 @@ private :
 	// 컬러에 대한 정보를 저장한다.
 	COLORREF	m_ColorKey;
 	bool		m_bColorKeyEnable;	// 컬러키가 있는가
+	// 파일에 저장할 텍스처 이름들을 저장한다.
+	wstring		m_strFileName;
+	string		m_strKey;
+	string		m_strPathKey;
 
 private : 
 	// 이 관리자만 텍스처 생성 가능

@@ -15,6 +15,8 @@ public :
 	virtual bool Collision(CCollider* pDst);
 	virtual void Render(HDC hDC, float fDeltaTime);
 	virtual CCollider* Clone() = 0;
+	virtual void Save(FILE* pFile);
+	virtual void Load(FILE* pFile);
 
 protected :
 	bool CollisionRectToRect(const RECTANGLE& src, const RECTANGLE& dst);

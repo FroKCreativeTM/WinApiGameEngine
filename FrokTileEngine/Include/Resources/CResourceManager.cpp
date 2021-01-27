@@ -56,6 +56,47 @@ CTexture* CResourceManager::LoadTexture(const string& strKey,
 	return pTexture;
 }
 
+CTexture* CResourceManager::LoadTexture(FILE* pFile)
+{
+	// key의 길이 불러오기
+	int nLength = 0;
+	char strKey[MAX_PATH] = {};
+	char strPathKey[MAX_PATH] = {};
+	wchar_t strFileName[MAX_PATH] = {};
+
+	fread(&nLength, 4, 1, pFile);
+	fread(strKey, 1, nLength, pFile);
+	strKey[nLength] = 0;
+
+	// FileName 저장
+	nLength = 0;
+	fread(&nLength, 4, 1, pFile);
+	fread(strFileName, 2, nLength, pFile);
+	strFileName[nLength] = 0;
+
+	// PathKey 저장
+	nLength = 0;
+	fread(&nLength, 4, 1, pFile);
+	fread(strPathKey, 1, nLength, pFile);
+	strPathKey[nLength] = 0;
+
+	// 컬러키
+	bool bColorKey = false;
+	COLORREF dwColorKey = 0;
+	fread(&bColorKey, 1, 1, pFile);
+	fread(&dwColorKey, sizeof(COLORREF), 1, pFile);
+
+	CTexture* pTex = GET_SINGLE(CResourceManager)->LoadTexture(strKey, strFileName, strPathKey);
+
+	// 텍스처가 있고 컬러키가 있다면
+	if (pTex && bColorKey)
+	{
+		pTex->SetColorKey(dwColorKey);
+	}
+
+	return pTex;
+}
+
 CTexture* CResourceManager::FindTexture(const string& strKey)
 {
 	unordered_map<string, CTexture*>::iterator iter = 

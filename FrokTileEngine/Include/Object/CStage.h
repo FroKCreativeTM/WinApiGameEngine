@@ -30,6 +30,9 @@ public :
 	int GetTileIndex(const POSITION& tPos);
 	int GetTileIndex(float x, float y);
 
+private : 
+	void ClearTile();
+
 private:
 	// 타일은 유동적으로 수가 변하니까 벡터로
 	vector<class CTile*>		m_vecTile;

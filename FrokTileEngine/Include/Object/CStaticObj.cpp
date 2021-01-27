@@ -47,4 +47,5 @@ void CStaticObj::Save(FILE* pFile)
 
 void CStaticObj::Load(FILE* pFile)
 {
+    CObj::Load(pFile);
 }

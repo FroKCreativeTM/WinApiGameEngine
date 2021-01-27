@@ -81,30 +81,7 @@ void CTexture::LoadFromPath(const char* pFileName, const string& strPathKey)
 
 void CTexture::Load(FILE* pFile)
 {
-	// key의 길이 불러오기
-	int nLength = 0;
-	char strKey[MAX_PATH] = {};
-	char strPathKey[MAX_PATH] = {};
-	wchar_t strFileName[MAX_PATH] = {};
-
-	fread(&nLength, 4, 1, pFile);
-	fread(strKey, 1, nLength, pFile);
-	strKey[nLength] = 0;
-
-	// FileName 저장
-	nLength = 0;
-	fread(&nLength, 4, 1, pFile);
-	fread(strFileName, 2, nLength, pFile);
-	strFileName[nLength] = 0;
-
-	// PathKey 저장
-	nLength = 0;
-	fread(&nLength, 4, 1, pFile);
-	fread(strPathKey, 1, nLength, pFile);
-	strPathKey[nLength] = 0;
-
-	// 텍스처를 가져온다.
-	GET_SINGLE(CResourceManager)->LoadTexture(strKey, strFileName, strPathKey);
+	
 }
 
 void CTexture::SetColorKey(unsigned char r, unsigned char g, unsigned char b)

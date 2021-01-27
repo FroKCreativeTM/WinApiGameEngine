@@ -24,7 +24,7 @@ CStage::CStage(const CStage& pStage) :
 CStage::~CStage()
 {
 	// 타일 정보를 모두 날린다.
-	Safe_Release_VecList(m_vecTile);
+	ClearTile();
 }
 
 bool CStage::Init()
@@ -138,22 +138,13 @@ void CStage::Load(FILE* pFile)
 	fread(&m_nTileSizeX, 4, 1, pFile);
 	fread(&m_nTileSizeY, 4, 1, pFile);
 
-	Safe_Release_VecList(m_vecTile);
+	ClearTile();
 
 	for (size_t i = 0; i < m_nTileNumX * m_nTileNumY; ++i)
 	{
 		CTile* pTile = CObj::CreateObj<CTile>("Tile");
-
 		pTile->Load(pFile);
-
 		m_vecTile.push_back(pTile);
-
-		SAFE_RELEASE(pTile);
-	}
-
-	for (size_t i = 0; i < m_vecTile.size(); ++i)
-	{
-		m_vecTile[i]->Save(pFile);
 	}
 }
 
@@ -161,7 +152,7 @@ void CStage::CreateTile(int nNumX, int nNumY, int nSizeX, int nSizeY,
 	const string& strKey, const wchar_t* pFileName, const string& strPathKey)
 {
 	// 기존에 가진 건 다 날려준다.
-	Safe_Release_VecList(m_vecTile);
+	ClearTile();
 
 	m_nTileNumX = nNumX;
 	m_nTileNumY = nNumY;
@@ -179,8 +170,6 @@ void CStage::CreateTile(int nNumX, int nNumY, int nSizeX, int nSizeY,
 			pTile->SetTexture(strKey, pFileName, strPathKey);
 
 			m_vecTile.push_back(pTile);
-
-			SAFE_RELEASE(pTile);
 		}
 	}
 
@@ -233,4 +222,13 @@ int CStage::GetTileIndex(float x, float y)
 	}
 
 	return idxY * m_nTileNumX + idxX;
+}
+
+void CStage::ClearTile()
+{
+	for (size_t i = 0; i < m_vecTile.size(); i++)
+	{
+		CObj::EraseObj(m_vecTile[i]);
+	}
+	Safe_Release_VecList(m_vecTile);
 }

@@ -143,6 +143,7 @@ void CTile::Load(FILE* pFile)
 	CStaticObj::Load(pFile);
 
 	fread(&m_eOption, 4, 1, pFile);
+	SetTileOption(m_eOption);
 }
 
 void CTile::SetTileOption(TILE_OPTION eType)

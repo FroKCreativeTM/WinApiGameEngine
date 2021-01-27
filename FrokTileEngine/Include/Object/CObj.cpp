@@ -8,6 +8,11 @@
 #include "../Animation/CAnimation.h"
 #include "../Core/CPathManager.h"
 
+#include "../Collider/CRectCollider.h"
+#include "../Collider/CPixelCollider.h"
+#include "../Collider/CPointCollider.h"
+#include "../Collider/CSphereCollider.h"
+
 // static
 list<CObj*> CObj::m_ObjList;
 
@@ -272,6 +277,8 @@ void CObj::Save(FILE* pFile)
 
 	for (iter = m_ColliderList.begin(); iter != iterEnd; iter++)
 	{
+		COLLIDER_TYPE eType = (*iter)->GetColliderType();
+		fwrite(&eType, 4, 1, pFile);
 		((*iter)->Save(pFile));
 	}
 
@@ -318,6 +325,88 @@ void CObj::LoadFromPath(const char* pFileName, const string& strPathKey)
 
 void CObj::Load(FILE* pFile)
 {
+	// 태그 저장(무조건!!!)
+	int nLength = 0;
+	char strText[MAX_PATH] = {};
+
+	// 태그 길이 읽어오기
+	fread(&nLength, 4, 1, pFile);
+
+	// 태그 읽어오기
+	fread(strText, 1, nLength, pFile);
+	strText[nLength] = 0;
+	m_strTag = strText;
+
+	// 물리 사용여부 읽어오기
+	fread(&m_bPhysics, 1, 1, pFile);
+
+	// 위치 읽어오기
+	fread(&m_tPos, sizeof(m_tPos), 1, pFile);
+
+	// 크기 읽어오기
+	fread(&m_tSize, sizeof(m_tSize), 1, pFile);
+
+	// 이미지 오프셋
+	fread(&m_tImageOffset, sizeof(m_tImageOffset), 1, pFile);
+
+	// 피봇 읽어오기
+	fread(&m_tPivot, sizeof(m_tPivot), 1, pFile);
+
+	// 텍스처 정보 읽어오기
+	bool bTexture = false;
+	fread(&bTexture, 1, 1, pFile);
+	SAFE_RELEASE(m_pTexture);
+
+	if (bTexture)
+	{
+		// 텍스처를 로딩한다.
+		m_pTexture = GET_SINGLE(CResourceManager)->LoadTexture(pFile);
+	}
+
+	// 충돌체 정보 읽어오기
+	// 충돌체 수를 읽어오기.
+	nLength = 0;
+	fread(&nLength, 4, 1, pFile);
+
+	for (size_t i = 0; i < nLength; i++)
+	{
+		// 충돌체를 생성한다.
+		// 충돌체 타입을 읽어온다.
+		COLLIDER_TYPE eType;
+		fread(&eType, 4, 1, pFile);
+
+		CCollider* pCollider = nullptr;
+
+		switch (eType)
+		{
+		case CT_RECT:
+			pCollider = AddCollider<CRectCollider>("");
+			break;
+		case CT_SPHERE:
+			pCollider = AddCollider<CSphereCollider>("");
+			break;
+		case CT_POINT:
+			pCollider = AddCollider<CPointCollider>("");
+			break;
+		case CT_PIXEL:
+			pCollider = AddCollider<CPixelCollider>("");
+			break;
+		}
+		pCollider->Load(pFile);
+		SAFE_RELEASE(pCollider);
+	}
+
+	// 애니메이션 저장
+	bool bAnimation = false;
+	fread(&bAnimation, 1, 1, pFile);
+	SAFE_RELEASE(m_pAnimation);
+	if (bAnimation)
+	{
+		m_pAnimation = new CAnimation;
+
+		m_pAnimation->Init();
+		m_pAnimation->Load(pFile);
+	}
 }
 
 void CObj::LoadFromFullPath(const char* pFullPath)
@@ -503,6 +592,7 @@ CObj::CObj() :
 CObj::CObj(const CObj& ref)
 {
 	*this = ref;
+	m_nRef = 1;
 
 	// 복사할 객체가 애니메이션이 있다면
 	if (ref.m_pAnimation)

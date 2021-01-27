@@ -178,7 +178,24 @@ void CMapEditScene::Input(float fDeltaTime)
 
 	if (KEYDOWN("Load"))
 	{
+		ShowCursor(TRUE);
+		// 그냥 모달 방식으로 띄우자
+		DialogBox(GET_WINDOWINSTANCE, MAKEINTRESOURCE(IDD_DIALOG1),
+			GET_WINDOWHANDLE, CMapEditScene::DlgProc);
+		ShowCursor(FALSE);
 
+		// 파일명을 이용해서 저장한다.
+		// 멀티바이트로 변환 필요
+		char strFileName[MAX_PATH] = {};
+		WideCharToMultiByte(CP_ACP, 0, m_strText, -1, strFileName, lstrlen(m_strText), 0, 0);
+
+		if (!m_pStage)
+		{
+			CLayer* pStageLayer = FindLayer("Stage");
+			m_pStage = CObj::CreateObj<CStage>("Stage", pStageLayer);
+		}
+
+		m_pStage->LoadFromPath(strFileName);
 	}
 }
 

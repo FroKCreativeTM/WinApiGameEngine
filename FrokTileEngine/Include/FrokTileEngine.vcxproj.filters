@@ -73,6 +73,9 @@
     <Filter Include="03. Object\02. StaticObj\02. Tile">
       <UniqueIdentifier>{ee1891ab-5d97-4cc6-a911-f29f7cea2dc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Core\06. Sound">
+      <UniqueIdentifier>{5b120a7c-362c-4a28-b2a4-0b63336d937e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -182,6 +185,9 @@
     </ClCompile>
     <ClCompile Include="Object\CTile.cpp">
       <Filter>03. Object\02. StaticObj\02. Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CSoundManager.cpp">
+      <Filter>01. Core\06. Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="Object\CTile.h">
       <Filter>03. Object\02. StaticObj\02. Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CSoundManager.h">
+      <Filter>01. Core\06. Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

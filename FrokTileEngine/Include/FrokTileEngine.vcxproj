@@ -79,16 +79,21 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <TargetName>$(ProjectName)_Release</TargetName>
+    <LibraryPath>../Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <TargetName>$(ProjectName)64_Debug</TargetName>
+    <LibraryPath>../Bin;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <TargetName>$(ProjectName)64_Release</TargetName>
+    <LibraryPath>../Bin;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -161,6 +166,7 @@
     <ClCompile Include="Core\CMath.cpp" />
     <ClCompile Include="Core\CPathManager.cpp" />
     <ClCompile Include="Core\CRef.cpp" />
+    <ClCompile Include="Core\CSoundManager.cpp" />
     <ClCompile Include="Core\CTimer.cpp" />
     <ClCompile Include="Object\CBullet.cpp" />
     <ClCompile Include="Object\CMouse.cpp" />
@@ -198,6 +204,7 @@
     <ClInclude Include="Core\CMath.h" />
     <ClInclude Include="Core\CPathManager.h" />
     <ClInclude Include="Core\CRef.h" />
+    <ClInclude Include="Core\CSoundManager.h" />
     <ClInclude Include="Core\CTimer.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />

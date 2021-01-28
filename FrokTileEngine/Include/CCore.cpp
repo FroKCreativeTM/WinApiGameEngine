@@ -8,6 +8,7 @@
 #include "Core/CInput.h"
 #include "Collider/CCollisionManager.h"
 #include "Object/CMouse.h"
+#include "Core/CSoundManager.h"
 
 // nullptr 선언은 여기서 가능하다.
 // 왜냐면 얘는 프로그램 시작과 생기는 인스턴스고
@@ -85,6 +86,15 @@ bool CCore::Init(HINSTANCE hInstance)
     {
         return false;
     }
+
+    /* 사운드 매니저 초기화 */
+    if (!GET_SINGLE(CSoundManager)->Init())
+    {
+        return false;
+    }
+
+    GET_SINGLE(CSoundManager)->LoadSound("BGM", true, "Title.mp3");
+    GET_SINGLE(CSoundManager)->Play("BGM");
 
 	return true;
 }
@@ -290,6 +300,7 @@ CCore::CCore()
 CCore::~CCore()
 {
     // 서브 관리 클래스들을 전부 해제한다.
+    DESTROY_SINGLE(CSoundManager);
     DESTROY_SINGLE(CSceneManager);
     DESTROY_SINGLE(CCollisionManager);
     DESTROY_SINGLE(CCamera);
